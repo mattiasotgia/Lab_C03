@@ -8,6 +8,8 @@
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
 
+# TODO: 
+# make macOs app that imput name of folder and title of article as string <-!!
 import os, sys
 import logging
 
