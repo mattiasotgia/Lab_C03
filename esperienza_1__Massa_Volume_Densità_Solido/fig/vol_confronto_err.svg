@@ -1,0 +1,78 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="567.429" height="488.498" viewBox="0 0 567.429 488.498" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+<title>
+/Users/massimosotgia/Desktop/università@DIFI/laboratorio/esperienza_1__Massa_Volume_Densità_Solido/fig/vol_confronto_err.svg
+</title>
+<desc>
+Creator: ROOT Version 6.22/02
+CreationDate: Wed Nov 18 17:29:45 2020</desc>
+<defs>
+</defs>
+<rect x="0.5" y="0" width="566.929" height="487.998" fill="white"/>
+<rect x="57.1929" y="48.7998" width="453.543" height="390.399" fill="white"/>
+<rect x="57.1929" y="48.7998" width="453.543" height="390.399" fill="none" stroke="black"/>
+<rect x="57.1929" y="48.7998" width="453.543" height="390.399" fill="white"/>
+<rect x="57.1929" y="48.7998" width="453.543" height="390.399" fill="none" stroke="black"/>
+<path d="M57.1929,439.198h 453.543" fill="none" stroke="black"/>
+<path d="M57.1929,439.198v -390.399" fill="none" stroke="black"/>
+<path d="M70.7992,398.817h -13.6063" fill="none" stroke="black"/>
+<path d="M63.9961,379.735h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,360.654h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,341.572h -6.80315" fill="none" stroke="black"/>
+<path d="M70.7992,322.491h -13.6063" fill="none" stroke="black"/>
+<path d="M63.9961,303.409h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,284.328h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,265.247h -6.80315" fill="none" stroke="black"/>
+<path d="M70.7992,246.165h -13.6063" fill="none" stroke="black"/>
+<path d="M63.9961,227.084h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,208.002h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,188.921h -6.80315" fill="none" stroke="black"/>
+<path d="M70.7992,169.839h -13.6063" fill="none" stroke="black"/>
+<path d="M63.9961,150.758h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,131.676h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,112.595h -6.80315" fill="none" stroke="black"/>
+<path d="M70.7992,93.5136h -13.6063" fill="none" stroke="black"/>
+<path d="M70.7992,398.817h -13.6063" fill="none" stroke="black"/>
+<path d="M63.9961,417.898h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,436.979h -6.80315" fill="none" stroke="black"/>
+<path d="M70.7992,93.5136h -13.6063" fill="none" stroke="black"/>
+<path d="M63.9961,74.4322h -6.80315" fill="none" stroke="black"/>
+<path d="M63.9961,55.3508h -6.80315" fill="none" stroke="black"/>
+<text xml:space="preserve" x="27.9542" y="404.949" fill="black" font-size="16.1697" font-family="Helvetica">110</text>
+<text xml:space="preserve" x="27.9542" y="328.078" fill="black" font-size="16.1697" font-family="Helvetica">112</text>
+<text xml:space="preserve" x="27.9542" y="251.892" fill="black" font-size="16.1697" font-family="Helvetica">114</text>
+<text xml:space="preserve" x="27.9542" y="175.707" fill="black" font-size="16.1697" font-family="Helvetica">116</text>
+<text xml:space="preserve" x="27.9542" y="99.5215" fill="black" font-size="16.1697" font-family="Helvetica">118</text>
+<text xml:space="preserve" x="82.8626" y="38.4359" fill="black" font-size="10.9464" font-family="Helvetica">3</text>
+<text xml:space="preserve" x="65.7037" y="46.6721" fill="black" font-size="16.1697" font-family="Helvetica">10</text>
+<text xml:space="preserve" x="56.7811" y="46.6721" fill="black" font-size="16.1697" font-family="Times">&#0215;</text>
+<g transform="rotate(-90,18.3452,52.8493)">
+<text xml:space="preserve" x="18.3452" y="52.8493" fill="black" font-size="16.1697" font-family="Helvetica">)</text>
+</g>
+<g transform="rotate(-90,10.109,58.3402)">
+<text xml:space="preserve" x="10.109" y="58.3402" fill="black" font-size="10.9464" font-family="Helvetica">3</text>
+</g>
+<g transform="rotate(-90,18.3452,146.88)">
+<text xml:space="preserve" x="18.3452" y="146.88" fill="black" font-size="16.1697" font-family="Helvetica">Volume (mm</text>
+</g>
+<g fill="black">
+<rect x="143.491" y="163.646" width="10.9817" height="10.9817"/>
+<rect x="413.457" y="362.944" width="10.9817" height="10.9817"/>
+</g>
+<path d="M143.491,169.137h -48.5024" fill="none" stroke="black"/>
+<path d="M94.9882,170.509v -2.74542" fill="none" stroke="black"/>
+<path d="M154.472,169.137h 48.5024" fill="none" stroke="black"/>
+<path d="M202.975,170.509v -2.74542" fill="none" stroke="black"/>
+<path d="M148.981,163.646v -82.3127" fill="none" stroke="black"/>
+<path d="M147.609,81.3331h 2.74542" fill="none" stroke="black"/>
+<path d="M148.981,174.627v 82.3127" fill="none" stroke="black"/>
+<path d="M147.609,256.94h 2.74542" fill="none" stroke="black"/>
+<path d="M413.457,368.435h -48.5024" fill="none" stroke="black"/>
+<path d="M364.954,369.807v -2.74542" fill="none" stroke="black"/>
+<path d="M424.439,368.435h 48.5024" fill="none" stroke="black"/>
+<path d="M472.941,369.807v -2.74542" fill="none" stroke="black"/>
+<path d="M418.948,362.944v -32.7397" fill="none" stroke="black"/>
+<path d="M417.575,330.204h 2.74542" fill="none" stroke="black"/>
+<path d="M418.948,373.926v 32.7397" fill="none" stroke="black"/>
+<path d="M417.575,406.665h 2.74542" fill="none" stroke="black"/>
+<text xml:space="preserve" x="152.184" y="21.9634" fill="black" font-size="20.7453" font-family="Helvetica">Discrepanza valori di volume</text></svg>

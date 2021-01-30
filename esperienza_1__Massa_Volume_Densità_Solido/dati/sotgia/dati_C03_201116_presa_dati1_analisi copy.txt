@@ -1,0 +1,3 @@
+116524.2979 2307.411839 misure_indirette_semi_somma
+116018.415 2300.758534 misure_indirette_ellissoide
+110796.1091 1001.773299 misure_dirette_idrostatiche

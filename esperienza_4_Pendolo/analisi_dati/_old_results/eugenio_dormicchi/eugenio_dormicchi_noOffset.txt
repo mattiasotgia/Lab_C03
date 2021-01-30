@@ -1,0 +1,8 @@
+ FCN=199.344 FROM MIGRAD    STATUS=CONVERGED      22 CALLS          23 TOTAL
+                     EDM=9.76089e-11    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.29952e+00   2.46091e-02   1.70081e-04  -5.67758e-04
+   2  p1           3.14159e+00     fixed    
+
+X^2/ndf (prob.) = 199.344/4 (5.19926e-42)

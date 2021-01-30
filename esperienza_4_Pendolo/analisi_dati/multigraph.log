@@ -1,0 +1,17 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing multigraph.C...
+ FCN=94.5194 FROM MIGRAD    STATUS=CONVERGED      58 CALLS          59 TOTAL
+                     EDM=3.74586e-09    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.75992e+00   8.90179e-02   3.51184e-05  -1.13246e-02
+   2  p1           3.14159e+00     fixed    
+   3  p2          -1.64009e-02   1.10749e-02   4.36886e-06   9.28258e-02

@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "iostream": "cpp",
+        "string": "cpp",
+        "cmath": "cpp",
+        "fstream": "cpp"
+    }
+    "C_Cpp.default.includePath": ["~/root/include"]
+}

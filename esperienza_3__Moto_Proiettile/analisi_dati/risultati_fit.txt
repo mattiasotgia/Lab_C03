@@ -1,0 +1,16 @@
+v0_T = 1.48897 +/- 0.190295
+v0_R = 1.25841 +/- 0.22516
+
+k = -0.664434 +/- 0.0689577
+n = 10.6484 +/- 0.28246
+
+theta_fit = -0.586455 +/- 0.0994006
+v0_fit = 0.678544 +/- 0.00899956
+
+Confronto con v0_T e v0_fit:
+DISCREPANZA: scarto tra |g1-g2| e |eg1+eg2| = 0.238899
+Confronto con v0_R e v0_fit:
+COMPATIBILITA'
+
+Contronto theta_fit e theta_0
+DISCREPANZA: scarto tra |g1-g2| e |eg1+eg2| = 0.286748

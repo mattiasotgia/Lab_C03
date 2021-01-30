@@ -1,0 +1,4 @@
+116018.415 2300.758534 misure_indirette_ellissoide
+0.003620114962 0.00008 misure_indirette_ro
+110796.1091 1001.773299 misure_dirette_idrostatiche
+0.003790746836 0.00004 misure_dirette_ro
