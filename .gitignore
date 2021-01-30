@@ -1,0 +1,11 @@
+# ignore invisible file
+
+**/.vscode
+
+**/.DS_Store
+
+#ignore swap files emacs
+
+**/*~
+
+**/\#*
