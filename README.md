@@ -8,5 +8,14 @@ This repo should be manteined up-to-date with latest experiments and data.
 
 ## Stat Library
 
-`stat`is a `C++`library made exclusevely to compute statistical average and standard error.
+`stat` is a `C++` library made exclusevely to compute statistical average and standard error.
 It is located in `stat/stat.h`.
+
+***Library Usage***
+
+`stat::read_values()` takes a `stdin::vector` as input, whereas the vector contain all data needed in calculation.
+
+`stat::avg()` return average of elements in the `vector`.
+`stat::std_err()` return standard error computed from RMS (Root Minimimum Square).
+
+`stat::clear()` is needed to clean up the data vector, in order to compute other data. 
