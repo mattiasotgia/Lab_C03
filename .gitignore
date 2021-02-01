@@ -11,3 +11,8 @@
 **/\#*
 
 **/*.swp
+
+
+#ignore setup.py log file
+
+setup.log
