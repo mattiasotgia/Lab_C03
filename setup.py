@@ -10,6 +10,7 @@
 
 # TODO: 
 # make macOs app that imput name of folder and title of article as string <-!!
+
 import os, sys
 import logging
 
@@ -93,7 +94,7 @@ for i in paths:
 
 movepath = folder_full_path + paths[4]
 tex_path = [
-'/fig',
+    '/fig',
     '/_misc'
 ]
 
