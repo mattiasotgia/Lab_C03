@@ -11,6 +11,7 @@ public:
 
     void read_values(std::vector<double> &v)
     {
+        clear();
         _v = v;
     }
 
