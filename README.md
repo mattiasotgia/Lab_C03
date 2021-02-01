@@ -13,6 +13,8 @@ It is located in `stat/stat.h`.
 
 ***Library Usage***
 
+This library is just a piece of code written to semplificate some computing, eventually it need to be implemented in the code.
+
 `stat::read_values()` takes a `stdin::vector` as input, whereas the vector contain all data needed in calculation.
 
 `stat::avg()` return average of elements in the `vector`.
