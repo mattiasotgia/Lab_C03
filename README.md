@@ -16,6 +16,7 @@ It is located in `stat/stat.h`.
 `stat::read_values()` takes a `stdin::vector` as input, whereas the vector contain all data needed in calculation.
 
 `stat::avg()` return average of elements in the `vector`.
+
 `stat::std_err()` return standard error computed from RMS (Root Minimimum Square).
 
 `stat::clear()` is needed to clean up the data vector, in order to compute other data. 
