@@ -11,6 +11,7 @@ public:
 
     void read_values(std::vector<double> &v)
     {
+        clear(); // Zeroing vector before new assignment
         _v = v;
     }
 
