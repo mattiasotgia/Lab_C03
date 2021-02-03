@@ -16,3 +16,12 @@
 #ignore setup.py log file
 
 setup.log
+
+
+# latex files
+
+**/*.aux
+**/*.fdb_latexmk
+**/*.fls
+
+**/*.synctex.gz
