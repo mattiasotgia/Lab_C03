@@ -58,29 +58,25 @@ main folder /{}
 
 > /relazione
     for all pdf versions of paper
+    also for all .tex and .docx eventually
 > /fig
     for everythong concerning .figs, .pdfs, .ai's
 > /dati
     raw and polished data goes here.
 > /analisi_dati
     everuthing __code__ goes here.
-> /MOVETO_{}
-    for everything that goes on the second machine 
-    for latex typesetting
-    > /fig
-        a carbon copy of every fig in folder {}/fig 
-    > /misc
-        everything else (log files, results to be 
-        copied)
+> /misc
+    everything else (log files, results to be 
+    copied)
 
-'''.format(title_underscore, title_underscore, title_underscore), file=readme_file)
+'''.format(title_underscore), file=readme_file)
 
 paths = [
    '/fig',
    '/relazione',
    '/dati',
     '/analisi_dati',
-    '/MOVETO_{}'.format(title_underscore)
+    '/misc'
 ]
 
 for i in paths:
@@ -92,23 +88,24 @@ for i in paths:
         logging.info('Path {} created successfully'.format(folder_full_path + i))
 
 
-movepath = folder_full_path + paths[4]
-tex_path = [
-    '/fig',
-    '/_misc'
-]
+# movepath = folder_full_path + paths[4]
+# tex_path = [
+#     '/fig',
+#     '/_misc'
+# ]
 
-for t in tex_path:
-    try:
-        os.mkdir(movepath + t)
-    except OSError:
-        logging.exception('Creation of directory {} failed'.format(movepath + t))
-    else:
-        logging.info('Path {} created successfully'.format(movepath + t))
-        print('All path created successfully!')
+# for t in tex_path:
+#     try:
+#         os.mkdir(movepath + t)
+#     except OSError:
+#         logging.exception('Creation of directory {} failed'.format(movepath + t))
+#     else:
+#         logging.info('Path {} created successfully'.format(movepath + t))
+#         print('All path created successfully!')
         
 
-os.chdir(movepath)
+# os.chdir(movepath)
+os.chdir(folder_full_path + paths[1])
 
 
 title_full = input('Enter full title Latex: ')
@@ -117,7 +114,7 @@ title_full = input('Enter full title Latex: ')
 template_file = open('esperienza_{}_{}'.format(esp_no, now.strftime('%Y_%m_%d')) + '.tex', 'w')
 
 
-tex_template = '''\\documentclass[italian, a4paper, 10pt, twocolumn]{{../style/lab_unige_v2}}
+tex_template = '''\\documentclass[italian, a4paper, 10pt, twocolumn]{{../../style/lab_unige_v2}}
 \\usepackage[a4paper, margin=1.25cm, footskip=0.25in]{{geometry}}
 
 \\usepackage[utf8]{{inputenc}}
@@ -139,7 +136,7 @@ urlbordercolor={{0 1 1}}]{{hyperref}}
 \\usepackage{{booktabs}}
 
 % FOUNDAMENTAL
-\\usepackage{{../style/custom}}
+\\usepackage{{../../style/custom}}
 
 \\usepackage{{physics}}
 
