@@ -4,6 +4,8 @@
 # Change log:
 # added some minor feature, 
 # added support for full dir name
+# 2021-02-03 moved everything in one single 
+# dir, as latex file go into ../relazione/
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
