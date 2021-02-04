@@ -9,7 +9,8 @@ insertion, and active development, while the former is a sort of 'archive' for p
 
 This repo should be manteined up-to-date with latest experiments and data.
 
-There is a `./esperienza_#__<title>` folder for each one lab. experience. Those are then divided as described in README for each sub-directory. 
+There is a `./esperienza_#__<title>` folder for each one lab. experience. Those are then divided 
+as described in README for each sub-directory. 
 
 The `setup.py` file is meant to be used to create the base project for a lab. experience.
 
@@ -20,9 +21,11 @@ It is located in `stat/stat.h`.
 
 ***Library Usage***
 
-This library is just a piece of code written to semplificate some computing, eventually it need to be implemented in the code.
+This library is just a piece of code written to semplificate some computing, eventually it need 
+to be implemented in the code.
 
-`stat::read_values()` takes a `stdin::vector` as input, whereas the vector contain all data needed in calculation.
+`stat::read_values()` takes a `stdin::vector` as input, whereas the vector contain all data needed
+ in calculation.
 
 `stat::avg()` return average of elements in the `vector`.
 
