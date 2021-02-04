@@ -77,8 +77,8 @@ paths = [
    '/fig',
    '/relazione',
    '/dati',
-    '/analisi_dati',
-    '/misc'
+   '/analisi_dati',
+   '/misc'
 ]
 
 for i in paths:
