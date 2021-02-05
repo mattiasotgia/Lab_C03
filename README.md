@@ -35,4 +35,5 @@ to be implemented in the code.
 
 Changelog
 ---------
-2021-02-01 changelog init
+2021-02-01 changelog init,
+2021-02-01 12:50 modified setup.py to include `\graphicspath{{../fig/}}` as main graphics path
