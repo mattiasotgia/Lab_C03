@@ -56,29 +56,33 @@ if __name__ == "__main__":
 
     Folder structure
     ----------------
-    main folder /{}
+    main folder `/{}`
 
-    > /relazione
+    > `/relazione`
         for all pdf versions of paper
         also for all .tex and .docx eventually
-    > /fig
+
+    > `/fig`
         for everythong concerning .figs, .pdfs, .ai's
-    > /dati
+
+    > `/dati`
         raw and polished data goes here.
-    > /analisi_dati
+
+    > `/analisi_dati`
         everuthing __code__ goes here.
-    > /misc
+
+    > `/misc`
         everything else (log files, results to be 
         copied)
 
     '''.format(title_underscore), file=readme_file)
 
     paths = [
-    '/fig',
-    '/relazione',
-    '/dati',
-    '/analisi_dati',
-    '/misc'
+        '/fig',
+        '/relazione',
+        '/dati',
+        '/analisi_dati',
+        '/misc'
     ]
 
     for i in paths:
