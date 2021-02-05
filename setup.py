@@ -103,7 +103,7 @@ if __name__ == "__main__":
     template_file = open('esperienza_{}_{}'.format(esp_no, now.strftime('%Y_%m_%d')) + '.tex', 'w')
 
 
-    tex_template = '''\\documentclass[italian, a4paper, 10pt, twocolumn]{{../../style/lab_unige_v2}}
+    tex_template = '''\\documentclass[italian, a4paper, 10pt, twocolumn]{{../../style/lab_unige}}
     \\usepackage[a4paper, margin=1.25cm, footskip=0.25in]{{geometry}}
 
     \\usepackage[utf8]{{inputenc}}
