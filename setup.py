@@ -30,6 +30,15 @@ current_path = os.getcwd()
 
 
 if __name__ == "__main__":
+    '''setup.py python3 file
+    This file is made to be used as a light tools for directory managment in Lab1A papers
+
+    Usage:
+        - the main program is run by command line as python3 setup.py 'name of experience' 
+            - the name of experience should be formatted as NN_<brief_title_with_underscores>
+        - there are no dependencies other than os, sys, datetime and logging
+    
+    '''
 
     message = 'Compile as: python3 {} <esp_no>'.format(sys.argv[0])
     if len(sys.argv)<2:
