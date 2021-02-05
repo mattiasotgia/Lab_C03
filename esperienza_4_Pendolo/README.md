@@ -1,16 +1,22 @@
-Esperienza n. 4, NOTE:
-=====================
+README file
+===========
 
-Sono riportate alcune note sull'utilizzo della seguende directory.
+Folder structure
+----------------
+main folder /{}
 
-Struttura cartella relazione:
------------------------------
-.
-|_analisi dati (dove troviamo il codice)
-|_dati (chiaro!)
-|_relazione___finale
-
-
+> /relazione
+    for all pdf versions of paper
+    also for all .tex and .docx eventually
+> /fig
+    for everythong concerning .figs, .pdfs, .ai's
+> /dati
+    raw and polished data goes here.
+> /analisi_dati
+    everuthing __code__ goes here.
+> /misc
+    everything else (log files, results to be 
+    copied)
 
 Lettura di file dati per i grafici:
 -----------------------------------
