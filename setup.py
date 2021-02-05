@@ -6,6 +6,8 @@
 # added support for full dir name
 # 2021-02-03 moved everything in one single 
 # dir, as latex file go into ../relazione/
+# 2021-02-05 reformatted README.md for every
+#  single istance of lab
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
