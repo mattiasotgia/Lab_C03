@@ -90,23 +90,6 @@ for i in paths:
         logging.info('Path {} created successfully'.format(folder_full_path + i))
 
 
-# movepath = folder_full_path + paths[4]
-# tex_path = [
-#     '/fig',
-#     '/_misc'
-# ]
-
-# for t in tex_path:
-#     try:
-#         os.mkdir(movepath + t)
-#     except OSError:
-#         logging.exception('Creation of directory {} failed'.format(movepath + t))
-#     else:
-#         logging.info('Path {} created successfully'.format(movepath + t))
-#         print('All path created successfully!')
-        
-
-# os.chdir(movepath)
 os.chdir(folder_full_path + paths[1])
 
 
