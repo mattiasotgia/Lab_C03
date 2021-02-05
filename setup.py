@@ -116,6 +116,7 @@ if __name__ == "__main__":
     \\usepackage[numbered]{{bookmark}}
 
     \\usepackage{{graphicx}}
+    \\graphicspath{{{{../fig/}}}}
     \\usepackage{{array}}
     \\usepackage{{tabulary}}
     \\usepackage{{booktabs}}
