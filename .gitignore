@@ -25,3 +25,7 @@ setup.log
 **/*.fls
 
 **/*.synctex.gz
+
+# jupyter/notebook
+
+.ipynb_checkpoints
