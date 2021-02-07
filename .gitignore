@@ -1,22 +1,18 @@
 # ignore invisible file
 
 **/.vscode
-
 **/.DS_Store
 
 #ignore swap files emacs
 
 **/*~
-
 **/\#*
-
 **/*.swp
 
 
 #ignore setup.py log file
 
 setup.log
-
 
 # latex files
 
