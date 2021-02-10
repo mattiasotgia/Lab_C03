@@ -25,3 +25,7 @@ setup.log
 # jupyter/notebook
 
 .ipynb_checkpoints
+
+# python cache
+__pycache__
+**/*.pyc
