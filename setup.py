@@ -8,6 +8,9 @@
 # dir, as latex file go into ../relazione/
 # 2021-02-05 reformatted README.md for every
 #  single istance of lab
+# 2021-02-11 rewritten setup.py for latex 
+# template, so it is easier to modify master 
+# template file
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
@@ -26,7 +29,8 @@ logging.basicConfig(filename='setup.log', filemode='w',
                     level=logging.DEBUG)
 
 now = date.today()
-current_path = os.getcwd()
+base_path = os.getcwd()
+temp_file = open('template.tex')
 
 
 if __name__ == "__main__":
@@ -40,26 +44,25 @@ if __name__ == "__main__":
     
     '''
 
-    message = 'Compile as: python3 {} <esp_no>'.format(sys.argv[0])
     if len(sys.argv)<2:
-        print(message)
+        print('Compile as: python3 {} <esp_no>'.format(sys.argv[0]))
         sys.exit(0)
 
     else:
-        first_arg = sys.argv[1]
-        esp_no = first_arg[0:first_arg.find('_')] 
-        title_underscore = 'esperienza_{}'.format(first_arg)
+        arg_1 = sys.argv[1]
+        exp_no = arg_1[0:arg_1.find('_')] 
+        title_underscore = 'esperienza_{}'.format(arg_1)
 
-        folder_full_path = current_path + '/' + title_underscore
+        folder_path = base_path + '/' + title_underscore
 
     try:
-        os.mkdir(folder_full_path)
+        os.mkdir(folder_path)
     except OSError:
-        logging.exception('Creation of directory {} failed'.format(folder_full_path))
+        logging.exception('Creation of directory {} failed'.format(folder_path))
     else:
-        logging.info('Path {} created successfully'.format(folder_full_path))
-        
-    os.chdir(folder_full_path)
+        logging.info('Path {} created successfully'.format(folder_path))
+    
+    os.chdir(folder_path)
 
     readme_file = open('README.md', 'w')
     print('''README file
@@ -98,129 +101,31 @@ if __name__ == "__main__":
 
     for i in paths:
         try:
-            os.mkdir(folder_full_path + i)
+            os.mkdir(folder_path + i)
         except OSError:
-            logging.exception('Creation of directory {} failed'.format(folder_full_path + i))
+            logging.exception('Creation of directory {} failed'.format(folder_path + i))
         else:
-            logging.info('Path {} created successfully'.format(folder_full_path + i))
+            logging.info('Path {} created successfully'.format(folder_path + i))
 
 
-    os.chdir(folder_full_path + paths[1])
+    os.chdir(folder_path + paths[1])
 
 
     title_full = input('Enter full title Latex: ')
 
+    latex_file = open('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', 'w')
 
-    template_file = open('esperienza_{}_{}'.format(esp_no, now.strftime('%Y_%m_%d')) + '.tex', 'w')
+    latex_readlines = temp_file.readlines()
 
-
-    tex_template = '''\\documentclass[italian, a4paper, 10pt, twocolumn]{{../../style/lab_unige}}
-    \\usepackage[a4paper, margin=1.25cm, footskip=0.25in]{{geometry}}
-
-    \\usepackage[utf8]{{inputenc}}
-    \\usepackage[T1]{{fontenc}}
-
-    \\usepackage[italian]{{babel}}
-
-    % \\usepackage{{biblatex}}
-
-    \\usepackage[bookmarksopen=true, 
-    citebordercolor={{0 1 0}}, 
-    linkbordercolor={{1 0 0}}, 
-    urlbordercolor={{0 1 1}}]{{hyperref}}
-    \\usepackage[numbered]{{bookmark}}
-
-    \\usepackage{{graphicx}}
-    \\graphicspath{{{{../fig/}}}}
-    \\usepackage{{array}}
-    \\usepackage{{tabulary}}
-    \\usepackage{{booktabs}}
-
-    % FOUNDAMENTAL
-    \\usepackage{{../../style/custom}}
-
-    \\usepackage{{physics}}
-
-    \\usepackage{{breqn}}
-    \\usepackage{{cuted}}
-    \\usepackage{{txfonts}}
-
-    \\usepackage{{lipsum}}
-
-    %% Define ref types
-    \\newcommand{{\\reftab}}[1]{{Tab. {{\\ref{{#1}}}}}}%
-    \\newcommand{{\\reffig}}[1]{{Fig. {{\\ref{{#1}}}}}}%
-    \\newcommand{{\\refeqn}}[1]{{({{\\ref{{#1}})}}}}%
-    %%
-    \\setlength{{\\columnsep}}{{6mm}}
-    \\begin{{document}}
-
-
-    \\twocolumn[
-    \\begin{{@twocolumnfalse}}
+    for line in latex_readlines:
+        if '%%TITLE_HERE%%' in line:
+            line = line.replace('%%TITLE_HERE%%', title_full)
+        elif '%%DATE_HERE%%' in line:
+            line = line.replace('%%DATE_HERE%%', now.strftime('%Y_%m_%d'))
+        elif '%%NN%%' in line:
+            line = line.replace('%%NN%%', exp_no)
         
-        \\title{{
-            {}
-        }}
-        \\author{{
-        Eugenio Dormicchi\\textsuperscript{{1}},  
-        Riccardo Pizzimbone\\textsuperscript{{1}}, 
-        Mattia Sotgia\\textsuperscript{{1}}
-        }}
-
-        \\date{{
-        \\textsuperscript{{1}}Gruppo C03, Esperienza di laboratorio n. {}\\\\
-        %\\textsuperscript{{2}}In presenza in laboratorio per la presa dati\\\\
-            % Università degli Studi di Genova, Dipartimento di Fisica.\\\\
-            Presa dati–– 
-            {}, 15:00– 18:00; Analisi dati–– 
-            <end-date here>
-        }}
-        \\maketitle
-        
-        \\begin{{abstract}}
-        
-        \\textit{{Obiettivo– }}
-        
-        \\textit{{Metodi– }}
-        
-        \\textit{{Risultati– }}
-        
-        \\textit{{Conclusione– }}
-        
-        
-        \\end{{abstract}}
-        \\vspace{{2em}}
-        \\end{{@twocolumnfalse}}
-    ]
-
-    %%%% CORPO DEL TESTO
-    %%%% CORPO DEL TESTO
-
-    \\section{{Obiettivo}}
-    \\label{{section:aim}}
-
-    \\section{{Strumentazione}}
-    \\label{{section:strument}}
-
-    \\section{{Metodi}}
-    \\label{{section:methods}}
-
-    \\section{{Risultati}}
-    \\label{{section:results}}
-
-    \\section{{Conclusione}}
-    \\label{{section:conclusion}}
-
-    \\subsection{{Controlli}}
-
-    \\subsection{{Possibili errori sistematici}}
-    
-
-    \\end{{document}}
-    '''.format(title_full, esp_no, now.strftime('%d %B %Y'))
-
-    print(tex_template, file=template_file)
+        latex_file.write(line)
 
     logging.info('Done')
     print('Done, see log file for errors!')
