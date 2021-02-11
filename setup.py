@@ -25,7 +25,7 @@ from datetime import date
 
 # base support for logging information;
 logging.basicConfig(filename='setup.log', filemode='a', 
-                    format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
+                    format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.DEBUG)
 
 now = date.today()
