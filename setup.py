@@ -24,7 +24,7 @@ import logging
 from datetime import date
 
 # base support for logging information;
-logging.basicConfig(filename='setup.log', filemode='w', 
+logging.basicConfig(filename='setup.log', filemode='a', 
                     format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
                     level=logging.DEBUG)
 
