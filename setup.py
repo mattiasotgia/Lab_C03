@@ -128,7 +128,8 @@ if __name__ == "__main__":
         
         latex_file.write(line)
 
-    logging.info('Done')
+    print('Created file {} with paper title: {}'.format('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', title_full))
+    logging.info('Done, created {} file in {}'.format('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', title_underscore + paths[1]))
     print('Done, see log file for errors!')
 
     # end of document
