@@ -121,7 +121,7 @@ if __name__ == "__main__":
         if '%%TITLE_HERE%%' in line:
             line = line.replace('%%TITLE_HERE%%', title_full)
         elif '%%DATE_HERE%%' in line:
-            line = line.replace('%%DATE_HERE%%', now.strftime('%Y_%m_%d'))
+            line = line.replace('%%DATE_HERE%%', now.strftime('%d %B %Y'))
         elif '%%NN%%' in line:
             line = line.replace('%%NN%%', exp_no)
         
