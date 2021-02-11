@@ -31,6 +31,31 @@ logging.basicConfig(filename='setup.log', filemode='w',
 now = date.today()
 base_path = os.getcwd()
 temp_file = open('template.tex')
+README_STRING = '''README file
+===========
+
+Folder structure
+----------------
+main folder `/{}`
+
+> `/relazione`
+    for all pdf versions of paper
+    also for all .tex and .docx eventually
+
+> `/fig`
+    for everythong concerning .figs, .pdfs, .ai's
+
+> `/dati`
+    raw and polished data goes here.
+
+> `/analisi_dati`
+    everuthing __code__ goes here.
+
+> `/misc`
+    everything else (log files, results to be 
+    copied)
+
+'''
 
 
 if __name__ == "__main__":
@@ -65,31 +90,7 @@ if __name__ == "__main__":
     os.chdir(folder_path)
 
     readme_file = open('README.md', 'w')
-    print('''README file
-    ===========
-
-    Folder structure
-    ----------------
-    main folder `/{}`
-
-    > `/relazione`
-        for all pdf versions of paper
-        also for all .tex and .docx eventually
-
-    > `/fig`
-        for everythong concerning .figs, .pdfs, .ai's
-
-    > `/dati`
-        raw and polished data goes here.
-
-    > `/analisi_dati`
-        everuthing __code__ goes here.
-
-    > `/misc`
-        everything else (log files, results to be 
-        copied)
-
-    '''.format(title_underscore), file=readme_file)
+    print(README_STRING.format(title_underscore), file=readme_file)
 
     paths = [
         '/fig',
