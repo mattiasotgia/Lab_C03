@@ -1,22 +1,18 @@
 # ignore invisible file
 
 **/.vscode
-
 **/.DS_Store
 
 #ignore swap files emacs
 
 **/*~
-
 **/\#*
-
 **/*.swp
 
 
 #ignore setup.py log file
 
 setup.log
-
 
 # latex files
 
@@ -25,3 +21,11 @@ setup.log
 **/*.fls
 
 **/*.synctex.gz
+
+# jupyter/notebook
+
+.ipynb_checkpoints
+
+# python cache
+__pycache__
+**/*.pyc
