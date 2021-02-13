@@ -28,9 +28,16 @@ logging.basicConfig(filename='setup.log', filemode='a',
                     format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.DEBUG)
 
-now = date.today()
-base_path = os.getcwd()
-temp_file = open('template.tex')
+NOW = date.today()
+BASE_PATH = os.getcwd()
+PATHS = [
+    '/fig',
+    '/relazione',
+    '/dati',
+    '/analisi_dati',
+    '/misc'
+]
+TEMP_FILE = open('template.tex')
 README_STRING = '''README file
 ===========
 
@@ -56,7 +63,23 @@ main folder `/{}`
     copied)
 
 '''
+LOGO = [
+'                                                            ',
+'                                                            ',
+'   **                 **             ******   ****   ****   ',
+'  /**                /**            **////** *///** */// *  ',
+'  /**        ******  /**           **    // /*  */*/    /*  ',
+'  /**       ´´´´´´** /******      /**       /* * /*   ***   ',
+'  /**        ******* /**///**     /**       /**  /*  /// *  ',
+'  /**       **´´´´** /**  /** **  //**    **/*   /* *   /*  ',
+'  /********//********/****** /**   //****** / **** / ****   ',
+'  ////////  //////// /////   //     //////   ////   /´///   ',
+'                                                            ',
+'                                                            ',
+]
 
+def logo(): 
+        for line in LOGO: print(line)
 
 if __name__ == "__main__":
     '''setup.py python3 file
@@ -69,19 +92,18 @@ if __name__ == "__main__":
     
     '''
 
+    logo() # Print Lab. C03 intro page
+
     if len(sys.argv)<2:
-        print('Compile as: python3 {} <esp_no>'.format(sys.argv[0]))
-        sys.exit(0)
+        print('Better compile as: python3 {} <esp_no> \n'.format(sys.argv[0]))
+        arg_1 = input('Enter exp. `title_underscore`: ')
+    else: arg_1 = sys.argv[1]
+    
+    exp_no = arg_1[0:arg_1.find('_')] 
+    title_underscore = 'esperienza_{}'.format(arg_1)
+    folder_path = BASE_PATH + '/' + title_underscore
 
-    else:
-        arg_1 = sys.argv[1]
-        exp_no = arg_1[0:arg_1.find('_')] 
-        title_underscore = 'esperienza_{}'.format(arg_1)
-
-        folder_path = base_path + '/' + title_underscore
-
-    try:
-        os.mkdir(folder_path)
+    try: os.mkdir(folder_path)
     except OSError:
         logging.exception('Creation of directory {} failed'.format(folder_path))
     else:
@@ -92,15 +114,9 @@ if __name__ == "__main__":
     readme_file = open('README.md', 'w')
     print(README_STRING.format(title_underscore), file=readme_file)
 
-    paths = [
-        '/fig',
-        '/relazione',
-        '/dati',
-        '/analisi_dati',
-        '/misc'
-    ]
 
-    for i in paths:
+    print('Setting up directories...\n')
+    for i in PATHS:
         try:
             os.mkdir(folder_path + i)
         except OSError:
@@ -108,28 +124,24 @@ if __name__ == "__main__":
         else:
             logging.info('Path {} created successfully'.format(folder_path + i))
 
+    os.chdir(folder_path + PATHS[1])
 
-    os.chdir(folder_path + paths[1])
+    title_full = input('Enter full paper title Latex: ')
+    try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
+    except IOError: print('Unable to open/create requested file!')
 
-
-    title_full = input('Enter full title Latex: ')
-
-    latex_file = open('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', 'w')
-
-    latex_readlines = temp_file.readlines()
+    latex_readlines = TEMP_FILE.readlines()
 
     for line in latex_readlines:
         if '%%TITLE_HERE%%' in line:
             line = line.replace('%%TITLE_HERE%%', title_full)
         elif '%%DATE_HERE%%' in line:
-            line = line.replace('%%DATE_HERE%%', now.strftime('%d %B %Y'))
+            line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
         elif '%%NN%%' in line:
             line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
 
-    print('Created file {} with paper title: {}'.format('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', title_full))
-    logging.info('Done, created {} file in {}'.format('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', title_underscore + paths[1]))
+    print('Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
+    logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
     print('Done, see log file for errors!')
-
-    # end of document
