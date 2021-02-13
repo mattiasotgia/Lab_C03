@@ -37,6 +37,11 @@ PATHS = [
     '/analisi_dati',
     '/misc'
 ]
+LOG_MSG = {
+    'path_created': 'Path {} created successfully',
+    'path_failed': 'Creation of directory {} failed',
+    'io_err': 'Unable to open/create requested file!',
+}
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
 ===========
@@ -78,7 +83,7 @@ LOGO = [
 '                                                            ',
 ]
 
-def logo(): 
+def LOGO_PRINT(): 
         for line in LOGO: print(line)
 
 if __name__ == "__main__":
@@ -92,7 +97,7 @@ if __name__ == "__main__":
     
     '''
 
-    logo() # Print Lab. C03 intro page
+    LOGO_PRINT() # Print Lab. C03 intro page
 
     if len(sys.argv)<2:
         print('Better compile as: python3 {} <esp_no> \n'.format(sys.argv[0]))
@@ -105,9 +110,9 @@ if __name__ == "__main__":
 
     try: os.mkdir(folder_path)
     except OSError:
-        logging.exception('Creation of directory {} failed'.format(folder_path))
+        logging.exception(LOG_MSG['path_failed'].format(folder_path))
     else:
-        logging.info('Path {} created successfully'.format(folder_path))
+        logging.info(LOG_MSG['path_created'].format(folder_path))
     
     os.chdir(folder_path)
 
@@ -120,15 +125,15 @@ if __name__ == "__main__":
         try:
             os.mkdir(folder_path + i)
         except OSError:
-            logging.exception('Creation of directory {} failed'.format(folder_path + i))
+            logging.exception(LOG_MSG['path_failed'].format(folder_path + i))
         else:
-            logging.info('Path {} created successfully'.format(folder_path + i))
+            logging.info(LOG_MSG['path_created'].format(folder_path + i))
 
     os.chdir(folder_path + PATHS[1])
 
     title_full = input('Enter full paper title Latex: ')
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
-    except IOError: print('Unable to open/create requested file!')
+    except IOError: print(LOG_MSG['io_err'])
 
     latex_readlines = TEMP_FILE.readlines()
 
