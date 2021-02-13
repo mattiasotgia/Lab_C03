@@ -41,6 +41,8 @@ LOG_MSG = {
     'path_created': 'Path {} created successfully',
     'path_failed': 'Creation of directory {} failed',
     'io_err': 'Unable to open/create requested file!',
+    'path_exist': 'Path {} already exists! Please change dir name.\n',
+    'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n'
 }
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
@@ -99,21 +101,30 @@ if __name__ == "__main__":
 
     LOGO_PRINT() # Print Lab. C03 intro page
 
-    if len(sys.argv)<2:
-        print('Better compile as: python3 {} <esp_no> \n'.format(sys.argv[0]))
-        arg_1 = input('Enter exp. `title_underscore`: ')
-    else: arg_1 = sys.argv[1]
+    c = 0
     
-    exp_no = arg_1[0:arg_1.find('_')] 
-    title_underscore = 'esperienza_{}'.format(arg_1)
-    folder_path = BASE_PATH + '/' + title_underscore
+    while True:
+        if len(sys.argv)<2+c:
+            # print('Better compile as: python3 {} <esp_no> \n'.format(sys.argv[0]))
+            arg_1 = input('Enter exp. `title_underscore`: ')
+        else: arg_1 = sys.argv[1]
+        c = 1        
+        
+        title_underscore = 'esperienza_{}'.format(arg_1)
+        folder_path = BASE_PATH + '/' + title_underscore
 
-    try: os.mkdir(folder_path)
-    except OSError:
-        logging.exception(LOG_MSG['path_failed'].format(folder_path))
-    else:
-        logging.info(LOG_MSG['path_created'].format(folder_path))
-    
+        if os.path.exists(folder_path): print(LOG_MSG['path_exist'].format(title_underscore)); continue
+        if arg_1 is '': print(LOG_MSG['path_empthy']); continue
+
+        try: os.mkdir(folder_path)
+        except OSError:
+            logging.exception(LOG_MSG['path_failed'].format(folder_path))
+        else:
+            logging.info(LOG_MSG['path_created'].format(folder_path))
+        break
+
+    exp_no = arg_1[0:arg_1.find('_')]
+
     os.chdir(folder_path)
 
     readme_file = open('README.md', 'w')
@@ -122,8 +133,7 @@ if __name__ == "__main__":
 
     print('Setting up directories...\n')
     for i in PATHS:
-        try:
-            os.mkdir(folder_path + i)
+        try: os.mkdir(folder_path + i)
         except OSError:
             logging.exception(LOG_MSG['path_failed'].format(folder_path + i))
         else:
