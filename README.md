@@ -45,7 +45,9 @@ Merged `working-on` branch on `master`. Removed old code from `esperienza_3_Moto
 README file.
 Uploaded .tex and .pdf file for e4 relazione.
 Uploaded .ipynb file for testing purposes, removed in gitignore.
+
 **2021-02-13** made all code easier to read; all standard strings made accessible in header as costant, so they
 cannot be modified. Added dict to setup.py to hold all log messaging strings.
+
 **2021-02-15** made possible for new directories to auto-number themselves. spaces in `title_underscore` now become
  `_` automatically. 
