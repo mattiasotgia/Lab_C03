@@ -130,7 +130,7 @@ if __name__ == "__main__":
             exp_no = str(np.max(ALL_EXP_N)+1)
             print(LOG_MSG['exist_exp_number'].format(str(int(exp_no) - 1), exp_no))
 
-        title_underscore = BASE_DIR_NAME + exp_no + arg_1[arg_1.find('_'):]
+        title_underscore = BASE_DIR_NAME + exp_no + '_' + arg_1[arg_1.find('_'):]
         folder_path = BASE_PATH + '/' + title_underscore
 
         if os.path.exists(folder_path): print(LOG_MSG['path_exist'].format(title_underscore)); continue # Check if full directory exists
