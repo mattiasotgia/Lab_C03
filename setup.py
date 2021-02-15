@@ -11,6 +11,9 @@
 # 2021-02-11 rewritten setup.py for latex 
 # template, so it is easier to modify master 
 # template file
+# 2021-02-13 created init costants strings 
+# and dict for given values. Updated input 
+# method to have also recursive support.
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
@@ -19,6 +22,7 @@
 # make macOs app that imput name of folder and title of article as string <-!!
 
 import os, sys
+import numpy as np
 import logging
 
 from datetime import date
@@ -30,19 +34,23 @@ logging.basicConfig(filename='setup.log', filemode='a',
 
 NOW = date.today()
 BASE_PATH = os.getcwd()
+BASE_DIR_NAME = 'esperienza_'
+ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) for n in os.listdir(BASE_PATH) if n[:len(BASE_DIR_NAME)] == BASE_DIR_NAME)
 PATHS = [
     '/fig',
     '/relazione',
     '/dati',
     '/analisi_dati',
-    '/misc'
+    '/misc',
 ]
 LOG_MSG = {
     'path_created': 'Path {} created successfully',
     'path_failed': 'Creation of directory {} failed',
     'io_err': 'Unable to open/create requested file!',
     'path_exist': 'Path {} already exists! Please change dir name.\n',
-    'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n'
+    'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n',
+    'not_exp_n': 'Dir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> ',
+    'exist_exp_number': 'Path esperienza_{}... exist, moving -> esperienza_{}...'
 }
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
@@ -101,33 +109,43 @@ if __name__ == "__main__":
 
     LOGO_PRINT() # Print Lab. C03 intro page
 
-    c = 0
+    os.chdir(BASE_PATH)
+
     
     while True:
-        if len(sys.argv)<2+c:
-            # print('Better compile as: python3 {} <esp_no> \n'.format(sys.argv[0]))
+        if len(sys.argv)<2 or sys.argv[1] is None:
             arg_1 = input('Enter exp. `title_underscore`: ')
-        else: arg_1 = sys.argv[1]
-        c = 1        
+        else: arg_1 = sys.argv[1]; sys.argv[1] = None
+
+        arg_1 = arg_1.replace(' ', '_')
         
-        title_underscore = 'esperienza_{}'.format(arg_1)
+        exp_no = arg_1[:arg_1.find('_')]
+
+        if not arg_1[0].isdigit():
+            if arg_1[0] != '_': arg_1 = '_' + arg_1
+            exp_no = str(np.max(ALL_EXP_N)+1); print(LOG_MSG['not_exp_n'] + exp_no);
+        elif int(exp_no) <= np.max(ALL_EXP_N):
+            exp_no = str(np.max(ALL_EXP_N)+1)
+            print(LOG_MSG['exist_exp_number'].format(str(int(exp_no) - 1), exp_no))
+
+        title_underscore = BASE_DIR_NAME + exp_no + arg_1[arg_1.find('_'):]
         folder_path = BASE_PATH + '/' + title_underscore
 
-        if os.path.exists(folder_path): print(LOG_MSG['path_exist'].format(title_underscore)); continue
-        if arg_1 is '': print(LOG_MSG['path_empthy']); continue
+        if os.path.exists(folder_path): print(LOG_MSG['path_exist'].format(title_underscore)); continue # Check if full directory exists
+        if arg_1 == '': print(LOG_MSG['path_empthy']); continue
 
-        try: os.mkdir(folder_path)
-        except OSError:
-            logging.exception(LOG_MSG['path_failed'].format(folder_path))
-        else:
-            logging.info(LOG_MSG['path_created'].format(folder_path))
         break
 
-    exp_no = arg_1[0:arg_1.find('_')]
+    try: os.mkdir(folder_path)
+    except OSError:
+        logging.exception(LOG_MSG['path_failed'].format(folder_path))
+    else:
+        logging.info(LOG_MSG['path_created'].format(folder_path))
 
     os.chdir(folder_path)
 
     readme_file = open('README.md', 'w')
+
     print(README_STRING.format(title_underscore), file=readme_file)
 
 
