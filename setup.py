@@ -14,6 +14,8 @@
 # 2021-02-13 created init costants strings 
 # and dict for given values. Updated input 
 # method to have also recursive support.
+# 2021-02-15 updated input method with error 
+# handling, added auto numbering
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
