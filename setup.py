@@ -52,7 +52,9 @@ LOG_MSG = {
     'path_exist': 'Path {} already exists! Please change dir name.\n',
     'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n',
     'not_exp_n': 'Dir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> ',
-    'exist_exp_number': 'Path esperienza_{}... exist, moving -> esperienza_{}...'
+    'exist_exp_number': 'Path esperienza_{}... exist, moving -> esperienza_{}...',
+    'i_paper_title': 'Enter full paper title Latex 📝 : ',
+    'i_dir_name': 'Enter exp. `title_underscore` 📁 : ',
 }
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
@@ -116,10 +118,12 @@ if __name__ == "__main__":
     
     while True:
         if len(sys.argv)<2 or sys.argv[1] is None:
-            arg_1 = input('Enter exp. `title_underscore`: ')
+            arg_1 = input(LOG_MSG['i_dir_name'])
         else: arg_1 = sys.argv[1]; sys.argv[1] = None
 
         arg_1 = arg_1.replace(' ', '_')
+        
+        if arg_1 == '': print(LOG_MSG['path_empthy']); continue
         
         exp_no = arg_1[:arg_1.find('_')]
 
@@ -134,7 +138,6 @@ if __name__ == "__main__":
         folder_path = BASE_PATH + '/' + title_underscore
 
         if os.path.exists(folder_path): print(LOG_MSG['path_exist'].format(title_underscore)); continue # Check if full directory exists
-        if arg_1 == '': print(LOG_MSG['path_empthy']); continue
 
         break
 
@@ -161,7 +164,8 @@ if __name__ == "__main__":
 
     os.chdir(folder_path + PATHS[1])
 
-    title_full = input('Enter full paper title Latex: ')
+    title_full = input(LOG_MSG['i_paper_title'])
+
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])
 
