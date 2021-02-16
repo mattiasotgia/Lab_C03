@@ -11,6 +11,11 @@
 # 2021-02-11 rewritten setup.py for latex 
 # template, so it is easier to modify master 
 # template file
+# 2021-02-13 created init costants strings 
+# and dict for given values. Updated input 
+# method to have also recursive support.
+# 2021-02-15 updated input method with error 
+# handling, added auto numbering
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
@@ -19,19 +24,81 @@
 # make macOs app that imput name of folder and title of article as string <-!!
 
 import os, sys
+import numpy as np
 import logging
 
 from datetime import date
 
 # base support for logging information;
-logging.basicConfig(filename='setup.log', filemode='w', 
-                    format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
+logging.basicConfig(filename='setup.log', filemode='a', 
+                    format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.DEBUG)
 
-now = date.today()
-base_path = os.getcwd()
-temp_file = open('template.tex')
+NOW = date.today()
+BASE_PATH = os.getcwd()
+BASE_DIR_NAME = 'esperienza_'
+ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) for n in os.listdir(BASE_PATH) if n[:len(BASE_DIR_NAME)] == BASE_DIR_NAME)
+PATHS = [
+    '/fig',
+    '/relazione',
+    '/dati',
+    '/analisi_dati',
+    '/misc',
+]
+LOG_MSG = {
+    'path_created': 'Path {} created successfully',
+    'path_failed': 'Creation of directory {} failed',
+    'io_err': 'Unable to open/create requested file!',
+    'path_exist': 'Path {} already exists! Please change dir name.\n',
+    'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n',
+    'not_exp_n': 'Dir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> ',
+    'exist_exp_number': 'Path esperienza_{}... exist, moving -> esperienza_{}...',
+    'i_paper_title': 'Enter full paper title Latex 📝 : ',
+    'i_dir_name': 'Enter exp. `title_underscore` 📁 : ',
+}
+TEMP_FILE = open('template.tex')
+README_STRING = '''README file
+===========
 
+Folder structure
+----------------
+main folder `/{}`
+
+> `/relazione`
+    for all pdf versions of paper
+    also for all .tex and .docx eventually
+
+> `/fig`
+    for everythong concerning .figs, .pdfs, .ai's
+
+> `/dati`
+    raw and polished data goes here.
+
+> `/analisi_dati`
+    everuthing __code__ goes here.
+
+> `/misc`
+    everything else (log files, results to be 
+    copied)
+
+'''
+LOGO = [
+'                                                            ',
+'                                                            ',
+'   **                 **             ******   ****   ****   ',
+'  /**                /**            **////** *///** */// *  ',
+'  /**        ******  /**           **    // /*  */*/    /*  ',
+'  /**       ´´´´´´** /******      /**       /* * /*   ***   ',
+'  /**        ******* /**///**     /**       /**  /*  /// *  ',
+'  /**       **´´´´** /**  /** **  //**    **/*   /* *   /*  ',
+'  /********//********/****** /**   //****** / **** / ****   ',
+'  ////////  //////// /////   //     //////   ////   /´///   ',
+'                                                            ',
+'                                                            ',
+]
+
+def LOGO_PRINT(): 
+        for line in LOGO: print(line)
 
 if __name__ == "__main__":
     '''setup.py python3 file
@@ -44,90 +111,76 @@ if __name__ == "__main__":
     
     '''
 
-    if len(sys.argv)<2:
-        print('Compile as: python3 {} <esp_no>'.format(sys.argv[0]))
-        sys.exit(0)
+    LOGO_PRINT() # Print Lab. C03 intro page
 
-    else:
-        arg_1 = sys.argv[1]
-        exp_no = arg_1[0:arg_1.find('_')] 
-        title_underscore = 'esperienza_{}'.format(arg_1)
+    os.chdir(BASE_PATH)
 
-        folder_path = base_path + '/' + title_underscore
-
-    try:
-        os.mkdir(folder_path)
-    except OSError:
-        logging.exception('Creation of directory {} failed'.format(folder_path))
-    else:
-        logging.info('Path {} created successfully'.format(folder_path))
     
+    while True:
+        if len(sys.argv)<2 or sys.argv[1] is None:
+            arg_1 = input(LOG_MSG['i_dir_name'])
+        else: arg_1 = sys.argv[1]; sys.argv[1] = None
+
+        arg_1 = arg_1.replace(' ', '_')
+        
+        if arg_1 == '': print(LOG_MSG['path_empthy']); continue
+        
+        exp_no = arg_1[:arg_1.find('_')]
+
+        if not arg_1[0].isdigit():
+            if arg_1[0] != '_': arg_1 = '_' + arg_1
+            exp_no = str(np.max(ALL_EXP_N)+1); print(LOG_MSG['not_exp_n'] + exp_no);
+        elif int(exp_no) <= np.max(ALL_EXP_N):
+            exp_no = str(np.max(ALL_EXP_N)+1)
+            print(LOG_MSG['exist_exp_number'].format(str(int(exp_no) - 1), exp_no))
+
+        title_underscore = BASE_DIR_NAME + exp_no + '_' + arg_1[arg_1.find('_'):]
+        folder_path = BASE_PATH + '/' + title_underscore
+
+        if os.path.exists(folder_path): print(LOG_MSG['path_exist'].format(title_underscore)); continue # Check if full directory exists
+
+        break
+
+    try: os.mkdir(folder_path)
+    except OSError:
+        logging.exception(LOG_MSG['path_failed'].format(folder_path))
+    else:
+        logging.info(LOG_MSG['path_created'].format(folder_path))
+
     os.chdir(folder_path)
 
     readme_file = open('README.md', 'w')
-    print('''README file
-    ===========
 
-    Folder structure
-    ----------------
-    main folder `/{}`
+    print(README_STRING.format(title_underscore), file=readme_file)
 
-    > `/relazione`
-        for all pdf versions of paper
-        also for all .tex and .docx eventually
 
-    > `/fig`
-        for everythong concerning .figs, .pdfs, .ai's
-
-    > `/dati`
-        raw and polished data goes here.
-
-    > `/analisi_dati`
-        everuthing __code__ goes here.
-
-    > `/misc`
-        everything else (log files, results to be 
-        copied)
-
-    '''.format(title_underscore), file=readme_file)
-
-    paths = [
-        '/fig',
-        '/relazione',
-        '/dati',
-        '/analisi_dati',
-        '/misc'
-    ]
-
-    for i in paths:
-        try:
-            os.mkdir(folder_path + i)
+    print('Setting up directories...\n')
+    for i in PATHS:
+        try: os.mkdir(folder_path + i)
         except OSError:
-            logging.exception('Creation of directory {} failed'.format(folder_path + i))
+            logging.exception(LOG_MSG['path_failed'].format(folder_path + i))
         else:
-            logging.info('Path {} created successfully'.format(folder_path + i))
+            logging.info(LOG_MSG['path_created'].format(folder_path + i))
 
+    os.chdir(folder_path + PATHS[1])
 
-    os.chdir(folder_path + paths[1])
+    title_full = input(LOG_MSG['i_paper_title'])
 
+    try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
+    except IOError: print(LOG_MSG['io_err'])
 
-    title_full = input('Enter full title Latex: ')
-
-    latex_file = open('esperienza_{}_{}'.format(exp_no, now.strftime('%Y_%m_%d')) + '.tex', 'w')
-
-    latex_readlines = temp_file.readlines()
+    latex_readlines = TEMP_FILE.readlines()
 
     for line in latex_readlines:
         if '%%TITLE_HERE%%' in line:
             line = line.replace('%%TITLE_HERE%%', title_full)
         elif '%%DATE_HERE%%' in line:
-            line = line.replace('%%DATE_HERE%%', now.strftime('%d %B %Y'))
+            line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
         elif '%%NN%%' in line:
             line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
 
-    logging.info('Done')
+    print('Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
+    logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
     print('Done, see log file for errors!')
-
-    # end of document
