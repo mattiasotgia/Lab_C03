@@ -1,6 +1,11 @@
 #ifndef _STAT_H
 #define _STAT_H
 
+// This code is completely open-source, 
+// any feature addition is welcome!
+
+// stat library, v1.0 as of 2021-02-16
+
 #include <vector>
 
 class stat{
