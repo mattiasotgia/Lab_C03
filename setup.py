@@ -181,6 +181,6 @@ if __name__ == "__main__":
         
         latex_file.write(line)
 
-    print('Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
+    print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
     logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
     print('Done, see log file for errors!')
