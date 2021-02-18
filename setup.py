@@ -16,6 +16,8 @@
 # method to have also recursive support.
 # 2021-02-15 updated input method with error 
 # handling, added auto numbering
+# 2021-02-17 removed numpy unnecessary import,
+# resolved max([]) at line 132-134
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
@@ -24,7 +26,6 @@
 # make macOs app that imput name of folder and title of article as string <-!!
 
 import os, sys
-import numpy as np
 import logging
 
 from datetime import date
@@ -129,9 +130,9 @@ if __name__ == "__main__":
 
         if not arg_1[0].isdigit():
             if arg_1[0] != '_': arg_1 = '_' + arg_1
-            exp_no = str(np.max(ALL_EXP_N)+1); print(LOG_MSG['not_exp_n'] + exp_no);
-        elif int(exp_no) <= np.max(ALL_EXP_N):
-            exp_no = str(np.max(ALL_EXP_N)+1)
+            exp_no = str(max(ALL_EXP_N)+1); print(LOG_MSG['not_exp_n'] + exp_no);
+        elif int(exp_no) <= max(ALL_EXP_N):
+            exp_no = str(max(ALL_EXP_N)+1)
             print(LOG_MSG['exist_exp_number'].format(str(int(exp_no) - 1), exp_no))
 
         title_underscore = BASE_DIR_NAME + exp_no + '_' + arg_1[arg_1.find('_'):]
