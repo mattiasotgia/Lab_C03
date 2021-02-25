@@ -31,6 +31,7 @@
 
 import os, sys
 import logging
+import subprocess
 
 from datetime import date
 
@@ -59,8 +60,9 @@ LOG_MSG = {
     'not_exp_n': '\033[31mDir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> \033[0m',
     'exist_exp_number': '\033[31mPath esperienza_{}... exist, moving -> esperienza_{}...\033[0m',
     'i_dir_name': 'Enter exp. `title_underscore` 📁 (`exit` to quit): ',
-    'i_paper_title': 'Enter full paper title Latex 📝 : ',
-    'u_quit': '\033[1;31mUser quit...\033[0m'
+    'i_paper_title': '\nEnter full paper title Latex 📝 : ',
+    'u_quit': '\033[1;31mUser quit...\033[0m',
+    'quit_delete': '\033[31mDo you want to delete {} directory? ( y / n )\033[0m',
 }
 SYS_EXIT = [
     '.q',
@@ -72,6 +74,7 @@ SYS_EXIT = [
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
 ===========
+{}
 
 Folder structure
 ----------------
@@ -165,9 +168,11 @@ if __name__ == "__main__":
 
     os.chdir(folder_path)
 
+    title_full = input(LOG_MSG['i_paper_title'])
+
 
     with open('README.md', 'w') as readme_file:
-        print(README_STRING.format(title_underscore), file=readme_file)
+        print(README_STRING.format(title_full, title_underscore), file=readme_file)
 
 
     print('\033[0;32mSetting up directories...\n\033[0m')
@@ -181,8 +186,12 @@ if __name__ == "__main__":
 
     os.chdir(folder_path + PATHS[1])
 
-    title_full = input(LOG_MSG['i_paper_title'])
-    if title_full in SYS_EXIT: print(LOG_MSG['u_quit']); sys.exit(0)
+    
+    if title_full in SYS_EXIT:
+        ask = input(LOG_MSG['quit_delete'].format(title_underscore))
+        if ask in ['y', 'Y', 'yes', 'Yes', 'YES']:
+            subprocess.run(['rm', '-r', BASE_PATH + '/' + title_underscore])
+        print(LOG_MSG['u_quit']); sys.exit(0)
 
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])
