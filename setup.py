@@ -18,6 +18,9 @@
 # handling, added auto numbering
 # 2021-02-17 removed numpy unnecessary import,
 # resolved max([]) at line 132-134
+# 2021-02-25 resolved minor fixes, made 
+# colored output, minor fixes on OSError, 
+# set sys.exit(0)
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
@@ -57,6 +60,7 @@ LOG_MSG = {
     'exist_exp_number': '\033[31mPath esperienza_{}... exist, moving -> esperienza_{}...\033[0m',
     'i_dir_name': 'Enter exp. `title_underscore` 📁 (`exit` to quit): ',
     'i_paper_title': 'Enter full paper title Latex 📝 : ',
+    'u_quit': '\033[1;31mUser quit...\033[0m'
 }
 SYS_EXIT = [
     '.q',
@@ -132,7 +136,7 @@ if __name__ == "__main__":
 
         arg_1 = arg_1.replace(' ', '_')
         
-        if arg_1 in SYS_EXIT: sys.exit(0)
+        if arg_1 in SYS_EXIT: print(LOG_MSG['u_quit']); sys.exit(0)
 
         if arg_1 == '': print(LOG_MSG['path_empthy']); continue
         
@@ -178,6 +182,7 @@ if __name__ == "__main__":
     os.chdir(folder_path + PATHS[1])
 
     title_full = input(LOG_MSG['i_paper_title'])
+    if title_full in SYS_EXIT: print(LOG_MSG['u_quit'])sys.exit(0)
 
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])

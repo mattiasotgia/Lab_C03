@@ -73,3 +73,6 @@ to .gitignore; Made all Important variable constants, and all those constant are
 Updated the input method, now supporting error handling notification if something goes wrong.
 Removed test.ipynb testing enviroment.
 Updated Changelog with every commit.
+
+**2021-02-25** Merged branches, tag v4.3 latest relase, removed numpy unecessary import, 
+added exit method for program.
