@@ -16,15 +16,17 @@
 # method to have also recursive support.
 # 2021-02-15 updated input method with error 
 # handling, added auto numbering
+# 2021-02-17 removed numpy unnecessary import,
+# resolved max([]) at line 132-134
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
 
-# TODO: 
+# TODO:
+# !!! make program chdir in terminal automatically at progrem end !!!
 # make macOs app that imput name of folder and title of article as string <-!!
 
 import os, sys
-import numpy as np
 import logging
 
 from datetime import date
@@ -49,13 +51,20 @@ LOG_MSG = {
     'path_created': 'Path {} created successfully',
     'path_failed': 'Creation of directory {} failed',
     'io_err': 'Unable to open/create requested file!',
-    'path_exist': 'Path {} already exists! Please change dir name.\n',
-    'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n',
-    'not_exp_n': 'Dir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> ',
-    'exist_exp_number': 'Path esperienza_{}... exist, moving -> esperienza_{}...',
+    'path_exist': '\033[1;31mPath {} already exists! Please change dir name.\n\033[0m',
+    'path_empthy': '\033[1;31mName for main dir for Lab. Experience is empthy!\n\033[0m',
+    'not_exp_n': '\033[31mDir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> \033[0m',
+    'exist_exp_number': '\033[31mPath esperienza_{}... exist, moving -> esperienza_{}...\033[0m',
+    'i_dir_name': 'Enter exp. `title_underscore` 📁 (`exit` to quit): ',
     'i_paper_title': 'Enter full paper title Latex 📝 : ',
-    'i_dir_name': 'Enter exp. `title_underscore` 📁 : ',
 }
+SYS_EXIT = [
+    '.q',
+    'quit()',
+    'exit',
+    'q',
+    '\x1b',
+]
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
 ===========
@@ -97,7 +106,7 @@ LOGO = [
 '                                                            ',
 ]
 
-def LOGO_PRINT(): 
+def LOGO_PRINT() -> None: 
         for line in LOGO: print(line)
 
 if __name__ == "__main__":
@@ -123,15 +132,17 @@ if __name__ == "__main__":
 
         arg_1 = arg_1.replace(' ', '_')
         
+        if arg_1 in SYS_EXIT: sys.exit(0)
+
         if arg_1 == '': print(LOG_MSG['path_empthy']); continue
         
         exp_no = arg_1[:arg_1.find('_')]
 
         if not arg_1[0].isdigit():
             if arg_1[0] != '_': arg_1 = '_' + arg_1
-            exp_no = str(np.max(ALL_EXP_N)+1); print(LOG_MSG['not_exp_n'] + exp_no);
-        elif int(exp_no) <= np.max(ALL_EXP_N):
-            exp_no = str(np.max(ALL_EXP_N)+1)
+            exp_no = str(max(ALL_EXP_N)+1); print(LOG_MSG['not_exp_n'] + exp_no);
+        elif int(exp_no) <= max(ALL_EXP_N):
+            exp_no = str(max(ALL_EXP_N)+1)
             print(LOG_MSG['exist_exp_number'].format(str(int(exp_no) - 1), exp_no))
 
         title_underscore = BASE_DIR_NAME + exp_no + '_' + arg_1[arg_1.find('_'):]
@@ -144,21 +155,23 @@ if __name__ == "__main__":
     try: os.mkdir(folder_path)
     except OSError:
         logging.exception(LOG_MSG['path_failed'].format(folder_path))
+        sys.exit(0)
     else:
         logging.info(LOG_MSG['path_created'].format(folder_path))
 
     os.chdir(folder_path)
 
-    readme_file = open('README.md', 'w')
 
-    print(README_STRING.format(title_underscore), file=readme_file)
+    with open('README.md', 'w') as readme_file:
+        print(README_STRING.format(title_underscore), file=readme_file)
 
 
-    print('Setting up directories...\n')
+    print('\033[0;32mSetting up directories...\n\033[0m')
     for i in PATHS:
         try: os.mkdir(folder_path + i)
         except OSError:
             logging.exception(LOG_MSG['path_failed'].format(folder_path + i))
+            sys.exit(0)
         else:
             logging.info(LOG_MSG['path_created'].format(folder_path + i))
 
@@ -169,18 +182,17 @@ if __name__ == "__main__":
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])
 
+    
     latex_readlines = TEMP_FILE.readlines()
 
     for line in latex_readlines:
-        if '%%TITLE_HERE%%' in line:
-            line = line.replace('%%TITLE_HERE%%', title_full)
-        elif '%%DATE_HERE%%' in line:
-            line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
-        elif '%%NN%%' in line:
-            line = line.replace('%%NN%%', exp_no)
+        if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', title_full)
+        if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
+        if '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
 
-    print('Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
+    print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
     logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
-    print('Done, see log file for errors!')
+    print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
+    # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible

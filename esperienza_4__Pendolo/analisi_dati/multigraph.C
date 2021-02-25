@@ -58,7 +58,7 @@
 	string g_total="g = "+to_string(f_offset.GetParameter(0))+" #pm "
 		+to_string(f_offset.GetParError(0))+" m/s^{2}";
 
-	stat_s="#bf{#splitline{#chi^{2}/ndf (prob.)}{"
+	string stat_s="#bf{#splitline{#chi^{2}/ndf (prob.)}{"
 		+to_string(f_offset.GetChisquare())+"/"
 		+to_string(f_offset.GetNDF())
 		+" ("+to_string(f_offset.GetProb()*1e13)+"#times10^{-13})}}";
@@ -79,6 +79,6 @@
 	par.DrawLatexNDC(0.5, 0.2, g_total.c_str());
 
 
-	//	c.SaveAs("multigraph_set_final_v2.pdf");
+	c.SaveAs("multigraph_set_final_v2.pdf");
 	// c.SaveAs("multigraph_set_final_v2_AC.pdf");
 }
