@@ -3,8 +3,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{lab_unige} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODIFICATO MODIFICATO MODIFICATO MODIFICATO
 
-
- \usepackage{caption}
+\usepackage{caption}
 
 
 \newcommand\@ptsize{}
