@@ -182,7 +182,7 @@ if __name__ == "__main__":
     os.chdir(folder_path + PATHS[1])
 
     title_full = input(LOG_MSG['i_paper_title'])
-    if title_full in SYS_EXIT: print(LOG_MSG['u_quit'])sys.exit(0)
+    if title_full in SYS_EXIT: print(LOG_MSG['u_quit']); sys.exit(0)
 
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])
