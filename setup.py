@@ -22,7 +22,8 @@
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
 
-# TODO: 
+# TODO:
+# !!! make program chdir in terminal automatically at progrem end !!!
 # make macOs app that imput name of folder and title of article as string <-!!
 
 import os, sys
@@ -65,8 +66,6 @@ SYS_EXIT = [
     '\x1b',
 ]
 TEMP_FILE = open('template.tex')
-TEX_CLASS = '../../style/lab_unige'
-TEX_CUSTOM_STY = '../../style/custom'
 README_STRING = '''README file
 ===========
 
@@ -156,14 +155,15 @@ if __name__ == "__main__":
     try: os.mkdir(folder_path)
     except OSError:
         logging.exception(LOG_MSG['path_failed'].format(folder_path))
+        sys.exit(0)
     else:
         logging.info(LOG_MSG['path_created'].format(folder_path))
 
     os.chdir(folder_path)
 
-    readme_file = open('README.md', 'w')
 
-    print(README_STRING.format(title_underscore), file=readme_file)
+    with open('README.md', 'w') as readme_file:
+        print(README_STRING.format(title_underscore), file=readme_file)
 
 
     print('\033[0;32mSetting up directories...\n\033[0m')
@@ -171,6 +171,7 @@ if __name__ == "__main__":
         try: os.mkdir(folder_path + i)
         except OSError:
             logging.exception(LOG_MSG['path_failed'].format(folder_path + i))
+            sys.exit(0)
         else:
             logging.info(LOG_MSG['path_created'].format(folder_path + i))
 
@@ -181,17 +182,17 @@ if __name__ == "__main__":
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])
 
+    
     latex_readlines = TEMP_FILE.readlines()
 
     for line in latex_readlines:
         if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', title_full)
-        elif '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
-        elif '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
-        elif '%%CLASS%%' in line: line.replace('%%CLASS%%', TEX_CLASS)
-        elif '%%CUSTOM%%' in line: line.replace('%%CUSTOM%%', TEX_CUSTOM_STY)
+        if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
+        if '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
 
     print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
     logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
-    print('Done, see log file for errors!')
+    print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
+    # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible
