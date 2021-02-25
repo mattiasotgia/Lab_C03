@@ -8,7 +8,7 @@ past lab experiences.
 
 ## Usage
 
-This repo should be manteined up-to-date with latest experiments and data.
+This repo should be maintained up-to-date with latest experiments and data.
 
 There is a `./esperienza_#__<title>` folder for each one lab. experience. Those are 
 then divided as described in README for each sub-directory. 
