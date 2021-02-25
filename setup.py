@@ -50,14 +50,23 @@ LOG_MSG = {
     'path_created': 'Path {} created successfully',
     'path_failed': 'Creation of directory {} failed',
     'io_err': 'Unable to open/create requested file!',
-    'path_exist': 'Path {} already exists! Please change dir name.\n',
-    'path_empthy': 'Name for main dir for Lab. Experience is empthy!\n',
-    'not_exp_n': 'Dir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> ',
-    'exist_exp_number': 'Path esperienza_{}... exist, moving -> esperienza_{}...',
+    'path_exist': '\033[1;31mPath {} already exists! Please change dir name.\n\033[0m',
+    'path_empthy': '\033[1;31mName for main dir for Lab. Experience is empthy!\n\033[0m',
+    'not_exp_n': '\033[31mDir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> \033[0m',
+    'exist_exp_number': '\033[31mPath esperienza_{}... exist, moving -> esperienza_{}...\033[0m',
+    'i_dir_name': 'Enter exp. `title_underscore` 📁 (`exit` to quit): ',
     'i_paper_title': 'Enter full paper title Latex 📝 : ',
-    'i_dir_name': 'Enter exp. `title_underscore` 📁 : ',
 }
+SYS_EXIT = [
+    '.q',
+    'quit()',
+    'exit',
+    'q',
+    '\x1b',
+]
 TEMP_FILE = open('template.tex')
+TEX_CLASS = '../../style/lab_unige'
+TEX_CUSTOM_STY = '../../style/custom'
 README_STRING = '''README file
 ===========
 
@@ -98,7 +107,7 @@ LOGO = [
 '                                                            ',
 ]
 
-def LOGO_PRINT(): 
+def LOGO_PRINT() -> None: 
         for line in LOGO: print(line)
 
 if __name__ == "__main__":
@@ -124,6 +133,8 @@ if __name__ == "__main__":
 
         arg_1 = arg_1.replace(' ', '_')
         
+        if arg_1 in SYS_EXIT: sys.exit(0)
+
         if arg_1 == '': print(LOG_MSG['path_empthy']); continue
         
         exp_no = arg_1[:arg_1.find('_')]
@@ -155,7 +166,7 @@ if __name__ == "__main__":
     print(README_STRING.format(title_underscore), file=readme_file)
 
 
-    print('Setting up directories...\n')
+    print('\033[0;32mSetting up directories...\n\033[0m')
     for i in PATHS:
         try: os.mkdir(folder_path + i)
         except OSError:
@@ -173,12 +184,11 @@ if __name__ == "__main__":
     latex_readlines = TEMP_FILE.readlines()
 
     for line in latex_readlines:
-        if '%%TITLE_HERE%%' in line:
-            line = line.replace('%%TITLE_HERE%%', title_full)
-        elif '%%DATE_HERE%%' in line:
-            line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
-        elif '%%NN%%' in line:
-            line = line.replace('%%NN%%', exp_no)
+        if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', title_full)
+        elif '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
+        elif '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
+        elif '%%CLASS%%' in line: line.replace('%%CLASS%%', TEX_CLASS)
+        elif '%%CUSTOM%%' in line: line.replace('%%CUSTOM%%', TEX_CUSTOM_STY)
         
         latex_file.write(line)
 
