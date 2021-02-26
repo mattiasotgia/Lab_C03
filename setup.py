@@ -43,7 +43,8 @@ logging.basicConfig(filename='setup.log', filemode='a',
 NOW = date.today()
 BASE_PATH = os.getcwd()
 BASE_DIR_NAME = 'esperienza_'
-ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) for n in os.listdir(BASE_PATH) if n[:len(BASE_DIR_NAME)] == BASE_DIR_NAME)
+ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) \
+    for n in os.listdir(BASE_PATH) if n[:len(BASE_DIR_NAME)] == BASE_DIR_NAME)
 PATHS = [
     '/fig',
     '/relazione',
@@ -74,11 +75,11 @@ SYS_EXIT = [
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
 ===========
-{}
+{doc}
 
 Folder structure
 ----------------
-main folder `/{}`
+main folder `/{path}`
 
 > `/relazione`
     for all pdf versions of paper
@@ -172,7 +173,7 @@ if __name__ == "__main__":
 
 
     with open('README.md', 'w') as readme_file:
-        print(README_STRING.format(title_full, title_underscore), file=readme_file)
+        print(README_STRING.format(doc=title_full, path=title_underscore), file=readme_file)
 
 
     print('\033[0;32mSetting up directories...\n\033[0m')
