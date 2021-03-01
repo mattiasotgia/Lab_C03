@@ -1,3 +1,7 @@
+// "stat.h" -*- C++ -*- 
+
+// Copyrights (C) 2021 Mattia Sotgia
+
 #ifndef _STAT_H
 #define _STAT_H
 
@@ -20,17 +24,17 @@ public:
         _v = v;
     }
 
-    double avg();
-    double std_err();
-    void clear();
+    double avg(); // Compute average for input vector
+    double std_err(); // Compute SE for input vector
+    void clear(); // Clear input vector
 
 private:
     std::vector<double> _v;
-    double sqr_avg();
-    double variance();
-    double emp_var();
-    double std();
-    double std_adp();
+    double sqr_avg(); // Private compute 
+    double variance(); // Private compute 
+    double emp_var(); // Private compute 
+    double std(); // Private compute 
+    double std_adp(); // Private compute 
 };
 
 #endif
