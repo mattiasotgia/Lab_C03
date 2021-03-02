@@ -81,20 +81,20 @@ Folder structure
 ----------------
 main folder `/{path}`
 
-> `/relazione`
+* `/relazione`
     for all pdf versions of paper
     also for all .tex and .docx eventually
 
-> `/fig`
+* `/fig`
     for everythong concerning .figs, .pdfs, .ai's
 
-> `/dati`
+* `/dati`
     raw and polished data goes here.
 
-> `/analisi_dati`
-    everuthing __code__ goes here.
+* `/analisi_dati`
+    everything __code__ goes here.
 
-> `/misc`
+* `/misc`
     everything else (log files, results to be 
     copied)
 
