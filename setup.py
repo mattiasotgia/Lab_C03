@@ -18,6 +18,9 @@
 # handling, added auto numbering
 # 2021-02-17 removed numpy unnecessary import,
 # resolved max([]) at line 132-134
+# 2021-02-25 resolved minor fixes, made 
+# colored output, minor fixes on OSError, 
+# set sys.exit(0)
 
 # UNIGE, DIFI, C03;
 # Mattia Sotgia;
@@ -28,6 +31,7 @@
 
 import os, sys
 import logging
+import subprocess
 
 from datetime import date
 
@@ -39,7 +43,8 @@ logging.basicConfig(filename='setup.log', filemode='a',
 NOW = date.today()
 BASE_PATH = os.getcwd()
 BASE_DIR_NAME = 'esperienza_'
-ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) for n in os.listdir(BASE_PATH) if n[:len(BASE_DIR_NAME)] == BASE_DIR_NAME)
+ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) \
+    for n in os.listdir(BASE_PATH) if n[:len(BASE_DIR_NAME)] == BASE_DIR_NAME)
 PATHS = [
     '/fig',
     '/relazione',
@@ -56,7 +61,9 @@ LOG_MSG = {
     'not_exp_n': '\033[31mDir name should start with Lab. Experience NUMBER!\nAdding auto Lab. Exp. N* -> \033[0m',
     'exist_exp_number': '\033[31mPath esperienza_{}... exist, moving -> esperienza_{}...\033[0m',
     'i_dir_name': 'Enter exp. `title_underscore` 📁 (`exit` to quit): ',
-    'i_paper_title': 'Enter full paper title Latex 📝 : ',
+    'i_paper_title': '\nEnter full paper title Latex 📝 : ',
+    'u_quit': '\033[1;31mUser quit...\033[0m',
+    'quit_delete': '\033[31mDo you want to delete {} directory? ( y / n )\033[0m',
 }
 SYS_EXIT = [
     '.q',
@@ -68,25 +75,26 @@ SYS_EXIT = [
 TEMP_FILE = open('template.tex')
 README_STRING = '''README file
 ===========
+{doc}
 
 Folder structure
 ----------------
-main folder `/{}`
+main folder `/{path}`
 
-> `/relazione`
+* `/relazione`
     for all pdf versions of paper
     also for all .tex and .docx eventually
 
-> `/fig`
+* `/fig`
     for everythong concerning .figs, .pdfs, .ai's
 
-> `/dati`
+* `/dati`
     raw and polished data goes here.
 
-> `/analisi_dati`
-    everuthing __code__ goes here.
+* `/analisi_dati`
+    everything __code__ goes here.
 
-> `/misc`
+* `/misc`
     everything else (log files, results to be 
     copied)
 
@@ -132,7 +140,7 @@ if __name__ == "__main__":
 
         arg_1 = arg_1.replace(' ', '_')
         
-        if arg_1 in SYS_EXIT: sys.exit(0)
+        if arg_1 in SYS_EXIT: print(LOG_MSG['u_quit']); sys.exit(0)
 
         if arg_1 == '': print(LOG_MSG['path_empthy']); continue
         
@@ -161,9 +169,11 @@ if __name__ == "__main__":
 
     os.chdir(folder_path)
 
+    title_full = input(LOG_MSG['i_paper_title'])
+
 
     with open('README.md', 'w') as readme_file:
-        print(README_STRING.format(title_underscore), file=readme_file)
+        print(README_STRING.format(doc=title_full, path=title_underscore), file=readme_file)
 
 
     print('\033[0;32mSetting up directories...\n\033[0m')
@@ -177,7 +187,12 @@ if __name__ == "__main__":
 
     os.chdir(folder_path + PATHS[1])
 
-    title_full = input(LOG_MSG['i_paper_title'])
+    
+    if title_full in SYS_EXIT:
+        ask = input(LOG_MSG['quit_delete'].format(title_underscore))
+        if ask in ['y', 'Y', 'yes', 'Yes', 'YES']:
+            subprocess.run(['rm', '-r', BASE_PATH + '/' + title_underscore])
+        print(LOG_MSG['u_quit']); sys.exit(0)
 
     try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])

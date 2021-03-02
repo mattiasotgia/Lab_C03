@@ -16,7 +16,7 @@ main folder `/esperienza_4_Pendolo`
     raw and polished data goes here.
 
 > `/analisi_dati`
-    everuthing __code__ goes here.
+    everything __code__ goes here.
 
 > `/misc`
     everything else (log files, results to be 

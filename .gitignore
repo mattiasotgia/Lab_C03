@@ -27,7 +27,7 @@ setup.log
 .ipynb_checkpoints
 
 # python cache
-__pycache__
+**/__pycache__
 **/*.pyc
 
 # test ipynb
