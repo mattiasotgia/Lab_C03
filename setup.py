@@ -86,7 +86,7 @@ main folder `/{path}`
     also for all .tex and .docx eventually
 
 * `/fig`
-    for everythong concerning .figs, .pdfs, .ai's
+    for everything concerning .figs, .pdfs, .ai's
 
 * `/dati`
     raw and polished data goes here.
