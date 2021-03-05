@@ -114,8 +114,19 @@ LOGO = [
 '                                                            ',
 ]
 
+LATEX_HEADER = '''%% Document created {date} automatically \n%% from {script} \n
+%% Copyright (C) Mattia Sotgia et al. 2021
+%% Using class lab_unige.cls
+'''
+
 def LOGO_PRINT() -> None: 
         for line in LOGO: print(line)
+
+def capitalize(title_full) -> str:
+        temp_str = str()
+        for word in title_full.split(' '):
+            temp_str += word.capitalize() + ' '
+        return temp_str
 
 if __name__ == "__main__":
     '''setup.py python3 file
@@ -200,14 +211,17 @@ if __name__ == "__main__":
     
     latex_readlines = TEMP_FILE.readlines()
 
+    latex_file.write(LATEX_HEADER.format(date=NOW.strftime('%d %B %Y'), script=__file__))
+    for o in LOGO: latex_file.write('%' + o + '\n')
+
     for line in latex_readlines:
-        if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', title_full)
+        if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', capitalize(title_full))
         if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
         if '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
 
-    print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, title_full))
+    print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, capitalize(title_full)))
     logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
     print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
     # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible
