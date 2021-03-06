@@ -79,3 +79,5 @@ commit.
 
 **2021-02-25** Merged branches, tag v4.3 latest release, removed numpy unnecessary 
 import, added exit method for program.
+
+**2021-03-06** Init v5.0/0 -> pre-relase: added tex file and README.
