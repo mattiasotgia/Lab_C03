@@ -53,17 +53,22 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\reffig}[1]{Fig. {\ref{#1}}}%
 \newcommand{\refeqn}[1]{({\ref{#1}})}%
 %% PAPER ONLY custom Macros
-\newcommand{\g_lab}{$g_{t}=(9.8056\pm0.0001_{\text{stat}}) \text{ m/s}^{2}$}
-\newcommand{\ks}{$k_{\text{statico}}$}
-\newcommand{\kd}{$k_{\text{dinamico}}$}
-\newcommand{\chi_sqr}{$\chi^2$}
-\newcommand{\chi_ndf}{$\chi^2/\text{ndf}$}
-\newcommand{\root}{\verb|root|}
-\newcommand{\scidavis}{\verb|scidavis|}
-\newcommand{\treSigma}{$3\sigma$}
-% \newcommand{\stdN}[2]{$S_{#1}$($#2$)} <- ???
-\newcommand{\hookeLaw}{$F=k\cdot\Delta L$}
-\newcommand{\Lo}{$L_0$}
+\newcommand{\gLab}{$g_t=(9.8056\pm0.0001_{\text{stat}}) \text{ m/s}^2$\space}
+\newcommand{\ks}{$k_{\text{\small statico}}$\space}
+\newcommand{\kd}{$k_{\text{\small dinamico}}$\space}
+\newcommand{\ChiSqr}{$\chi^2$\space}
+\newcommand{\ChiNdf}{$\chi^2/\text{ndf}$\space}
+\newcommand{\cernroot}{\verb|root|\space}
+\newcommand{\scidavis}{\verb|scidavis|\space}
+\newcommand{\treSigma}{$3\sigma$\space}
+\newcommand{\stdNG}[2]{$S_{#1}$($#2$)} %<- ???
+\newcommand{\stdErr}[1]{$\varepsilon_{#1}$}
+\newcommand{\hookeLaw}{$F=k\cdot\Delta L$\space}
+\newcommand{\misuraIncertezaUM}[3]{$#1\pm#2$ #3}
+\newcommand{\Lo}{$L_0$\space}
+\newcommand{\Li}[1]{$L_{#1}$}
+\newcommand{\Ti}[1]{$T_{#1}$}
+\newcommand{\MassI}[1]{$m_{#1}$}
 
 
 %%
@@ -87,19 +92,24 @@ urlbordercolor={0 1 1}]{hyperref}
         \textsuperscript{2}In presenza in laboratorio per la presa dati\\
             % Università degli Studi di Genova, Dipartimento di Fisica.\\
             Presa dati-- 
-            10 March 2021, 15:00– 18:00; Analisi dati-- 
+            10 Marzo 2021, 15:00– 18:00; Analisi dati-- 
             <end-date here>
         }
         \maketitle
         
         \begin{abstract}
-            \textit{Obiettivo-- }
+            \textit{Obiettivo--}
+            Vogliamo verificare la validità della legge di Hooke per cui la forza $F$ applicata su un corpo elastico
+            è direttamente proporzionale all'elongazione causata, secondo la legge \hookeLaw.
+            \textit{Metodi--}
+            Sfruttiamo due modelli per ricavare in modo differente la costante $k$ legata alla molla. Considerando 
+            la molla in una condizione statica, con un corpo di massa nota \MassI{i}, e misurando l'allungamento 
+            \Li{i} causato dalla massa, possiamo ricavare \ks. Se invece mettiamo in oscillazione dalla condizione 
+            di equilibrio \Lo possiamo dal periodo \Ti{i} ricavare \kd (considerando il moto nel regime delle piccole
+            oscillazioni).
+            \textit{Risultati--}
         
-            \textit{Metodi-- }
-        
-            \textit{Risultati-- }
-        
-            \textit{Conclusione-- }
+            \textit{Conclusione--}
         
         
         \end{abstract}
