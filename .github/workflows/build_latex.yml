@@ -11,3 +11,7 @@ jobs:
         with:
           root_file: esperienza_5_2021_03_05.tex
           working_directory: esperienza_5__Legge_Hooke/relazione/
+      - uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: esperienza_5__Legge_Hooke/relazione/esperienza_5_2021_03_05.pdf
