@@ -41,6 +41,23 @@ logging.basicConfig(filename='setup.log', filemode='a',
                     level=logging.DEBUG)
 
 NOW = date.today()
+def data_IT(today: date) -> str:
+    M = [
+        'Gennaio',
+        'Febbraio',
+        'Marzo',
+        'Aprile',
+        'Maggio',
+        'Giugno',
+        'Luglio',
+        'Agosto',
+        'Settembre',
+        'Ottobre',
+        'Novembre',
+        'Dicembre',
+    ]
+    return str(str(today.day) + ' ' + M[today.month-1] + ' ' + str(today.year))
+
 BASE_PATH = os.getcwd()
 BASE_DIR_NAME = 'esperienza_'
 ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) \
@@ -122,7 +139,7 @@ LATEX_HEADER = '''%% Document created {date} automatically \n%% from {script} \n
 def LOGO_PRINT() -> None: 
         for line in LOGO: print(line)
 
-def capitalize(title_full) -> str:
+def capitalize(title_full: str) -> str:
         temp_str = str()
         for word in title_full.split(' '):
             temp_str += word.capitalize() + ' '
@@ -216,7 +233,7 @@ if __name__ == "__main__":
 
     for line in latex_readlines:
         if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', capitalize(title_full))
-        if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
+        if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', data_IT(NOW))
         if '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
