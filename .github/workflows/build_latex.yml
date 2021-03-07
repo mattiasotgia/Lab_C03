@@ -14,4 +14,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: esperienza_5__Legge_Hooke/relazione/esperienza_5_2021_03_05.pdf
+          path: esperienza_5_2021_03_05.pdf
