@@ -7,7 +7,8 @@ used for new insertion, and active development, while the former is a sort of
 'archive' for past lab experiences.
 
 ***Latex files***
-Current status of latex files
+Current status of latex files.
+
 [![Build LaTeX document](https://github.com/mattiasotgia/Lab_C03/actions/workflows/build_latex.yml/badge.svg)](https://github.com/mattiasotgia/Lab_C03/actions/workflows/build_latex.yml)
 
 
