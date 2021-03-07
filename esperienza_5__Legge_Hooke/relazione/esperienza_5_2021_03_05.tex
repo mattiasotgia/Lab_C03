@@ -53,7 +53,7 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\reffig}[1]{Fig. {\ref{#1}}}%
 \newcommand{\refeqn}[1]{({\ref{#1}})}%
 %% PAPER ONLY custom Macros
-\newcommand{\gLab}{$g_t=(9.8056\pm0.0001_{\text{stat}}) \text{ m/s}^2$\space}
+\newcommand{\gLab}{$g_t=(9.8056\pm0.0001 \text{ stat}) \text{ m/s}^2$\space}
 \newcommand{\ks}{$k_{\text{\small statico}}$\space}
 \newcommand{\kd}{$k_{\text{\small dinamico}}$\space}
 \newcommand{\ChiSqr}{$\chi^2$\space}
@@ -63,10 +63,10 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\treSigma}{$3\sigma$\space}
 \newcommand{\stdNG}[2]{$S_{#1}$($#2$)} %<- ???
 \newcommand{\stdErr}[1]{$\varepsilon_{#1}$}
-\newcommand{\hookeLaw}{$F=k\cdot\Delta L$\space}
+\newcommand{\hookeLaw}{$F=k\cdot\Delta l$\space}
 \newcommand{\misuraIncertezaUM}[3]{$#1\pm#2$ #3}
-\newcommand{\Lo}{$L_0$\space}
-\newcommand{\Li}[1]{$L_{#1}$}
+\newcommand{\Lo}{$l_0$\space}
+\newcommand{\Li}[1]{$l_{#1}$}
 \newcommand{\Ti}[1]{$T_{#1}$}
 \newcommand{\MassI}[1]{$m_{#1}$}
 
@@ -78,7 +78,7 @@ urlbordercolor={0 1 1}]{hyperref}
     \twocolumn[
     \begin{@twocolumnfalse}
         \title{
-            Verifica Sperimentale della Legge di Hooke e Confronto con Modello Statico e Dinamico
+            Verifica Sperimentale della Legge di Hooke con Metodo Statico e Dinamico
         }
         \author{
         Eugenio Dormicchi\textsuperscript{1},
@@ -92,21 +92,21 @@ urlbordercolor={0 1 1}]{hyperref}
         \textsuperscript{2}In presenza in laboratorio per la presa dati\\
             % Università degli Studi di Genova, Dipartimento di Fisica.\\
             Presa dati-- 
-            10 Marzo 2021, 15:00– 18:00; Analisi dati-- 
+            10 Marzo 2021, 15:00-- 18:00; Analisi dati-- 
             <end-date here>
         }
         \maketitle
         
         \begin{abstract}
             \textit{Obiettivo--}
-            Vogliamo verificare la validità della legge di Hooke per cui la forza $F$ applicata su un corpo elastico
-            è direttamente proporzionale all'elongazione causata, secondo la legge \hookeLaw.
+            Vogliamo verificare la validità della legge di Hooke per cui la forza $\vec{F}$ applicata su un corpo 
+            elastico è direttamente proporzionale all'elongazione causata, secondo la legge \hookeLaw.
             \textit{Metodi--}
             Sfruttiamo due modelli per ricavare in modo differente la costante $k$ legata alla molla. Considerando 
             la molla in una condizione statica, con un corpo di massa nota \MassI{i}, e misurando l'allungamento 
             \Li{i} causato dalla massa, possiamo ricavare \ks. Se invece mettiamo in oscillazione dalla condizione 
-            di equilibrio \Lo possiamo dal periodo \Ti{i} ricavare \kd (considerando il moto nel regime delle piccole
-            oscillazioni).
+            di equilibrio \Lo possiamo dal periodo \Ti{i} ricavare \kd (considerando il moto nel regime delle 
+            piccole oscillazioni).
             \textit{Risultati--}
         
             \textit{Conclusione--}
@@ -122,12 +122,22 @@ urlbordercolor={0 1 1}]{hyperref}
 
     \section{Obiettivo}
     \label{section:aim}
+    Obiettivo dell'esperienza è quello di verificare la validità della relazione $\vec{F}=k\Delta\vec{l}$ (che 
+    possiamo considerare nel nostro caso \hookeLaw , poiché consideriamo solo componenti lungo lo stesso asse) 
+    per cui la forza $\vec{F}$ esercitata su un corpo elastico è direttamente proporzionale all'allungamento 
+    causato dalla stessa forza, a meno di una costante $k$.
+    Per verificare la legge di Hooke esguiamo misure su due modelli, uno statico e uno dinamico, e confrontiamo 
+    graficamente il risultato ottenuto. Infine vogliamo ricavare il valore rispettivamente di \ks e di \kd , ed
+    esegure una verifica della compatibilità dei valori. Se tali valori risultano compatbili infine proviamo a 
+    ricavare il valore della miglior stima, ottenuto con una media pesata sugli errori associati.
 
     \section{Strumentazione}
     \label{section:strument}
 
     \section{Metodi}
     \label{section:methods}
+    Tutte le misure sono riportate nelle unità del Sistema Internazionale (SI). Si assume come nota e costante 
+    l'accelerazione di gravità \gLab .
 
     \section{Risultati}
     \label{section:results}
