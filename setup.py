@@ -99,7 +99,7 @@ BUILD_SCRIPT = '''      - name: Compile e{n} Latex document
       - uses: actions/upload-artifact@v2
         with:
           name: PDF
-          path: {filename}.pdf
+          path: {dir}/relazione/{filename}.pdf
 '''
 
 README_STRING = '''README file
