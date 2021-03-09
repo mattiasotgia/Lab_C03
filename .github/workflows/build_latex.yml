@@ -1,4 +1,4 @@
-name: Build LaTeX document
+name: Build LaTeX documents
 on: 
   push:
     paths:
@@ -16,5 +16,5 @@ jobs:
           working_directory: esperienza_5__Legge_Hooke/relazione/
       - uses: actions/upload-artifact@v2
         with:
-          name: PDF
+          name: files
           path: esperienza_5__Legge_Hooke/relazione/esperienza_5_2021_03_05.pdf
