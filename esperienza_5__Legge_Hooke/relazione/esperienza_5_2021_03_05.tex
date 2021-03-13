@@ -63,7 +63,7 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\treSigma}{$3\sigma$\space}
 \newcommand{\stdNG}[2]{$S_{#1}$($#2$)} %<- ???
 \newcommand{\stdErr}[1]{$\varepsilon_{#1}$}
-\newcommand{\hookeLaw}{$F=k\cdot\Delta l$\space}
+\newcommand{\hookeLaw}{$F=k\cdot\delta l$\space}
 \newcommand{\misuraIncertezaUM}[3]{$#1\pm#2$ #3}
 \newcommand{\Lo}{$l_0$\space}
 \newcommand{\Li}[1]{$l_{#1}$}
@@ -121,17 +121,50 @@ urlbordercolor={0 1 1}]{hyperref}
 
     \section{Obiettivo}
     \label{section:aim}
-    Obiettivo dell'esperienza è quello di verificare la validità della relazione $\va{F}=k\Delta\va{l}$ (che 
+    Obiettivo dell'esperienza è quello di verificare la validità della relazione $\va{F}=k\delta\va{l}$ (che 
     possiamo considerare nel nostro caso \hookeLaw , poiché consideriamo solo componenti lungo lo stesso asse) 
     per cui la forza $\va{F}$ esercitata su un corpo elastico è direttamente proporzionale all'allungamento 
     causato dalla stessa forza, a meno di una costante $k$.
     Per verificare la legge di Hooke esguiamo misure su due modelli, uno statico e uno dinamico, e confrontiamo 
-    graficamente il risultato ottenuto. Infine vogliamo ricavare il valore rispettivamente di \ks e di \kd, ed
-    esegure una verifica della compatibilità dei valori. Se tali valori risultano compatbili infine proviamo a 
+    graficamente il risultato ottenuto. 
+    
+    Infine vogliamo ricavare il valore rispettivamente di \ks e di \kd~, ed
+    esegure una verifica della compatibilità dei valori. Se tali valori risultano compatibili infine proviamo a 
     ricavare il valore della miglior stima, ottenuto con una media pesata sugli errori associati.
 
     \section{Strumentazione}
     \label{section:strument}
+    Abbiamo a disposizione come strumentazione:\\
+    un calibro ventesimale di portata 20 cm e sensibilità 0.05 mm;\\
+    un cronometro di portata molto maggiore alle misure effettuate e sensibilità 0.01 s;\\
+    una bilancia elettronica KERN BCP-350/4, di portata 350 g, considerando come sensibilità la linearità dello 
+    strumento 0.04 g (non rischiamo così di sottostimare l'errore);\\
+    un foglio di carta millimetrata attacato con le pinze su un piano verticale posto sulla struttura che sostiene
+    la molla, parallelo a quest'ultima;\\
+    una squadra utilizzata per ridurre l'errore commesso di parallasse;\\
+    una vite infinita con un gancio all'estremità e due bulloni, necessario per fissare le masse alla molla;\\
+    una molla di costante elastica $k$;\\
+    diverse masse cilindriche forate, considerate di densità omogenea;\\
+
+    La struttura utilizzata prevede una guida fissata al muro dove a un estremo è vincolata tramite un braccetto 
+    una molla, libera per l'altro estremo. Sulla guida è collocato un piano mobile con sopra applicato il foglio 
+    di carta millimetrata con due pinze. Tale piano viene fermato con due viti sulla guida all'altezza tale da
+    posizionare l'estremo libero della molla in cima al foglio millimetrato. In qusto modo ci assicuriamo che 
+    l'aggiunta del peso all'estremo della molla e la relativa elongazione rimangano nei limiti del foglio.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.8\linewidth]{IMG_0242.JPG}
+        \caption{Apparato sperimentale}
+        \label{figure:apparatus}
+    \end{figure}
+
+    \begin{figure*}[t]
+        \centering
+        \includegraphics[width=0.8\linewidth]{system_horiz.pdf}
+        \label{figure:methods}
+        \caption{\textit{a.} \textit{b.}}
+    \end{figure*}
 
     \section{Metodi}
     \label{section:methods}
@@ -152,8 +185,60 @@ urlbordercolor={0 1 1}]{hyperref}
     di ritornare alla condizione iniziale, e quindi in una condizione in cui l'energia totale del sistema si 
     conserva.
 
+    Poichè la portata della bilancia elettronica è di 350 g e le masse da noi utlizzate combinate danno valori
+    superiori, procediamo a pesare le masse in combinazioni tali da non superare tale limite della bilancia, ma 
+    con lo scopo di non effettuare troppe misure sommate poichè l'errore totale della misua è la somma degli
+    errori delle singole pesate. Inoltre per il medesimo motivo il gancio viene pesato in una delle pesate e non 
+    singolarmente.
+
+    Per riportare le misure di lunghezza raggiunte dalla molla sul foglio abbiamo utilizzato una squadra per 
+    ridurre l'errore dovuto alla parallasse.\\
+
+    Misuriamo la massa della molla utilizzando la squadra come piano d'appoggio per allargare il piatto della 
+    bilancia. Tale massa risulta essere $83.894\pm0.004$ g.
+
+    Segnamo sul foglio millimetrato la proiezione della lunghezza \Lo raggiunta dalla molla a riposo quando essa
+    è libera senza masse ulteriori appese. 
+
+    \subsection{Metodo Statico}
+    \label{subsec:methods_stat}
+    Vogliamo ricavare tramite misure di statica un valore \ks (ovvero una misura di $k$).
+
+    Dai pesetti componiamo una massa \MassI{i} tale che la massa rientri nel regime delle elongazioni elastiche per
+    la molla, ovvero che  $0.150 \text{ kg} < m_i < 1.200 \text{ kg}$. 
+    Pesata quindi la massa totale (come somma delle diverse pesate) fissiamo sulla vite senza fine tramite i bulloni
+    i pesetti. Agganciamo dunque il sistema composto da masse + gancio alla molla, attendiamo che questa si 
+    stabilizzi su una condizione di equlibrio e segniamo sul foglio la lunghezza raggiunta dall'estremo della molla.
+    Misuriamo dunque la variazione di elongazione $\delta l_i$, a cui associamo un errore di $\Delta l_i=$1~mm, 
+    considerando come incertezza sulla misura il minimo valore misurabile dalla carta millimetrata. Convertiamo 
+    poi l'errore assoluto in errore standard $\varepsilon_{l_i} = \Delta l_i /\sqrt{3}$ secondo la regola del 
+    \treSigma.
+    
+    Ripetiamo questo procedimento per 7 misure di massa differenti, e trasciviamo i valori in tabella. %% <<-------INDICARE TABELLA!!!!!
+
+    \subsection{Metodo dinamico}
+    \label{subsec:methods_dyn}
+    Per ogni massa utilizzata nel metodo statico effettuiamo anche una considerazione di tipo dinamico del sistema,
+    per ricavare un valore \kd da confrontare poi con \ks, per verificarne il valore.
+    Applichiamo una forza $\va{F}$ al sistema molla + \MassI{i}, spostando la molla dalla sua posizione di 
+    equilibrio di un $\delta x$ abbastanza piccolo. Questa necessità può essere spiegata da due fatti: innanzitutto
+    il periodo di oscillazione della sistema non dipende dall'ampiezza dell'oscillazione, e inoltre un ampiezza 
+    maggiore porta ad avere una velocità maggiore e quindi, poichè l'attrito viscoso dell'aria è direttamente 
+    proporzionale alla velocità $v$ ($\va{f_v}=-\beta \va{v}$) causando quindi uno smorzamento del moto. 
+    Per dimostrare il primo punto, partendo dalle equazioni delle forse in gioco ricaviamo:
+    \[
+        \va{P} + \va{f_el} = M_{\text{tot}}\va{a}
+    \]
+    da cui 
+    \[
+        M\cdot g - k\cdot\delta x = M \cdot \ddot{x}
+    \]
+    % Se consideriamo il termine ($g-\frac{k}{M}$) <<-------COMPLETARE ANALISI
+
     \section{Risultati}
     \label{section:results}
+
+    % \input{table_osc}
 
     \section{Conclusione}
     \label{section:conclusion}
