@@ -186,10 +186,10 @@ urlbordercolor={0 1 1}]{hyperref}
     conserva.
 
     Poichè la portata della bilancia elettronica è di 350 g e le masse da noi utlizzate combinate danno valori
-    superiori, procediamo a pesare le masse in combinazioni tali da non superare tale limite della bilancia, ma 
-    con lo scopo di non effettuare troppe misure sommate poichè l'errore totale della misua è la somma degli
-    errori delle singole pesate. Inoltre per il medesimo motivo il gancio viene pesato in una delle pesate e non 
-    singolarmente.
+    superiori, procediamo a pesare le masse in combinazioni tali da non superare tale limite della bilancia, 
+    ma con lo scopo di non effettuare troppe misure sommate poichè l'errore totale della misua è la somma degli
+    errori delle singole pesate. Inoltre per il medesimo motivo il gancio viene pesato in una delle pesate e 
+    non singolarmente.
 
     Per riportare le misure di lunghezza raggiunte dalla molla sul foglio abbiamo utilizzato una squadra per 
     ridurre l'errore dovuto alla parallasse.\\
@@ -197,18 +197,19 @@ urlbordercolor={0 1 1}]{hyperref}
     Misuriamo la massa della molla utilizzando la squadra come piano d'appoggio per allargare il piatto della 
     bilancia. Tale massa risulta essere $83.894\pm0.004$ g.
 
-    Segnamo sul foglio millimetrato la proiezione della lunghezza \Lo raggiunta dalla molla a riposo quando essa
-    è libera senza masse ulteriori appese. 
+    Segnamo sul foglio millimetrato la proiezione della lunghezza \Lo raggiunta dalla molla a riposo quando 
+    essa è libera senza masse ulteriori appese. 
 
     \subsection{Metodo Statico}
     \label{subsec:methods_stat}
     Vogliamo ricavare tramite misure di statica un valore \ks (ovvero una misura di $k$).
 
-    Dai pesetti componiamo una massa \MassI{i} tale che la massa rientri nel regime delle elongazioni elastiche per
-    la molla, ovvero che  $0.150 \text{ kg} < m_i < 1.200 \text{ kg}$. 
-    Pesata quindi la massa totale (come somma delle diverse pesate) fissiamo sulla vite senza fine tramite i bulloni
-    i pesetti. Agganciamo dunque il sistema composto da masse + gancio alla molla, attendiamo che questa si 
-    stabilizzi su una condizione di equlibrio e segniamo sul foglio la lunghezza raggiunta dall'estremo della molla.
+    Dai pesetti componiamo una massa \MassI{i} tale che la massa rientri nel regime delle elongazioni elastiche 
+    per la molla, ovvero che  $0.150 \text{ kg} < m_i < 1.200 \text{ kg}$. 
+    Pesata quindi la massa totale (come somma delle diverse pesate) fissiamo sulla vite senza fine tramite i 
+    bulloni i pesetti. Agganciamo dunque il sistema composto da masse + gancio alla molla, attendiamo che questa 
+    si stabilizzi su una condizione di equlibrio e segniamo sul foglio la lunghezza raggiunta dall'estremo della 
+    molla.
     Misuriamo dunque la variazione di elongazione $\delta l_i$, a cui associamo un errore di $\Delta l_i=$1~mm, 
     considerando come incertezza sulla misura il minimo valore misurabile dalla carta millimetrata. Convertiamo 
     poi l'errore assoluto in errore standard $\varepsilon_{l_i} = \Delta l_i /\sqrt{3}$ secondo la regola del 
@@ -218,22 +219,43 @@ urlbordercolor={0 1 1}]{hyperref}
 
     \subsection{Metodo dinamico}
     \label{subsec:methods_dyn}
-    Per ogni massa utilizzata nel metodo statico effettuiamo anche una considerazione di tipo dinamico del sistema,
-    per ricavare un valore \kd da confrontare poi con \ks, per verificarne il valore.
+    Per ogni massa utilizzata nel metodo statico effettuiamo anche una considerazione di tipo dinamico del 
+    sistema, per ricavare un valore \kd da confrontare poi con \ks, per verificarne il valore.
     Applichiamo una forza $\va{F}$ al sistema molla + \MassI{i}, spostando la molla dalla sua posizione di 
-    equilibrio di un $\delta x$ abbastanza piccolo. Questa necessità può essere spiegata da due fatti: innanzitutto
-    il periodo di oscillazione della sistema non dipende dall'ampiezza dell'oscillazione, e inoltre un ampiezza 
-    maggiore porta ad avere una velocità maggiore e quindi, poichè l'attrito viscoso dell'aria è direttamente 
-    proporzionale alla velocità $v$ ($\va{f_v}=-\beta \va{v}$) causando quindi uno smorzamento del moto. 
+    equilibrio di un $\delta x$ abbastanza piccolo. Questa necessità può essere spiegata da due fatti: 
+    innanzitutto il periodo di oscillazione della sistema non dipende dall'ampiezza dell'oscillazione, e 
+    inoltre un ampiezza maggiore porta ad avere una velocità maggiore e quindi, poichè l'attrito viscoso 
+    dell'aria è direttamente proporzionale alla velocità $v$ ($\va{f_v}=-\beta \va{v}$) causando quindi 
+    uno smorzamento del moto.\\
     Per dimostrare il primo punto, partendo dalle equazioni delle forse in gioco ricaviamo:
     \[
-        \va{P} + \va{f_el} = M_{\text{tot}}\va{a}
+        \va{f_{el}} + \va{P} = M_{\text{tot}}\va{a}
     \]
     da cui 
     \[
-        M\cdot g - k\cdot\delta x = M \cdot \ddot{x}
+        k\cdot x - M\cdot g = - M \cdot \ddot{x}
     \]
-    % Se consideriamo il termine ($g-\frac{k}{M}$) <<-------COMPLETARE ANALISI
+    Dividendo per la massa M
+    \[
+        \frac{k}{M}\cdot x - g = - \ddot{x}
+    \]
+    Se riscriviamo il termine $\frac{k}{M} \cdot (x - g\cdot\frac{M}{k}) = \xi$, osserviamo che 
+    $\ddot{\xi} = \ddot{x}$, quindi possiamo riscrivere come
+    \[
+        - \frac{k}{M} \cdot \xi = \ddot{\xi}
+    \]
+    Se consideriamo il fattore $\frac{k}{M}$ questo ha dimensioni s$^{-1}$, quindi possiamo riscrivere
+    \[
+        - \omega^2 \cdot \xi = \ddot{\xi}
+    \]
+    Che è una equazione differenziale al secondo ordine, che se risolta ci dà proprio l'equazione del moto 
+    armonico oscillatorio, dove però il termine $g \cdot \frac{M}{k}$ rappresenta la posizione $x_{\text{eq}}$
+    di equilibrio. Da $\omega = \sqrt{\frac{k}{M}}$ possiamo ricavare il periodo di oscillazione del sistema.\\
+    Se infatti il periodo è $T = \frac{2 \pi}{\omega}$, allora otteniamo
+    \[
+        T = 2 \pi \sqrt{\frac{M}{k}}
+    \]
+    che denota la non dipendenza del periodo dall'ampiezza di oscillazione. 
 
     \section{Risultati}
     \label{section:results}
