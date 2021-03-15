@@ -6,6 +6,12 @@ There are two branches: `master` and `working-on`. The latter is currently being
 used for new insertion, and active development, while the former is a sort of 
 'archive' for past lab experiences.
 
+***Latex files***
+Current status of latex files.
+
+[![Build LaTeX document](https://github.com/mattiasotgia/Lab_C03/actions/workflows/build_latex.yml/badge.svg)](https://github.com/mattiasotgia/Lab_C03/actions/workflows/build_latex.yml)
+
+
 ## Usage
 
 This repo should be maintained up-to-date with the latest experiments and data.
@@ -79,3 +85,5 @@ commit.
 
 **2021-02-25** Merged branches, tag v4.3 latest release, removed numpy unnecessary 
 import, added exit method for program.
+
+**2021-03-06** Init v5.0/0 -> pre-relase: added tex file and README.

@@ -36,3 +36,7 @@ test.ipynb
 
 .idea
 lab_c03.code-workspace
+
+# excel files and swp
+**/*.xlsx
+

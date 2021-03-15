@@ -209,7 +209,7 @@
       \end{tabular}\par}%
     \vskip 0.5em% it was 1em
     
-      \small \it
+      \small
       {\@date}%
   \end{center}%
   \par

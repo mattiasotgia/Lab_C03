@@ -41,6 +41,23 @@ logging.basicConfig(filename='setup.log', filemode='a',
                     level=logging.DEBUG)
 
 NOW = date.today()
+def data_IT(today: date) -> str:
+    M = [
+        'Gennaio',
+        'Febbraio',
+        'Marzo',
+        'Aprile',
+        'Maggio',
+        'Giugno',
+        'Luglio',
+        'Agosto',
+        'Settembre',
+        'Ottobre',
+        'Novembre',
+        'Dicembre',
+    ]
+    return str(str(today.day) + ' ' + M[today.month-1] + ' ' + str(today.year))
+
 BASE_PATH = os.getcwd()
 BASE_DIR_NAME = 'esperienza_'
 ALL_EXP_N = list(int(n[len(BASE_DIR_NAME):n.find('_', len(BASE_DIR_NAME))]) \
@@ -73,6 +90,18 @@ SYS_EXIT = [
     '\x1b',
 ]
 TEMP_FILE = open('template.tex')
+BUILD_LATEX_FILE = open('.github/workflows/build_latex.yml', 'a')
+BUILD_SCRIPT = '''      - name: Compile e{n} Latex document
+        uses: dante-ev/latex-action@master
+        with:
+          root_file: {filename}.tex
+          working_directory: {dir}/relazione/
+      - uses: actions/upload-artifact@v2
+        with:
+          name: PDF
+          path: {dir}/relazione/{filename}.pdf
+'''
+
 README_STRING = '''README file
 ===========
 {doc}
@@ -122,7 +151,7 @@ LATEX_HEADER = '''%% Document created {date} automatically \n%% from {script} \n
 def LOGO_PRINT() -> None: 
         for line in LOGO: print(line)
 
-def capitalize(title_full) -> str:
+def capitalize(title_full: str) -> str:
         temp_str = str()
         for word in title_full.split(' '):
             temp_str += word.capitalize() + ' '
@@ -205,7 +234,8 @@ if __name__ == "__main__":
             subprocess.run(['rm', '-r', BASE_PATH + '/' + title_underscore])
         print(LOG_MSG['u_quit']); sys.exit(0)
 
-    try: latex_file = open('esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d')) + '.tex', 'w')
+    filename = 'esperienza_{}_{}'.format(exp_no, NOW.strftime('%Y_%m_%d'))
+    try: latex_file = open(filename + '.tex', 'w')
     except IOError: print(LOG_MSG['io_err'])
 
     
@@ -216,12 +246,15 @@ if __name__ == "__main__":
 
     for line in latex_readlines:
         if '%%TITLE_HERE%%' in line: line = line.replace('%%TITLE_HERE%%', capitalize(title_full))
-        if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', NOW.strftime('%d %B %Y'))
+        if '%%DATE_HERE%%' in line: line = line.replace('%%DATE_HERE%%', data_IT(NOW))
         if '%%NN%%' in line: line = line.replace('%%NN%%', exp_no)
         
         latex_file.write(line)
 
     print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, capitalize(title_full)))
     logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
+
+    print(BUILD_SCRIPT.format(filename=filename, n=exp_no, dir=title_underscore), file=BUILD_LATEX_FILE)
+
     print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
     # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible
