@@ -87,3 +87,5 @@ commit.
 import, added exit method for program.
 
 **2021-03-06** Init v5.0/0 -> pre-relase: added tex file and README.
+
+**2021-03-16** Final commit on e5 -> v5.2/0: published paper
