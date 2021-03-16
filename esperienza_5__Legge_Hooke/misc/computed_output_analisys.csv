@@ -1,0 +1,4 @@
+method, k, err_k, spring_m, err_spring_m, offset, err_offset
+dynamic, 88.4968, 0.430222, 0.166065, 0.010671, -, - 
+dynamic_lin, 88.4958, 0.429481, 0.165849, 0.0099652, -, - 
+static, 71.0746, 0.440991, -, -, 0.001279, 0.000625
