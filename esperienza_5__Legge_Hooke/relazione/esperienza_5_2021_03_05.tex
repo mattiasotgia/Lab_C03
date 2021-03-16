@@ -107,8 +107,11 @@ urlbordercolor={0 1 1}]{hyperref}
             \Li{i} causato dalla massa, possiamo ricavare \ks. Se invece mettiamo in oscillazione dalla condizione 
             di equilibrio \Lo possiamo dal periodo \Ti{i} ricavare \kd (considerando il moto nel regime elastico).
             \textit{Risultati--}
-        
+            Dal fit lineare su grafici elongazione$\times$massa e periodo$^2\times$massa 
+            ricaviamo rispettivamente i valori di \ks$=71.1\pm0.4$ N/m e \kd$= 87.6\pm0.3$ N/m.
             \textit{Conclusione--}
+            Nonostante L'andamento lineare della relazione \hookeLaw sia visualmente verificato, i valori di \ks e 
+            \kd non risultano essere compatibili tra di loro.
         
         
         \end{abstract}
@@ -152,10 +155,10 @@ urlbordercolor={0 1 1}]{hyperref}
     posizionare l'estremo libero della molla in cima al foglio millimetrato. In questo modo ci assicuriamo che 
     l'aggiunta del peso all'estremo della molla e la relativa elongazione rimangano nei limiti del foglio.
 
-    \begin{figure}
+    \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.8\linewidth]{IMG_0242.JPG}
-        \caption{Apparato sperimentale utillizzato nell'esperienza. Sulla guida di alluminio si vede fissato il
+        \includegraphics[width=0.77\linewidth]{IMG_0242.JPG}
+        \caption{Apparato sperimentale utilizzato nell'esperienza. Sulla guida di alluminio si vede fissato il
         piano di misura con il foglio di carta millimetrata, dove sono riportate le elongazioni dovute alle 
         diverse masse.}
         \label{figure:apparatus}
@@ -167,9 +170,9 @@ urlbordercolor={0 1 1}]{hyperref}
         \label{figure:methods}
         \caption{\textit{a.} Descrizione del metodo di misura dinamico. Al sistema molla + massa \MassI{i} è 
         applicata una forza $\va{F}$, che sposta il sistema dalla sua condizione di equilibrio. Quando viene 
-        lasciato andare il sistema si mette in oscillazione attorno alla sua posizione di equlibrio.
+        lasciato andare il sistema si mette in oscillazione attorno alla sua posizione di equilibrio.
         \textit{b.} Descrizione del metodo di misura statico. Alla molla è appesa una massa \MassI{i} che 
-        ne causa l'elongazioe di una lunghezza \Li{i}$=h_0-h_f$. 
+        ne causa l'elongazione di una lunghezza \Li{i}$=h_0-h_f$. 
         }
     \end{figure}
 
@@ -202,7 +205,7 @@ urlbordercolor={0 1 1}]{hyperref}
     ridurre l'errore dovuto alla parallasse.\\
 
     Misuriamo la massa della molla utilizzando la squadra come piano d'appoggio per allargare il piatto della 
-    bilancia. Tale massa risulta essere $83.894\pm0.004$~g.
+    bilancia. Tale massa risulta essere $83.894\pm0.004$~g [$= (83.894\pm0.002\text{ stat})$~g].
 
     Segniamo sul foglio millimetrato la proiezione della lunghezza \Lo raggiunta dalla molla a riposo quando 
     essa è libera senza masse ulteriori appese. 
@@ -238,7 +241,7 @@ urlbordercolor={0 1 1}]{hyperref}
     in \reffig{figure:plot_sts}. 
     Dal fit eseguito su una funzione del tipo $y=a\cdot x + b$, ricaviamo i valori di $a$ e $b$. Se la relazione 
     che vogliamo dimostrare è della forma \hookeLaw, possiamo concludere che $b\approx0$, e
-    $a=\frac{g}{k_{\text{statico}}}$, da cui ossiamo ricavare il valore di 
+    $a=\frac{g}{k_{\text{statico}}}$, da cui possiamo ricavare il valore di 
     \misuraIncertezaUM{k_{\text{statico}}}{\varepsilon_k}{}.
 
     \input{tables/table_computed_data}
@@ -288,7 +291,7 @@ urlbordercolor={0 1 1}]{hyperref}
     \Ti{10\times10\times i}.\\
     Cambiamo la massa e ripetiamo le stesse misure, ottenendo i valori riportati in tabella in fondo al 
     documento (\reftab{table:raw_data}). In \reftab{table:dyn_values} non sono riportati i valori del punto 2, e 
-    quindi gli altri valori sono fatti scalare, poichè come si illustra dopo, tale punto è ritenuto essere erroneo
+    quindi gli altri valori sono fatti scalare, poiché come si illustra dopo, tale punto è ritenuto essere erroneo
     e quindi eliminato per considerazioni successive.%% <<--- 
 
     Cronometriamo 10 oscillazioni per ridurre l'errore di reazione dividendolo su più oscillazioni, dalle 
@@ -347,38 +350,157 @@ urlbordercolor={0 1 1}]{hyperref}
     $T^2 = a'\cdot M + b'$, 
     dove $M=m_i$ è la massa che agganciamo alla molla.
 
+    Ricaviamo $\bar{T_i^2}$ da $\bar{T_i}$ eseguendo un semplice elevamento a potenza ($\bar{T_i^2}=(\bar{T_i})^2$).
+    Ricaviamo l'errore standard sul periodo al quadrato $\varepsilon_{T^2} = 2~\cdot~\bar{T_i}~\cdot~\varepsilon_{T}$.
+
     Partendo dai dati presenti in \reftab{table:dyn_values} dei valori di $m_i\pm\varepsilon_m$ e 
     $\bar{T_i^2}\pm\varepsilon_{T^2}$ possiamo rappresentarli nel grafico in \reffig{figure:plot_dyn_lin}.
     Su questi punti possiamo eseguire un fit lineare con una funzione $y = a'\cdot x + b'$, da cui ricaviamo i 
     valori dei parametri $a'$ e $b'$.
 
-
-    
-
     \section{Risultati}
     \label{section:results}
 
-    
+    \subsection{Risultati metodo statico}
+    \label{subsec:results_sts}
+    Dal fit lineare della funzione $y=ax+b$ otteniamo i valori dei parametri $a$ e $b$ con i rispettivi errori 
+    standard $\varepsilon_a$ e $\varepsilon_b$ ($a = 0.1380\pm0.0009$ m/kg, $b = 0.0013\pm0.0006$ m).\\
+    Nel paragrafo \ref{subsec:methods_stat} abbiamo ottenuto che $a=\frac{g}{k_{\text{statico}}}$ e $b\approx0$.
+    Verifichiamo innanzitutto che $b$ sia compatibile con zero attraverso la relazione
+    \[
+        \left|b-0\right|<3\sqrt{\varepsilon_b^{2}+\varepsilon_0^{2}}
+    \]
+    ma, poiché stiamo cercando la compatibilità con lo zero abbiamo che 
+    \[
+        \left|b\right|<3\sqrt{\varepsilon_b^{2}}
+    \]
+    ovvero, per $b=0.0013\pm0.0006$ m abbiamo che la relazione $0.0013~<~3~\cdot~0.0006$ è verificata
+    ($0.00128<0.00186$).\\
+    Da $a$ invece possiamo ricavare il valore di \ks: infatti se $a=\frac{g}{k_{\text{statico}}}$, allora 
+    \[
+        k_{\text{statico}} = \frac{g}{a} = 71.1 \text{ N/m}
+    \]
+    dove $g=$\gLab noto con errore statistico. Ricaviamo quindi \ks=$71.1$ N/m, e possiamo ricavare l'errore 
+    \[
+        \varepsilon_k = \sqrt{\left(\frac{\varepsilon_g}{a}\right)^2+\left(-\frac{g\cdot\varepsilon_a}{a^2}\right)^2} = 0.4 \text{ N/m} 
+    \]
+    Quindi il valore di \ks$=71.1\pm0.4$ N/m, che riportiamo anche in \reftab{table:results}.%%<<<<<------INSERIRE  TABELLA
 
+    \subsection{Risultati metodo dinamico}
+    \label{subsec:results_dyn}
+
+    Dal fit lineare della funzione $y=a'x+b'$ otteniamo i valori di $a'\pm\varepsilon_{a'} = 0.4506\pm0.0016$ m/N
+    e $b'\pm\varepsilon_{b'} = 0.0230\pm0.0024$ s$^2$.
+    Poiché $T^2 = y$ e $m_i = x$, allora possiamo riscrivere $T^2~=~a'm_i~+~b'$, ovvero 
+    $a' = \frac{4\pi^2}{k_{\text{dinamico}}}$ e $b' = \frac{4\pi^2m_{\text{molla}}}{3k_{\text{dinamico}}}$.
+
+    Possiamo dunque ricavarci \kd$\pm\varepsilon_k$
+    \[
+        k_{\text{dinamico}} = \frac{4\pi^2}{a'} = 87.6 \text{ N/m}
+    \] 
+    con il relativo errore standard 
+    \[
+        \varepsilon_k = \sqrt{\left(-\frac{4\pi^2}{a^2}\right)^2\cdot\varepsilon_{a'}^2} = 0.3\text{ N/m}  
+    \]
+    e possiamo anche ricavarci il valore della massa $m_{\text{molla}}\pm\varepsilon_m$
+    \[
+        m_{\text{molla}} = \frac{3\cdot b'\cdot k_{\text{dinamico}}}{4\pi^2} = \frac{3\cdot b'}{a'} = 0.153 \text{ kg}
+    \]
+    e il relativo errore standard
+    \[
+        \varepsilon_m = \sqrt{\left(\frac{3}{a'}\right)^2\cdot\varepsilon_{b'}^2 + \left(\frac{3\cdot b'}{{a'}^2}\right)^2\cdot\varepsilon_{a'}^2} = 0.016 \text{ kg}
+    \]
+    Trascriviamo quindi i valori di \kd$ = 87.6\pm0.3$ N/m e $m_{\text{molla}} = 0.153\pm0.016$ kg in 
+    \reftab{table:results}.
+
+    \input{tables/table_results.tex}
 
     \section{Conclusione}
     \label{section:conclusion}
 
+    Abbiamo verificato che l'andamento sperimentale del rapporto dell'elongazione sulla massa applicata alla molla 
+    è costante, come affermato dalla relazione \hookeLaw.
+    Allo stesso modo abbiamo osservato un comportamento della relazione tra periodo e massa appesa al sistema che 
+    bene può essere descritto dalla relazione
+    \[
+        T = 2\pi \sqrt{\frac{M}{k}}  
+    \]
+    Possiamo perciò procedere a studiare quantitativamente i valori ottenuti, e confrontare tra loro i risultati 
+    dei due modelli presi in analisi.
+
+    
+
+    \begin{figure*}
+        \centering
+        \includegraphics[width=0.45\linewidth]{plot_dyn_2.pdf}
+        \includegraphics[width=0.45\linewidth]{plot_dyn_lin_2.pdf}
+        \caption{Grafici periodo$\times$massa e periodo$^2\times$massa dove sono stati presi in considerazione 
+        tutti e sette i punti, denotando quindi lo scostamento~>~\treSigma del valore del terzo punto da un teorico 
+        fit, in rosso.}
+        \label{figure:plot_2}
+    \end{figure*}
+
+    \setcounter{table}{0}
+    \renewcommand{\thetable}{A\arabic{table}}
+    \input{tables/table_appendix.tex}
+
     \subsection{Controlli}
 
-    \subsection{Possibili errori sistematici}
+    Abbiamo già verificato la compatibilità di zero del valore di offset $b\pm\varepsilon_b =\delta\pm\varepsilon_{\delta}$
+    nel paragrafo \ref{subsec:results_sts}.\\
+    Procediamo a verificare la compatibilità del valore misurato della massa della molla 
+    $m_{\text{molla}}^t\pm\varepsilon_m^t = (0.083893\pm0.000002\text{ stat})$ kg con il valore trovato sperimentalmente 
+    $m_{\text{molla}}^s\pm\varepsilon_m^s = (0.153\pm0.016\text{ stat})$:
+    \[
+        \left|m_{\text{molla}}^t-m_{\text{molla}}^s\right|<3\cdot\sqrt{\left(\varepsilon_m^t\right)^2 + \left(\varepsilon_m^s\right)^2}
+    \]
+    \[
+        \left|0.083893-0.153\right|<3\cdot\sqrt{\left(0.000002\right)^2 + \left(0.016\right)^2} \to 0.07<0.05\text{ kg}
+    \]
+    che è una relazione falsa, quindi le masse non sono compatibili.
+
+    Procediamo infine a verificare la compatibilità dei valori di \kd e \ks:
+    \[
+        \left|k_{\text{dinamico}}-k_{\text{statico}}\right|<3\cdot\sqrt{\left(\varepsilon_k^d\right)^2 + \left(\varepsilon_k^s\right)^2} \to
+    \]
+    \[
+        \to 16.5<1.5 \text{ N/m}
+    \]
+    che mostra la non compatibilità dei risultati.
+
+    \subsection{Possibili errori sistematici, considerazioni finali}
+    La seconda colonna di valori della \reftab{table:results} è stata eliminata per la trattazione dettagliata 
+    e l'analisi dei dati poiché, come si osserva in \reffig{figure:plot_2} il terzo punto, che è rappresentato dai 
+    valori della seconda colonna, risulta essere più di \treSigma distante dal valore del fit.\\
+    Abbiamo perciò deciso di non considerarlo nell'analisi dettagliata, e infatti non è stato riportato in 
+    \reftab{table:sts_values} e \reftab{table:dyn_values}.\\
+
+    Pur ricontrollando i calcoli eseguiti e le analisi effettuate, il valore di \kd e quello di \ks non risultano 
+    essere compatibili. Non possiamo però discriminare quale dei due valori sia più attendibile e quale porti 
+    invece un errore.\\
+    Le misure statiche possono essere ricontrollate dal foglio di carta millimetrata, quindi, a meno di un errore 
+    sistematico nel segnare il punto sul foglio, possiamo però ritenere meno probabili errori legati alla misura
+    statica. 
+    L'errore potrebbe essere perciò legato alla strumentazione, anche se riteniamo che non possa essere causato
+    dalla bilancia, in quanto è stata utilizzata per entrambi i metodi.\\
+    Potrebbe esserci stato anche un errore sistematico dovuto allo strumento di misura del tempo, il cronometro 
+    elettronico, ma non possiamo però verificare effettivamente quale sia la causa di questa discrepanza.\\
+    Possiamo pensare che l'errore sia legato più probabilmente alla misura dinamica anche da un veloce confronto 
+    dei valori dei rapporti \ChiNdf dei due fit per i due modelli: per il modello statico infatti \ChiNdf
+    $= 7.328/4\approx1.8$, che rappresenta una buona stima del fit, essendo molto vicino a 1,
+    mentre per il modello dinamico \ChiNdf$= 37.235/4\approx9.3$, che rappresenta un fit che seppur probabile,
+    è più incerto del fit eseguito sul modello statico.
 
 
     \appendix
-    \setcounter{table}{0}
-    \renewcommand{\thetable}{A\arabic{table}}
-
+    
     \section{Dati completi}
     %%includere tabelle dati completi periodi e calcolo periodi.
 
-    Di seguito riportiamo in forma tabulare i dati raccolti relativi alle masse, ai periodi e alle elongazioni.
+    Riportiamo in forma tabulare in \reftab{table:raw_data} i dati raccolti relativi alle masse, ai periodi e alle 
+    elongazioni per tutte le misure effettuate.
 
-    \input{tables/table_appendix.tex}
+
 
 \end{document}
     
