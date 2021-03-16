@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <ctime>
 
 #include <TCanvas.h>
 #include <TPad.h>
@@ -28,8 +27,6 @@ vector<string> plot_Err(vector<double> _x_data, vector<double> _xerr_data,
             int removed_point = 2, double ymin = 0.25, double ymax = 0.75)
 {
     vector<string> params_out;
-
-    if(formula != ""){
 
     gStyle->SetTextFont(42);
 
@@ -99,10 +96,12 @@ void analisi_dettaglio_preliminare(){
     gStyle->SetFrameLineWidth(0);
 
     ifstream data_osc("../misc/p_oscillazioni_computed_txt.txt");
+    ifstream data_sts("../misc/l_elong_computed_txt.txt");
 
     string line;
     
-    vector<double> _M, _err_M, _T, _err_T, _T2, _err_T2;
+    vector<double> _M, _err_M, _T, _err_T, _T2, _err_T2, _L, _err_L;
+    const double g = 9.8056; const double err_g = 0.0001;
 
     while(getline(data_osc, line)){
 
@@ -118,25 +117,100 @@ void analisi_dettaglio_preliminare(){
 
     }
 
-    time_t rawtime;
-  	struct tm * timeinfo;
+    while(getline(data_sts, line)){
 
-  	time (&rawtime);
-  	timeinfo = localtime(&rawtime);
-  	printf ("Log date/time: %s", asctime (timeinfo));
+        istringstream issll(line);
+        double M, err_M, L, err_L;
+        issll >> M >> err_M >> L >> err_L;
+        _L.push_back(L);
+        _err_L.push_back(err_L);
+    }
 
-    double params_dyn[] = {88,0.1};
-    string formula_dyn = "2*3.14*sqrt((x+([1]/3))/[0])";
-    vector<string> results_dyn_nolin = plot_Err(_M, _err_M, _T, _err_T, params_dyn, 2, formula_dyn, 
-                                    "Massa (kg)", "Periodo (s)", "Dati (non linearizzati)", "analisi_12_03");
+    ofstream data_output("../misc/computed_output_analisys.csv");
+    data_output << "method, k, err_k, spring_m, err_spring_m, offset, err_offset" << endl;
+
+    // --------------------------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------------------------
+
+    string formula_dyn = "2*pi*sqrt((x+[1])/[0])";
+    double params_dyn[] = {88, 0.08};
+
+    data_output << "dynamic, " << flush;
+
+    vector<string> results_dyn = plot_Err(_M, _err_M, _T, _err_T, params_dyn, 2, formula_dyn, 
+                                "Massa (kg)", "Periodo (s)", "#splitline{Dati dinamica}{(non linearizzati)}", "analisi_15_03_dyn");
+
+    istringstream rr_dyn_p0(results_dyn[0]);
+    double dyn_p0, err_dyn_p0;
+    rr_dyn_p0 >> dyn_p0 >> err_dyn_p0;
+
+    data_output << dyn_p0 << ", " << err_dyn_p0 << ", " << flush;
+
+    istringstream rr_dyn_p1(results_dyn[1]);
+    double dyn_p1, err_dyn_p1;
+    rr_dyn_p1 >> dyn_p1 >> err_dyn_p1;
+
+    data_output << dyn_p1*3 << ", " << err_dyn_p1*3 << ", " << flush;
+
+    data_output << "-, - "<< endl;
+
+    // --------------------------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------------------------    
 
     string formula_dyn_lin = "[0]*x+[1]";
     double params_dyn_lin[] = {1, 1};
+
+    data_output << "dynamic_lin, " << flush;
     
     vector<string> results_dyn_lin = plot_Err(_M, _err_M, _T2, _err_T2, params_dyn_lin, 2, formula_dyn_lin, 
-                                    "Massa (kg)", "Periodo^{2} (s^{2})", "Dati (linearizzati)", "analisi_12_03_lin", 
+                                    "Massa (kg)", "Periodo^{2} (s^{2})", "#splitline{Dati dinamica}{(linearizzati)}", "analisi_15_03_dyn__lin", 
                                     2, 0.0, 0.55);
     
+    istringstream rr_dyn_lin_p0(results_dyn_lin[0]);
+    double dyn_lin_p0, err_dyn_lin_p0;
+    rr_dyn_lin_p0 >> dyn_lin_p0 >> err_dyn_lin_p0;
+
+    data_output << (4*M_PI*M_PI)/dyn_lin_p0 << ", " << (4*M_PI*M_PI*err_dyn_lin_p0)/pow(dyn_lin_p0, 2) << ", " << flush;
+
+    istringstream rr_dyn_lin_p1(results_dyn_lin[1]);
+    double dyn_lin_p1, err_dyn_lin_p1;
+    rr_dyn_lin_p1 >> dyn_lin_p1 >> err_dyn_lin_p1;
+
+    data_output << (3*dyn_lin_p1)/dyn_lin_p0 << ", " 
+                << sqrt(pow((3*err_dyn_lin_p1)/dyn_lin_p0, 2) + pow((3*dyn_lin_p1*err_dyn_lin_p0)/pow(dyn_lin_p0,2), 2))
+                << ", " << flush;
+
+    data_output << "-, - "<< endl;
+
+    // --------------------------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------------------------
+    
+    string formula_sts = "[0]*x+[1]";
+    double params_sts[] = {1, 0};
+
+    data_output << "static, " << flush;
+
+    vector<string> results_sts = plot_Err(_M, _err_M, _L, _err_L, params_sts, 2, formula_sts, 
+                                "Massa (kg)", "Elongazione (m)", "Dati statica", "analisi_15_03_sts", 
+                                    2, 0.03, 0.15);
+    
+    istringstream rr_sts_p0(results_sts[0]);
+    double sts_p0, err_sts_p0;
+    rr_sts_p0 >> sts_p0 >> err_sts_p0;
+
+    data_output << g/sts_p0 << ", " 
+                << sqrt(pow(err_g/sts_p0, 2) + pow(g*err_sts_p0/(sts_p0*sts_p0), 2)) 
+                << ", " << flush;
+
+    data_output << "-, -, " << flush;
+
+    istringstream rr_sts_p1(results_sts[1]);
+    double sts_p1, err_sts_p1;
+    rr_sts_p1 >> sts_p1 >> err_sts_p1;
+
+    data_output << sts_p1 << ", " << err_sts_p1 << endl;
+
+
 }
 
 

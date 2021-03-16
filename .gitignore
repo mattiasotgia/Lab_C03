@@ -40,3 +40,8 @@ lab_c03.code-workspace
 # excel files and swp
 **/*.xlsx
 
+# ignore ai masters
+**/*.ai
+
+#not imported in github
+**/_misc_IMG
