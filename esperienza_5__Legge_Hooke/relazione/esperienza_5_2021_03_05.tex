@@ -155,16 +155,23 @@ urlbordercolor={0 1 1}]{hyperref}
     \begin{figure}
         \centering
         \includegraphics[width=0.8\linewidth]{IMG_0242.JPG}
-        \caption{Apparato sperimentale}
+        \caption{Apparato sperimentale utillizzato nell'esperienza. Sulla guida di alluminio si vede fissato il
+        piano di misura con il foglio di carta millimetrata, dove sono riportate le elongazioni dovute alle 
+        diverse masse.}
         \label{figure:apparatus}
     \end{figure}
 
-    \begin{figure*}[t]
+    \begin{figure}[t]
         \centering
-        \includegraphics[width=0.8\linewidth]{system_horiz.pdf}
+        \includegraphics[width=\linewidth]{system_horiz.pdf}
         \label{figure:methods}
-        \caption{\textit{a.} \textit{b.}}
-    \end{figure*}
+        \caption{\textit{a.} Descrizione del metodo di misura dinamico. Al sistema molla + massa \MassI{i} è 
+        applicata una forza $\va{F}$, che sposta il sistema dalla sua condizione di equilibrio. Quando viene 
+        lasciato andare il sistema si mette in oscillazione attorno alla sua posizione di equlibrio.
+        \textit{b.} Descrizione del metodo di misura statico. Alla molla è appesa una massa \MassI{i} che 
+        ne causa l'elongazioe di una lunghezza \Li{i}$=h_0-h_f$. 
+        }
+    \end{figure}
 
     \section{Metodi}
     \label{section:methods}
@@ -215,18 +222,37 @@ urlbordercolor={0 1 1}]{hyperref}
     poi l'errore assoluto in errore standard $\varepsilon_{l_i} = \Delta l_i /\sqrt{3}$ secondo la regola del 
     \treSigma.
     
-    Ripetiamo questo procedimento per sette misure di massa differenti, e trascriviamo i valori in tabella. %% <<-------INDICARE TABELLA!!!!!
+    Ripetiamo questo procedimento per sette misure di massa differenti, e trascriviamo i valori in tabella 
+    (\reftab{table:raw_data} e \reftab{table:sts_values}).\\ %% <<-------INDICARE TABELLA!!!!!\\
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{plot_sts.pdf}
+        \caption{Grafico elongazione$\times$massa dove è stato effettuato un fit lineare da cui si è ricavato il 
+        valore di \ks. Si potrebbe verificare che la retta individuata passa per l'origine. Possiamo velocemente 
+        saggiare la bontà solamente dal rapporto \ChiNdf$=7.328/4\approx1,832$ che è poco più di 1.}
+        \label{figure:plot_sts}
+    \end{figure}
+
+    Dai valori in \reftab{table:sts_values} possiamo eseguire un grafico lineare elongazione $\times$ massa, come
+    in \reffig{figure:plot_sts}. 
+    Dal fit eseguito su una funzione del tipo $y=a\cdot x + b$, ricaviamo i valori di $a$ e $b$. Se la relazione 
+    che vogliamo dimostrare è della forma \hookeLaw, possiamo concludere che $b\approx0$, e
+    $a=\frac{g}{k_{\text{statico}}}$, da cui ossiamo ricavare il valore di 
+    \misuraIncertezaUM{k_{\text{statico}}}{\varepsilon_k}{}.
+
+    \input{tables/table_computed_data}
 
     \subsection{Metodo dinamico}
     \label{subsec:methods_dyn}
     Per ogni massa utilizzata nel metodo statico effettuiamo anche una considerazione di tipo dinamico del 
     sistema, per ricavare un valore \kd da confrontare poi con \ks, per verificarne il valore.
     Applichiamo una forza $\va{F}$ al sistema molla + \MassI{i}, spostando la molla dalla sua posizione di 
-    equilibrio di un $\delta x$ abbastanza piccolo. Questa necessità può essere spiegata da due fatti: 
-    innanzitutto il periodo di oscillazione della sistema non dipende dall'ampiezza dell'oscillazione, e 
-    inoltre un ampiezza maggiore porta ad avere una velocità maggiore e quindi, poiché l'attrito viscoso 
-    dell'aria è direttamente proporzionale alla velocità $v$ ($\va{f_v}=-\beta \va{v}$) causando quindi 
-    uno smorzamento del moto.\\
+    equilibrio di un $\delta x$ abbastanza piccolo. Il sistema si metterà dunque in oscillazione. La necessità
+    di avere ampiezza piccole può essere spiegata da due fatti: innanzitutto il periodo di oscillazione del 
+    sistema non dipende dall'ampiezza dell'oscillazione, e inoltre un ampiezza maggiore porta ad avere una 
+    velocità maggiore e quindi, poiché l'attrito viscoso dell'aria è direttamente proporzionale alla velocità 
+    $v$ ($\va{f_v}=-\beta \va{v}$) causando quindi uno smorzamento del moto.\\
     Per dimostrare il primo punto, partendo dalle equazioni delle forze in gioco ricaviamo:
     \[
         \va{f_{el}} + \va{P} = M_{\text{tot}}\va{a}
@@ -244,23 +270,96 @@ urlbordercolor={0 1 1}]{hyperref}
     \[
         - \frac{k}{M} \cdot \xi = \ddot{\xi}
     \]
-    Se consideriamo il fattore $\frac{k}{M}$ questo ha dimensioni s$^{-1}$, quindi possiamo riscrivere
+    Se consideriamo il fattore $\frac{k}{M}$ questo ha dimensioni {s$^{-1}$\}, quindi possiamo riscrivere
     \[
-        - \omega^2 \cdot \xi = \ddot{\xi}
+        - \omega^2_0 \cdot \xi = \ddot{\xi}
     \]
     Che è una equazione differenziale al secondo ordine, che se risolta ci dà proprio l'equazione del moto 
     armonico oscillatorio, dove però il termine $g \cdot \frac{M}{k}$ rappresenta la posizione $x_{\text{eq}}$
-    di equilibrio. Da $\omega = \sqrt{k/M}$ possiamo ricavare il periodo di oscillazione del sistema.\\
-    Se infatti il periodo è $T = \frac{2 \pi}{\omega}$, allora otteniamo
+    di equilibrio. Da $\omega_0 = \sqrt{k/M}$ possiamo ricavare il periodo di oscillazione del sistema.\\
+    Se infatti il periodo è $T = \frac{2 \pi}{\omega_0}$, allora otteniamo
     \[
         T = 2 \pi \sqrt{\frac{M}{k}}
     \]
     che denota la non dipendenza del periodo dall'ampiezza di oscillazione. 
 
+    Con il cronometro misuriamo il periodo di 10 oscillazioni (\Ti{10\times1\times i}). Ripetiamo la misurazione
+    per 10 volte, ottenendo quindi \Ti{10\times1\times i}, \Ti{10\times2\times i}, \ldots , 
+    \Ti{10\times10\times i}.\\
+    Cambiamo la massa e ripetiamo le stesse misure, ottenendo i valori riportati in tabella in fondo al 
+    documento (\reftab{table:raw_data}). In \reftab{table:dyn_values} non sono riportati i valori del punto 2, e 
+    quindi gli altri valori sono fatti scalare, poichè come si illustra dopo, tale punto è ritenuto essere erroneo
+    e quindi eliminato per considerazioni successive.%% <<--- 
+
+    Cronometriamo 10 oscillazioni per ridurre l'errore di reazione dividendolo su più oscillazioni, dalle 
+    quali ricaviamo poi il periodo di una singola oscillazione $T_{1\times i} = T_{10\times1\times i}/10$, \ldots ,
+    $T_{10\times i} = T_{10\times10\times i}/10$.
+    Dai valori $T_{1\times i}$, \ldots, $T_{10\times i}$ possiamo inoltre eseguire una analisi statistica e 
+    ricavare un valore medio $\bar{T}_i$ e l'errore standard associato ricavato come 
+    $\varepsilon_T = \frac{S_{10}}{\sqrt{10}}$. 
+    
+    Trascriviamo i valori così ricavati in \reftab{table:dyn_values}.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{plot_dyn.pdf}
+        \caption{Grafico periodo$\times$massa. Il fit è stato ottenuto a partire da una funzione uguale a quella
+        del periodo $T = 2 \pi \sqrt{\left(M+(m_{\text{molla}})/(3)\right)/\left(k\right)}$. Si può osservare un 
+        andamento parabolico della curva, in accordo con la teoria.}
+        \label{figure:plot_dyn}
+    \end{figure}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{plot_dyn_lin.pdf}
+        \caption{Grafico periodo$^2\times$massa. Il fit è stato eseguito a partire da una relazione lineare come 
+        descritto nel paragrafo dei metodi \ref{subsec:methods_dyn}.}
+        \label{figure:plot_dyn_lin}
+    \end{figure}
+
+    La relazione che lega il periodo $T$ alla massa, come ricavato in precedenza è
+    \[
+        T = 2 \pi \sqrt{\frac{M}{k}}
+    \]
+    la formula presentata è valida però solo per un sistema composto da una molla ideale di massa trascurabile, 
+    ma nel nostro caso il valore della massa della molla è di $0.083894\pm0.000004$~kg, quindi non trascurabile 
+    rispetto alle masse considerate.
+    Si trova necessario introdurre quindi un termine correttivo che tenga conto dell'influenza della massa della
+    molla:
+    \[
+        T = 2 \pi \sqrt{\frac{M+\frac{m_{\text{molla}}}{3}}{k}}
+    \]
+    
+    Se eseguiamo il grafico periodo$\times$massa dovremmo individuare un andamento parabolico con l'asse sull'asse 
+    delle masse. Osservando infatti la \reffig{figure:plot_dyn} si può vedere chiaramente un andamento che rispetta
+    la legge sopra descritta.
+
+    Procediamo ora con la linearizzazione della relazione del periodo. Partendo dalla formula
+    \[
+        T = 2 \pi \sqrt{\frac{M+\frac{m_{\text{molla}}}{3}}{k}}
+    \]
+    otteniamo elevando al quadrato ambo i membri
+    \[
+        T^2 = \frac{4 \pi^2}{k_{\text{dinamico}}} \cdot M + \frac{4 \pi^2 \cdot \frac{m_{\text{molla}}}{3}}{k_{\text{dinamico}}}
+    \]
+    ovvero ponendo $a'=\frac{4 \pi^2}{k_{\text{dinamico}}}$ e 
+    $b'=\frac{4 \pi^2 \cdot \frac{m_{\text{molla}}}{3}}{k_{\text{dinamico}}}$ possiamo riscriverla come 
+    $T^2 = a'\cdot M + b'$, 
+    dove $M=m_i$ è la massa che agganciamo alla molla.
+
+    Partendo dai dati presenti in \reftab{table:dyn_values} dei valori di $m_i\pm\varepsilon_m$ e 
+    $\bar{T_i^2}\pm\varepsilon_{T^2}$ possiamo rappresentarli nel grafico in \reffig{figure:plot_dyn_lin}.
+    Su questi punti possiamo eseguire un fit lineare con una funzione $y = a'\cdot x + b'$, da cui ricaviamo i 
+    valori dei parametri $a'$ e $b'$.
+
+
+    
+
     \section{Risultati}
     \label{section:results}
 
-    % \input{table_osc}
+    
+
 
     \section{Conclusione}
     \label{section:conclusion}
@@ -268,11 +367,18 @@ urlbordercolor={0 1 1}]{hyperref}
     \subsection{Controlli}
 
     \subsection{Possibili errori sistematici}
-    
+
+
     \appendix
+    \setcounter{table}{0}
+    \renewcommand{\thetable}{A\arabic{table}}
 
     \section{Dati completi}
     %%includere tabelle dati completi periodi e calcolo periodi.
+
+    Di seguito riportiamo in forma tabulare i dati raccolti relativi alle masse, ai periodi e alle elongazioni.
+
+    \input{tables/table_appendix.tex}
 
 \end{document}
     
