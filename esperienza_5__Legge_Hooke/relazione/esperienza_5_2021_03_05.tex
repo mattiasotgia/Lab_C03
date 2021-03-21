@@ -343,15 +343,18 @@ urlbordercolor={0 1 1}]{hyperref}
     \]
     otteniamo elevando al quadrato ambo i membri
     \[
-        T^2 = \frac{4 \pi^2}{k_{\text{dinamico}}} \cdot M + \frac{4 \pi^2 \cdot \frac{m_{\text{molla}}}{3}}{k_{\text{dinamico}}}
+        T^2 = \frac{4 \pi^2}{k_{\text{dinamico}}} \cdot M + \frac{4 \pi^2 \cdot 
+        \frac{m_{\text{molla}}}{3}}{k_{\text{dinamico}}}
     \]
     ovvero ponendo $a'=\frac{4 \pi^2}{k_{\text{dinamico}}}$ e 
     $b'=\frac{4 \pi^2 \cdot \frac{m_{\text{molla}}}{3}}{k_{\text{dinamico}}}$ possiamo riscriverla come 
     $T^2 = a'\cdot M + b'$, 
     dove $M=m_i$ è la massa che agganciamo alla molla.
 
-    Ricaviamo $\bar{T_i^2}$ da $\bar{T_i}$ eseguendo un semplice elevamento a potenza ($\bar{T_i^2}=(\bar{T_i})^2$).
-    Ricaviamo l'errore standard sul periodo al quadrato $\varepsilon_{T^2} = 2~\cdot~\bar{T_i}~\cdot~\varepsilon_{T}$.
+    Ricaviamo $\bar{T_i^2}$ da $\bar{T_i}$ eseguendo un semplice elevamento a potenza ($\bar{T_i^2}=
+    (\bar{T_i})^2$).
+    Ricaviamo l'errore standard sul periodo al quadrato $\varepsilon_{T^2} = 2~\cdot~\bar{T_i}~\cdot~
+    \varepsilon_{T}$.
 
     Partendo dai dati presenti in \reftab{table:dyn_values} dei valori di $m_i\pm\varepsilon_m$ e 
     $\bar{T_i^2}\pm\varepsilon_{T^2}$ possiamo rappresentarli nel grafico in \reffig{figure:plot_dyn_lin}.
@@ -382,9 +385,10 @@ urlbordercolor={0 1 1}]{hyperref}
     \]
     dove $g=$\gLab noto con errore statistico. Ricaviamo quindi \ks=$71.1$ N/m, e possiamo ricavare l'errore 
     \[
-        \varepsilon_k = \sqrt{\left(\frac{\varepsilon_g}{a}\right)^2+\left(-\frac{g\cdot\varepsilon_a}{a^2}\right)^2} = 0.4 \text{ N/m} 
+        \varepsilon_k = \sqrt{\left(\frac{\varepsilon_g}{a}\right)^2+\left(-\frac{g\cdot\varepsilon_a}
+        {a^2}\right)^2} = 0.4 \text{ N/m} 
     \]
-    Quindi il valore di \ks$=71.1\pm0.4$ N/m, che riportiamo anche in \reftab{table:results}.%%<<<<<------INSERIRE  TABELLA
+    Quindi il valore di \ks$=71.1\pm0.4$ N/m, che riportiamo anche in \reftab{table:results}.
 
     \subsection{Risultati metodo dinamico}
     \label{subsec:results_dyn}
@@ -404,11 +408,13 @@ urlbordercolor={0 1 1}]{hyperref}
     \]
     e possiamo anche ricavarci il valore della massa $m_{\text{molla}}\pm\varepsilon_m$
     \[
-        m_{\text{molla}} = \frac{3\cdot b'\cdot k_{\text{dinamico}}}{4\pi^2} = \frac{3\cdot b'}{a'} = 0.153 \text{ kg}
+        m_{\text{molla}} = \frac{3\cdot b'\cdot k_{\text{dinamico}}}{4\pi^2} = \frac{3\cdot b'}{a'} = 0.153 
+        \text{ kg}
     \]
     e il relativo errore standard
     \[
-        \varepsilon_m = \sqrt{\left(\frac{3}{a'}\right)^2\cdot\varepsilon_{b'}^2 + \left(\frac{3\cdot b'}{{a'}^2}\right)^2\cdot\varepsilon_{a'}^2} = 0.016 \text{ kg}
+        \varepsilon_m = \sqrt{\left(\frac{3}{a'}\right)^2\cdot\varepsilon_{b'}^2 + \left(\frac{3\cdot b'}
+        {{a'}^2}\right)^2\cdot\varepsilon_{a'}^2} = 0.016 \text{ kg}
     \]
     Trascriviamo quindi i valori di \kd$ = 87.6\pm0.3$ N/m e $m_{\text{molla}} = 0.153\pm0.016$ kg in 
     \reftab{table:results}.
@@ -446,22 +452,26 @@ urlbordercolor={0 1 1}]{hyperref}
 
     \subsection{Controlli}
 
-    Abbiamo già verificato la compatibilità di zero del valore di offset $b\pm\varepsilon_b =\delta\pm\varepsilon_{\delta}$
+    Abbiamo già verificato la compatibilità di zero del valore di offset $b\pm\varepsilon_b =
+    \delta\pm\varepsilon_{\delta}$
     nel paragrafo \ref{subsec:results_sts}.\\
     Procediamo a verificare la compatibilità del valore misurato della massa della molla 
-    $m_{\text{molla}}^t\pm\varepsilon_m^t = (0.083893\pm0.000002\text{ stat})$ kg con il valore trovato sperimentalmente 
-    $m_{\text{molla}}^s\pm\varepsilon_m^s = (0.153\pm0.016\text{ stat})$:
+    $m_{\text{molla}}^t\pm\varepsilon_m^t = (0.083893\pm0.000002\text{ stat})$ kg con il valore trovato 
+    sperimentalmente $m_{\text{molla}}^s\pm\varepsilon_m^s = (0.153\pm0.016\text{ stat})$:
     \[
-        \left|m_{\text{molla}}^t-m_{\text{molla}}^s\right|<3\cdot\sqrt{\left(\varepsilon_m^t\right)^2 + \left(\varepsilon_m^s\right)^2}
+        \left|m_{\text{molla}}^t-m_{\text{molla}}^s\right|<3\cdot\sqrt{\left(\varepsilon_m^t\right)^2 + 
+        \left(\varepsilon_m^s\right)^2}
     \]
     \[
-        \left|0.083893-0.153\right|<3\cdot\sqrt{\left(0.000002\right)^2 + \left(0.016\right)^2} \to 0.07<0.05\text{ kg}
+        \left|0.083893-0.153\right|<3\cdot\sqrt{\left(0.000002\right)^2 + \left(0.016\right)^2} 
+        \to 0.07<0.05\text{ kg}
     \]
     che è una relazione falsa, quindi le masse non sono compatibili.
 
     Procediamo infine a verificare la compatibilità dei valori di \kd e \ks:
     \[
-        \left|k_{\text{dinamico}}-k_{\text{statico}}\right|<3\cdot\sqrt{\left(\varepsilon_k^d\right)^2 + \left(\varepsilon_k^s\right)^2} \to
+        \left|k_{\text{dinamico}}-k_{\text{statico}}\right|<3\cdot\sqrt{\left(\varepsilon_k^d\right)^2 + 
+        \left(\varepsilon_k^s\right)^2} \to
     \]
     \[
         \to 16.5<1.5 \text{ N/m}
