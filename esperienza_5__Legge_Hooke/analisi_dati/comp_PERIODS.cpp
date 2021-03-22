@@ -21,7 +21,7 @@ int main(){
       for(int j=0; j<10; j++){
          double a;
          p_oscillazioni >> a;
-         v.push_back(a/10);
+         v.push_back(a/(double)10);
       }
       s1.read_values(v);
       output << "T" << i+1 << " " << s1.avg() << " " << s1.std_err() << endl;
