@@ -33,7 +33,7 @@ framework used by high energy physics and others, developed by CERN
 (currently using [`v6.22/06`](https://github.com/root-project/root/tree/v6-22-06) 
 to run code);
 - `stat` custom library (Currently `v1.0`). Run as `g++ -o <exe_name> <program.cpp> stat.cpp`.
-- various python libraries are used: `numpy`, `matplotlib`, `scipy`, with different use-cases.
+- various python libraries are used: `numpy`, `matplotlib`, `scipy`, `pandas`, with different use-cases.
 <!-- - `numpy` Python library is only needed in order for the [setup.py](setup.py) program to work.  -->
 
 Future code might need other libraries, that will be eventually be written here.
