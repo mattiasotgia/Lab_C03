@@ -56,11 +56,11 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\Oi}{$O_1$}
 \newcommand{\Oii}{$O_2$}
 \newcommand{\treSigma}{$3\sigma$}
-\newcommand{\treSigma}{$3\sigma$\space}
+% \newcommand{\treSigma}{$3\sigma$\space}
 \newcommand{\stdNG}[2]{$S_{#1}$($#2$)} %<- ???
 \newcommand{\stdErr}[1]{$\varepsilon_{#1}$}
 \newcommand{\mstdErr}[1]{\varepsilon_{#1}}
-\newcommand{\gLab}{g_t=(9.8056~\pm~0.0001~\text{ stat}~)~\text{ m/s}^2}
+\newcommand{\gLab}{$g_t=(9.8056~\pm~0.0001~\text{ stat}~)~\text{ m/s}^2$}
 \newcommand{\ChiSqr}{$\chi^2$\space}
 \newcommand{\ChiNdf}{$\chi^2/\text{ndf}$\space}
 \newcommand{\cernroot}{\texttt{root} \space}
@@ -68,8 +68,9 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\Ti}[1]{$T_{#1}$}
 \newcommand{\Ma}{$M_a$}
 \newcommand{\Mb}{$M_b$}
-\newcommand{\Tiso}{$T^*$}
-\newcommand{\xiso}{$x^*$}
+\newcommand{\Tiso}{$T^*$\space}
+\newcommand{\xiso}{$x^*$\space}
+\newcommand{\LrVALUE}{$l_R=(0.800010\pm0.000010)$~mm\space}
 
 
 %%
@@ -79,7 +80,7 @@ urlbordercolor={0 1 1}]{hyperref}
     \twocolumn[
     \begin{@twocolumnfalse}
         \title{
-            {\raggedleft \includegraphics[width=0.2\linewidth]{../../style/lab_mark.pdf}\\}
+            {\raggedright \includegraphics[width=0.2\linewidth]{../../style/lab_mark.pdf}\\}
             Misura Sperimentale dell'Accelerazione di Gravità Sfruttando il Pendolo di Kater
         }
         \author{
@@ -122,6 +123,20 @@ urlbordercolor={0 1 1}]{hyperref}
 
     \section{Strumentazione}
     \label{section:strument}
+    Abbiamo a disposizione i seguenti strumenti:\\
+    Calibro ventesimale, di portata 150 mm e sensibilità uguale all'accuratezza dello strumento di 
+    50 $\mu$m;\\
+    Pendolo di Kater (si veda in seguto descrizione dettagliata dell'apparato);\\
+    Cronometro elettronico collegato ad una fotocellula in grado di misurare una singola oscillazione del pendolo, 
+    di portata potenzialmente infinita (molto maggiore comunque dei periodi misurati), e sensibilità 10$^{-7}$ s, 
+    che assumiamo anche come accuratezza;\\
+
+    Il pendolo di Kater è costituito da due masse \Ma\space e \Mb\space e poste su un'asta di acciaio inox., una 
+    fissa (\Ma) e una libera di muoversi, vincolata da una vite che la può bloccare all'asta in ben definite 
+    posizioni, che sono indicate da $N=25$ fori equidistanti 25~mm tra loro, eseguiti con strumentazione abbastanza 
+    precisa da poter trascurare l'incertezza associata a questa distanza. il pendolo è poi poggiato su un sostegno 
+    tramite due perni che si incastrano perfettamente in una sede su una piastra posta orizzontalmente munita di 
+    livella a bolla, mantenuta in perfetto equilibrio.
 
     \section{Metodi}
     \label{section:methods}
@@ -147,6 +162,14 @@ urlbordercolor={0 1 1}]{hyperref}
     \subsection{Controlli}
 
     \subsection{Possibili errori sistematici}
+
+    \appendix
+
+    \setcounter{table}{0}
+    \renewcommand{\thetable}{A\arabic{table}}
+
+    \section{Dati completi}
+    \input{tables/TABLE_RAW.tex}
     
 
 \end{document}
