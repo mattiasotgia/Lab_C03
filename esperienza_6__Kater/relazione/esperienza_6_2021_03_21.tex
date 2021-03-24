@@ -1,0 +1,153 @@
+%% Document created 21 March 2021 automatically 
+%% from /Users/massimosotgia/Desktop/uni_at_DIFI/Lab_C03/setup.py 
+
+%% Copyright (C) Mattia Sotgia et al. 2021
+%% Using class lab_unige.cls
+%                                                            
+%                                                            
+%   **                 **             ******   ****   ****   
+%  /**                /**            **////** *///** */// *  
+%  /**        ******  /**           **    // /*  */*/    /*  
+%  /**       ´´´´´´** /******      /**       /* * /*   ***   
+%  /**        ******* /**///**     /**       /**  /*  /// *  
+%  /**       **´´´´** /**  /** **  //**    **/*   /* *   /*  
+%  /********//********/****** /**   //****** / **** / ****   
+%  ////////  //////// /////   //     //////   ////   /´///   
+%                                                            
+%                                                            
+\documentclass[italian, a4paper, 10pt, twocolumn]{../../style/lab_unige}
+\usepackage[a4paper, margin=1.25cm, footskip=0.25in]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[italian]{babel}
+
+% \usepackage{biblatex}
+
+\usepackage[bookmarksopen=true, 
+citebordercolor={0 1 0}, 
+linkbordercolor={1 0 0}, 
+urlbordercolor={0 1 1}]{hyperref}
+\usepackage[numbered]{bookmark}
+
+\usepackage{graphicx}
+\graphicspath{{../fig/}}
+\usepackage{array}
+\usepackage{tabulary}
+\usepackage{booktabs}
+
+% FOUNDAMENTAL
+\usepackage{../../style/custom}
+
+\usepackage{physics}
+
+\usepackage{breqn}
+\usepackage{cuted}
+\usepackage{txfonts}
+
+\usepackage{lipsum}
+
+%% Define ref types
+\newcommand{\reftab}[1]{Tab. {\ref{#1}}}%
+\newcommand{\reffig}[1]{Fig. {\ref{#1}}}%
+\newcommand{\refeqn}[1]{({\ref{#1}})}%
+%% PAPER ONLY custom Macros
+\newcommand{\Oi}{$O_1$}
+\newcommand{\Oii}{$O_2$}
+\newcommand{\treSigma}{$3\sigma$}
+\newcommand{\treSigma}{$3\sigma$\space}
+\newcommand{\stdNG}[2]{$S_{#1}$($#2$)} %<- ???
+\newcommand{\stdErr}[1]{$\varepsilon_{#1}$}
+\newcommand{\mstdErr}[1]{\varepsilon_{#1}}
+\newcommand{\gLab}{g_t=(9.8056~\pm~0.0001~\text{ stat}~)~\text{ m/s}^2}
+\newcommand{\ChiSqr}{$\chi^2$\space}
+\newcommand{\ChiNdf}{$\chi^2/\text{ndf}$\space}
+\newcommand{\cernroot}{\texttt{root} \space}
+\newcommand{\lr}{$l_{\text{R}}$}
+\newcommand{\Ti}[1]{$T_{#1}$}
+\newcommand{\Ma}{$M_a$}
+\newcommand{\Mb}{$M_b$}
+\newcommand{\Tiso}{$T^*$}
+\newcommand{\xiso}{$x^*$}
+
+
+%%
+\setlength{\columnsep}{6mm}
+
+\begin{document}
+    \twocolumn[
+    \begin{@twocolumnfalse}
+        \title{
+            {\raggedleft \includegraphics[width=0.2\linewidth]{../../style/lab_mark.pdf}\\}
+            Misura Sperimentale dell'Accelerazione di Gravità Sfruttando il Pendolo di Kater
+        }
+        \author{
+        Eugenio Dormicchi\textsuperscript{1, 2},
+        % Riccardo Pizzimbone\textsuperscript{1}, 
+        Giovanni Oliveri\textsuperscript{1},
+        Mattia Sotgia\textsuperscript{1}
+        }
+
+        \date{
+        \textsuperscript{1}Gruppo C03, Esperienza di laboratorio n. 6 \\
+        %\textsuperscript{2}In presenza in laboratorio per la presa dati\\
+            % Università degli Studi di Genova, Dipartimento di Fisica.\\
+            Presa dati-- 
+            24 Marzo 2021, 15:00– 18:00; Analisi dati-- 
+            <end-date here>
+        }
+        \maketitle
+        
+        \begin{abstract}
+            \textit{Obiettivo-- }
+        
+            \textit{Metodi-- }
+        
+            \textit{Risultati-- }
+        
+            \textit{Conclusione-- }
+        
+        
+        \end{abstract}
+        \vspace{2em}
+    \end{@twocolumnfalse}
+    ]
+
+    %%%% CORPO DEL TESTO
+    %%%% CORPO DEL TESTO
+
+    \section{Obiettivo}
+    \label{section:aim}
+
+    \section{Strumentazione}
+    \label{section:strument}
+
+    \section{Metodi}
+    \label{section:methods}
+    Tutte le misure sono riportate nelle unità del Sistema Internazionale (SI). Si assume come nota e costante 
+    l'accelerazione di gravità \gLab .
+
+    
+    Si fa spesso riferimento anche alla regola del \treSigma, con la quale si vuole intendere la volontà di 
+    trasformare un errore di tipo massimo in errore statistico.\\% e quindi considerando il valore vero con una
+    % probabilità statistica del \treSigma~$\approx99.73\%$ di probabilità del dato vero.\\
+    %% MAGARI AGGIUNGERE COMMENTO SU QUANTE CIFRE SI CONSIDERANO E COME APPROSSIMIAMO I VALORI %%
+    I valori riportati sono stati approssimati tenendo conto di alcune convenzioni prese. Si approssima 
+    l'errore a una cifra significativa se tale cifra è $\geqslant3$, altrimenti se tale cifra è 1 o 2 allora
+    si considerano due cifre significative. Considerando quindi le posizioni decimali significative dell'errore
+    si approssima per eccesso il valore numerico della grandezza.
+
+    \section{Risultati}
+    \label{section:results}
+    
+    \section{Conclusione}
+    \label{section:conclusion}
+
+    \subsection{Controlli}
+
+    \subsection{Possibili errori sistematici}
+    
+
+\end{document}
+    
