@@ -4,8 +4,6 @@ on:
   push:
     paths:
       - '*/relazione/*.tex'
-    tags:
-      - "*"
 
 jobs:
   build_latex:
