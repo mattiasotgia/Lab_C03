@@ -3,7 +3,7 @@ name: Build and Relase papers
 on: 
   push:
     paths:
-      - '*/relazione/*.tex'
+      - '**/relazione/*.tex'
 
 jobs:
   build_latex:
