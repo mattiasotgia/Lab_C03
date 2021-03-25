@@ -2,7 +2,7 @@ README file
 ===========
 Misura sperimentale dell'accelerazione di gravità sfruttando il pendolo di kater.
 
-Individuiamo il periodod di isocronia, infine possiamo calcolare il valore di $g$ e confrontarlo con il valore di $g_t=(9.8056\pm0.0001\text{ stat})$ m/s$^2$ teorico.  
+Individuiamo il periodod di isocronia, infine possiamo calcolare il valore di *g* e confrontarlo con il valore di *g<sub>t</sub>* = (9.8056 +/- 0.0001 stat) m/s<sup>2</sup> teorico.  
 
 Folder structure
 ----------------
