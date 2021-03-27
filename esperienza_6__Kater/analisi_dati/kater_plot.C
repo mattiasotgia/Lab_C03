@@ -1,6 +1,7 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <string>
 
 #include <TCanvas.h>
 #include <TGraphErrors.h>
@@ -8,6 +9,7 @@
 #include <TStyle.h>
 #include <TAxis.h>
 #include <TMath.h>
+#include <TLatex.h>
 
 struct x_values{
     double xpos[2];
@@ -62,27 +64,7 @@ double* get_isoX(x_values x, TGraphErrors _g){
 
 }
 
-void test(){
-    TF1 f01("f01", "[0]*x*x+[1]*x+[2]"); // a = p0, b = p1, c = p2;
-    f01.SetParameters(1,2,1);
-    TF1 f02("f02", "[0]*x*x+[1]*x+[2]"); // a = p0, b = p1, c = p2;
-    f02.SetParameters(1.1, 4.3, 1.2);
-
-    Double_t* par01 = f01.GetParameters();
-    const Double_t* par01_err = f01.GetParErrors();
-    Double_t* par02 = f02.GetParameters();
-    const Double_t* par02_err = f02.GetParErrors();
-
-    x_values x;
-    x = isocrony_x(par01, par01_err, par02, par02_err);
-
-    std::cout << "x+ = " << x.xpos[0] << "+/-" << x.xpos[1] << std::endl;
-    std::cout << "x- = " << x.xneg[0] << "+/-" << x.xneg[1] << std::endl;
-
-    return;
-}
-
-void kater_multigraph(){
+void kater_plot(bool fast = false){
 
     gStyle->SetFrameLineWidth(0);
 
@@ -147,18 +129,42 @@ void kater_multigraph(){
     double* x_iso = get_isoX(isocrony_x(par_1, par_1_err, par_2, par_2_err), g1);
     std::cout << "x* = " << x_iso[0] << " +/- " << x_iso[1] << std::endl;
     std::cout << "T* = " << f1.Eval(x_iso[0]) << std::endl;
-    delete[] x_iso;
 
+    if(!fast){
+        std::string ss_1="#chi^{2}/ndf (prob.) = "
+            +std::to_string(f1.GetChisquare())+"/"
+            +std::to_string(f1.GetNDF())
+            +" ("+std::to_string(f1.GetProb())+")";
+        TLatex sl_1;
+        sl_1.SetTextSize(0.035);
+        sl_1.SetTextColor(kBlack);
+        sl_1.DrawLatexNDC(0.50, 0.28, ss_1.c_str());
+        
+        
+        std::string ss_2="#chi^{2}/ndf (prob.) = "
+            +std::to_string(f2.GetChisquare())+"/"
+            +std::to_string(f2.GetNDF())
+            +" ("+std::to_string(f2.GetProb())+")";
+        TLatex sl_2;
+        sl_1.SetTextSize(0.035);
+        sl_1.SetTextColor(kRed);
+        sl_1.DrawLatexNDC(0.50, 0.24, ss_2.c_str());
+    }
+    
+
+    TLatex header;
+	header.SetTextSize(0.065);
+    header.DrawLatexNDC(0.25, 0.85, "#bf{Pendolo di Kater}");
 
     // test(); // FOR TESTING PURPOSES
 
     c1.SaveAs("test.pdf");
 
+    delete[] x_iso;
     return;
 }
 
 int main(){
-    // test();
-    kater_multigraph();
+    kater_plot();
     return 0;
 }
