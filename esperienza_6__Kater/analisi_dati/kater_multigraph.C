@@ -18,6 +18,7 @@ x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1,
                     Double_t* params_2, const Double_t* err_params_2){
     x_values x;
 
+    // non usare valori assoluti per a, b e c per evitare di ottenere valore di isocronia errato.
     double a = params_1[0]-params_2[0], err_a = abs(err_params_1[0])+abs(err_params_2[0]);
     double b = params_1[1]-params_2[1], err_b = abs(err_params_1[1])+abs(err_params_2[1]);
     double c = params_1[2]-params_2[2], err_c = abs(err_params_1[2])+abs(err_params_2[2]);
@@ -47,12 +48,19 @@ x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1,
     return x;
 }
 
-// double* get_isoX(x_values x){
-//     double _x = {0,0};
+double* get_isoX(x_values x, TGraphErrors _g){
+    
+    double* _x = new double[2];
 
-//     return _x;
+    if(x.xpos[0]>TMath::MinElement(_g.GetN(), _g.GetX())){
+        _x[0] = x.xpos[0]; _x[1] = x.xpos[1];
+    }else{
+        _x[0] = x.xneg[0]; _x[1] = x.xneg[1];
+    }
+    
+    return _x;
 
-// }
+}
 
 void test(){
     TF1 f01("f01", "[0]*x*x+[1]*x+[2]"); // a = p0, b = p1, c = p2;
@@ -82,7 +90,7 @@ void kater_multigraph(){
 
     TCanvas c1("c", "", 600, 500);
     c1.SetMargin(0.16, 0.06, 0.12, 0.06);
-    c1.SetGrid();
+    // c1.SetGrid();
 
     TGraphErrors g1("../dati/computed_T1_x.txt");
     g1.SetLineColor(kBlack);
@@ -93,7 +101,7 @@ void kater_multigraph(){
     f1.SetParameters(0.4, 0.1, 1.4);
     f1.SetLineColor(kBlack);
     TF1 f2("f2", "[0]*x*x+[1]*x+[2]"); // a2 = p0, b2 = p1, c2 = p2;
-    f2.SetParameters(0.8, -1.1, 2);
+    // f2.SetParameters(0.8, -1.1, 2);
     f2.SetLineColor(kRed);
 
     g1.SetTitle("");
@@ -125,11 +133,22 @@ void kater_multigraph(){
     Double_t* par_2 = f2.GetParameters();
     const Double_t* par_2_err = f2.GetParErrors();
 
-    x_values x;
-    x = isocrony_x(par_1, par_1_err, par_2, par_2_err);
+    // x_values x;
+    // x = isocrony_x(par_1, par_1_err, par_2, par_2_err);
 
-    std::cout << "x+ = " << x.xpos[0] << " +/- " << x.xpos[1] << std::endl;
-    std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
+    // std::cout << "x+ = " << x.xpos[0] << " +/- " << x.xpos[1] << std::endl;
+    // std::cout << "(T*)+ = " << f1.Eval(x.xpos[0]) << std::endl;
+    // std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
+    // std::cout << "(T*)- = " << f1.Eval(x.xneg[0]) << std::endl;
+    // std::cout << "--------------------------------------------" << std::endl
+    //           << "            AUTOMATIC METHOD" << std::endl
+    //           << "--------------------------------------------" << std::endl;
+
+    double* x_iso = get_isoX(isocrony_x(par_1, par_1_err, par_2, par_2_err), g1);
+    std::cout << "x* = " << x_iso[0] << " +/- " << x_iso[1] << std::endl;
+    std::cout << "T* = " << f1.Eval(x_iso[0]) << std::endl;
+    delete[] x_iso;
+
 
     // test(); // FOR TESTING PURPOSES
 
