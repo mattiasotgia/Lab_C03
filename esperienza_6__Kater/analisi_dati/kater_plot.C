@@ -87,7 +87,7 @@ void kater_plot(bool fast = false){
     f2.SetLineColor(kRed);
 
     g1.SetTitle("");
-    g1.GetXaxis()->SetTitle("Posizione M_{b} x_{b} (m)");
+    g1.GetXaxis()->SetTitle("Posizione x_{b} della massa M_{b} (m)");
     g1.GetYaxis()->SetTitle("Periodo T (s)");
     g1.GetXaxis()->SetTitleOffset(0.85);
     g1.GetXaxis()->SetTitleSize(0.06);
