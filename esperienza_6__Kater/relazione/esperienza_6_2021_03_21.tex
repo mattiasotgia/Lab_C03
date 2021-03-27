@@ -68,9 +68,9 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\Ti}[1]{$T_{#1}$}
 \newcommand{\Ma}{$M_a$}
 \newcommand{\Mb}{$M_b$}
-\newcommand{\Tiso}{$T^*$\space}
-\newcommand{\xiso}{$x^*$\space}
-\newcommand{\LrVALUE}{$l_R=(0.800010\pm0.000010)$~mm\space}
+\newcommand{\Tiso}{$T^*$}
+\newcommand{\xiso}{$x^*$}
+\newcommand{\LrVALUE}{$l_R=(0.800010\pm0.000010)$~mm}
 
 
 %%
@@ -104,7 +104,7 @@ urlbordercolor={0 1 1}]{hyperref}
             \textit{Obiettivo-- }
             Si vuole sfruttare uno strumento di precisione come il pendolo di Kater per ricavare dalla misura accuraata del periodo di oscillazione un valore atendibile della misura dell'accelerazione di gravità $g$.
             \textit{Metodi-- }
-            
+            Sfruttando il periodo di isocronia \Tiso~ del pendolo di Kater, ricavato dalla posizione $x_b$ della massa mobile \Mb , possiamo ricavare il vaore di $g$.
             \textit{Risultati-- }
         
             \textit{Conclusione-- }
@@ -122,7 +122,7 @@ urlbordercolor={0 1 1}]{hyperref}
     \label{section:aim}
     Il valore della accelerazione di gravità $g$ può essere ottenuto in diversi metodi, con strumenti via via più precisi, e di conseguenza con risultati che si spera permettano una miglior approssimazione del valore vero di $g$. Il pendolo può essere sfruttato come metodo per misurare tale grandezza, e si è già eseguito l'esperimento sfruttando il pendolo semplice. Per questo motivo dal pendolo semplice si è passati a considerare il pendolo fisico, in particolar modo il pendolo di Kater, che permette di estendere la natura del pendolo 
     "semplice" e anche di eseguire misure con un livello maggiore di dettaglio.\\
-    Sfruttando quindi una precisione maggiore e proprietà particolari del pendolo di Kater come pendolo fisico, vogliamo quindi individuare il valore del periodo di isocronia \Tiso caratteristico del pendolo di Kater preso in considerazione e da questo valore ricavare una buona stima di $g$, verificandone infine la compatibilità con il valore noto \gLab.
+    Sfruttando quindi una precisione maggiore e proprietà particolari del pendolo di Kater come pendolo fisico, vogliamo quindi individuare il valore del periodo di isocronia \Tiso~ caratteristico del pendolo di Kater preso in considerazione e da questo valore ricavare una buona stima di $g$, verificandone infine la compatibilità con il valore noto \gLab.
 
     \section{Strumentazione}
     \label{section:strument}
@@ -131,7 +131,8 @@ urlbordercolor={0 1 1}]{hyperref}
     Pendolo di Kater (si veda in seguto descrizione dettagliata dell'apparato);\\
     Cronometro elettronico collegato a una fotocellula in grado di misurare una singola oscillazione del pendolo, di portata potenzialmente infinita (molto maggiore comunque dei periodi misurati), e sensibilità 10$^{-7}$ s, che assumiamo anche come accuratezza;\\
 
-    Il pendolo di Kater è costituito da due masse \Ma~ e \Mb~ e poste su un'asta di acciaio inox., una fissa (\Ma) e una libera di muoversi, vincolata da una vite che la può bloccare all'asta in ben definite posizioni, che sono indicate da $N=25$ fori equidistanti 25~mm tra loro, eseguiti con strumentazione abbastanza precisa da poter trascurare l'incertezza associata a questa distanza. Il pendolo è poi poggiato su un sostegno tramite due perni che si incastrano perfettamente in una sede su una piastra posta orizzontalmente munita di livella a bolla, mantenuta in perfetto equilibrio.
+    Il pendolo di Kater è costituito da due masse \Ma~(massa rossa) e \Mb~(massa blu), poste su un'asta di acciaio inox., una fissa (\Ma) e una libera di muoversi, vincolata da una vite che la può bloccare all'asta in ben definite posizioni, che sono indicate da $N=25$ fori equidistanti 25~mm tra loro, eseguiti con strumentazione abbastanza precisa da poter trascurare l'incertezza associata a questa distanza. Il pendolo è poi poggiato su un sostegno tramite due perni che si incastrano perfettamente in una sede su una piastra posta orizzontalmente munita di livella a bolla, mantenuta in perfetto equilibrio.
+    Il pendolo di Kater viene anche definito pendolo reversibile, in quanto possiamo agganciare il pendolo sia tramite i perni posti sull'astremo vicino alla massa \Ma, che su due perni identici posti sull'estremo della massa \Mb, per consentire quindi di misurare due periodi diversi \Ti{1} e \Ti{2}. 
 
     \section{Metodi}
     \label{section:methods}
@@ -140,9 +141,11 @@ urlbordercolor={0 1 1}]{hyperref}
     %% MAGARI AGGIUNGERE COMMENTO SU QUANTE CIFRE SI CONSIDERANO E COME APPROSSIMIAMO I VALORI %%
     I valori riportati sono stati approssimati tenendo conto di alcune convenzioni prese. Si approssima l'errore a una cifra significativa se tale cifra è $\geqslant3$, altrimenti se tale cifra è 1 o 2 allora si considerano due cifre significative. Considerando quindi le posizioni decimali significative dell'errore si approssima per eccesso il valore numerico della grandezza.
 
+
+
     \section{Risultati}
     \label{section:results}
-    Si fa spesso riferimento anche alla regola del \treSigma, con la quale si vuole intendere la volontà di trasformare un errore di tipo massimo in errore statistico, ovvero $\mstdErr{x}~=~$.\\% e quindi considerando il valore vero con una probabilità statistica del \treSigma~$\approx99.73\$ di probabilità del dato vero.\\
+    Si fa spesso riferimento anche alla regola del \treSigma, con la quale si vuole intendere la volontà di trasformare un errore di tipo massimo in errore statistico, ovvero calcolando $\mstdErr{x}~=~\Delta x/\sqrt{3}$.\\% e quindi considerando il valore vero con una probabilità statistica del \treSigma~$\approx99.73\$ di probabilità del dato vero.\\
     Nella trattazione che segue consideriamo come limite per definire un dato accettabile un valore che rientra in \treSigma~ (tre deviazioni standard) dal valore vero.
 
     
