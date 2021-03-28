@@ -10,11 +10,20 @@
 #include <TAxis.h>
 #include <TMath.h>
 #include <TLatex.h>
+#include <TLegend.h>
 
 struct x_values{
     double xpos[2];
     double xneg[2];        
 };
+
+void print_mmsg(std::string mmsg){
+    std::cout << std::endl 
+        << "*****************************************************" << std::endl
+        << mmsg << std::endl
+        << "*****************************************************" << std::endl
+        << std::endl;
+}
 
 x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1, 
                     Double_t* params_2, const Double_t* err_params_2){
