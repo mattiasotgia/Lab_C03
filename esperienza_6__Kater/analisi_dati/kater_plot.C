@@ -153,9 +153,7 @@ void kater_plot(){
         std::cout << "(T*)+ = " << f1->Eval(x.xpos[0]) << std::endl;
         std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
         std::cout << "(T*)- = " << f1->Eval(x.xneg[0]) << std::endl;
-        std::cout << "*****************************************************" << std::endl
-                  << "            AUTOMATIC METHOD" << std::endl
-                  << "*****************************************************" << std::endl;
+        print_mmsg("AUTOMATIC METHOD");
     }
 
     double* x_iso = get_isoX(isocrony_x(par_1, par_1_err, par_2, par_2_err), g1);
