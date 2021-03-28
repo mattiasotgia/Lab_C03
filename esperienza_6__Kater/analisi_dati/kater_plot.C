@@ -45,7 +45,7 @@ x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1,
     double ddb_sqr_neg = pow((-1 - (b/sqrt(delta)))/(2*a), 2);
     double ddc_sqr_neg = pow(1/sqrt(delta), 2);
 
-    x.xneg[1] = sqrt((dda_sqr_neg*err_a*err_a) + (ddb_sqr_neg*err_b*err_b) + (ddc_sqr_neg*err_c*err_c));;
+    x.xneg[1] = sqrt((dda_sqr_neg*err_a*err_a) + (ddb_sqr_neg*err_b*err_b) + (ddc_sqr_neg*err_c*err_c));
 
     return x;
 }
@@ -64,9 +64,30 @@ double* get_isoX(x_values x, TGraphErrors _g){
 
 }
 
+double get_err_T(double x_iso, TGraphErrors g1, TGraphErrors g2){
+
+    double Terr_iso_1 = 0;
+    double Terr_iso_2 = 0;
+    double range = abs(g1.GetX()[0]-x_iso);
+
+    for(int i=0; i<g1.GetN(); i++){
+        // std::cout << i << " " << abs(x_iso-g1.GetX()[i]) << " x: " << g1.GetX()[i] << std::endl;
+        // algorimo per identificazione dei valori di T1 T2 più
+        // vicini al valore di isocronia
+
+        if((abs(x_iso-g1.GetX()[i])<range)){
+            Terr_iso_1 = g1.GetErrorY(i);
+            Terr_iso_2 = g2.GetErrorY(i);
+            range = abs(x_iso-g1.GetX()[i]);
+        }
+    }
+
+    return sqrt(pow(Terr_iso_1, 2)+pow(Terr_iso_2, 2));
+}
+
 void kater_plot(bool fast = false){
 
-    gStyle->SetFrameLineWidth(0);
+    // gStyle->SetFrameLineWidth(0);
 
     gStyle->SetTextFont(42);
 
@@ -75,9 +96,12 @@ void kater_plot(bool fast = false){
     // c1.SetGrid();
 
     TGraphErrors g1("../dati/computed_T1_x.txt");
+    g1.SetMarkerStyle(4);
     g1.SetLineColor(kBlack);
     TGraphErrors g2("../dati/computed_T2_x.txt");
     g2.SetLineColor(kRed);
+    g2.SetMarkerStyle(4);
+    g2.SetMarkerColor(kRed);
 
     TF1 f1("f1", "[0]*x*x+[1]*x+[2]"); // a1 = p0, b1 = p1, c1 = p2;
     f1.SetParameters(0.4, 0.1, 1.4);
@@ -95,14 +119,6 @@ void kater_plot(bool fast = false){
     g1.GetXaxis()->CenterTitle();
     g1.GetYaxis()->CenterTitle();
 
-    // double ymin = TMath::Min(TMath::MinElement(g1.GetN(), g1.GetY()), TMath::MinElement(g2.GetN(), g2.GetY()))
-    //             + 0.1
-    // double ymax = TMath::Max(TMath::MaxElement(g1.GetN(), g1.GetY()), TMath::MaxElement(g2.GetN(), g2.GetY()))
-    //             + 0.1*
-
-    // g1.SetMinimum(ymin);
-    // g1.SetMaximum(ymax);
-    // // g1.GetXaxis()->SetLimits(0.15, 1.2);
 
     g1.Draw("ap");
     g1.Fit("f1");
@@ -115,20 +131,24 @@ void kater_plot(bool fast = false){
     Double_t* par_2 = f2.GetParameters();
     const Double_t* par_2_err = f2.GetParErrors();
 
-    // x_values x;
-    // x = isocrony_x(par_1, par_1_err, par_2, par_2_err);
+    if(false){
+        x_values x;
+        x = isocrony_x(par_1, par_1_err, par_2, par_2_err);
 
-    // std::cout << "x+ = " << x.xpos[0] << " +/- " << x.xpos[1] << std::endl;
-    // std::cout << "(T*)+ = " << f1.Eval(x.xpos[0]) << std::endl;
-    // std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
-    // std::cout << "(T*)- = " << f1.Eval(x.xneg[0]) << std::endl;
-    // std::cout << "--------------------------------------------" << std::endl
-    //           << "            AUTOMATIC METHOD" << std::endl
-    //           << "--------------------------------------------" << std::endl;
+        std::cout << "x+ = " << x.xpos[0] << " +/- " << x.xpos[1] << std::endl;
+        std::cout << "(T*)+ = " << f1.Eval(x.xpos[0]) << std::endl;
+        std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
+        std::cout << "(T*)- = " << f1.Eval(x.xneg[0]) << std::endl;
+        std::cout << "--------------------------------------------" << std::endl
+                  << "            AUTOMATIC METHOD" << std::endl
+                  << "--------------------------------------------" << std::endl;
+    }
 
     double* x_iso = get_isoX(isocrony_x(par_1, par_1_err, par_2, par_2_err), g1);
+    double Terr_iso = get_err_T(x_iso[0], g1, g2);
+
     std::cout << "x* = " << x_iso[0] << " +/- " << x_iso[1] << std::endl;
-    std::cout << "T* = " << f1.Eval(x_iso[0]) << std::endl;
+    std::cout << "T* = " << f1.Eval(x_iso[0]) << " +/- " << Terr_iso << std::endl;
 
     if(!fast){
         std::string ss_1="#chi^{2}/ndf (prob.) = "
@@ -158,7 +178,7 @@ void kater_plot(bool fast = false){
 
     // test(); // FOR TESTING PURPOSES
 
-    c1.SaveAs("test.pdf");
+    c1.SaveAs("../fig/kater.pdf");
 
     delete[] x_iso;
     return;
