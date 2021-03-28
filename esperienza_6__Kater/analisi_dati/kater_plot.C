@@ -59,11 +59,11 @@ x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1,
     return x;
 }
 
-double* get_isoX(x_values x, TGraphErrors _g){
+double* get_isoX(x_values x, TGraphErrors* _g){
     
     double* _x = new double[2];
 
-    if(x.xpos[0]>TMath::MinElement(_g.GetN(), _g.GetX())){
+    if(x.xpos[0]>TMath::MinElement(_g->GetN(), _g->GetX())){
         _x[0] = x.xpos[0]; _x[1] = x.xpos[1];
     }else{
         _x[0] = x.xneg[0]; _x[1] = x.xneg[1];
@@ -73,97 +73,104 @@ double* get_isoX(x_values x, TGraphErrors _g){
 
 }
 
-double get_err_T(double x_iso, TGraphErrors g1, TGraphErrors g2){
+double get_err_T(double x_iso, TGraphErrors* g1, TGraphErrors* g2){
 
     double Terr_iso_1 = 0;
     double Terr_iso_2 = 0;
-    double range = abs(g1.GetX()[0]-x_iso);
+    double range = abs(g1->GetX()[0]-x_iso);
 
-    for(int i=0; i<g1.GetN(); i++){
+    for(int i=0; i<g1->GetN(); i++){
         // std::cout << i << " " << abs(x_iso-g1.GetX()[i]) << " x: " << g1.GetX()[i] << std::endl;
         // algorimo per identificazione dei valori di T1 T2 più
         // vicini al valore di isocronia
 
-        if((abs(x_iso-g1.GetX()[i])<range)){
-            Terr_iso_1 = g1.GetErrorY(i);
-            Terr_iso_2 = g2.GetErrorY(i);
-            range = abs(x_iso-g1.GetX()[i]);
+        if((abs(x_iso-g1->GetX()[i])<range)){
+            Terr_iso_1 = g1->GetErrorY(i);
+            Terr_iso_2 = g2->GetErrorY(i);
+            range = abs(x_iso-g1->GetX()[i]);
         }
     }
 
     return sqrt(pow(Terr_iso_1, 2)+pow(Terr_iso_2, 2));
 }
 
-void kater_plot(bool fast = false){
+void kater_plot(){
 
-    // gStyle->SetFrameLineWidth(0);
+    gStyle->SetFrameLineWidth(0);
 
     gStyle->SetTextFont(42);
 
-    TCanvas c1("c", "", 600, 500);
-    c1.SetMargin(0.16, 0.06, 0.12, 0.06);
+    TCanvas* c1 = new TCanvas("c", "", 600, 500);
+    c1->SetMargin(0.16, 0.06, 0.12, 0.06);
     // c1.SetGrid();
 
-    TGraphErrors g1("../dati/computed_T1_x.txt");
-    g1.SetMarkerStyle(4);
-    g1.SetLineColor(kBlack);
-    TGraphErrors g2("../dati/computed_T2_x.txt");
-    g2.SetLineColor(kRed);
-    g2.SetMarkerStyle(4);
-    g2.SetMarkerColor(kRed);
+    TGraphErrors* g1 = new TGraphErrors("../dati/computed_T1_x.txt"); g1->SetName("g1");
+    g1->SetMarkerStyle(4);
+    g1->SetLineColor(kBlack);
+    TGraphErrors* g2 = new TGraphErrors("../dati/computed_T2_x.txt"); g2->SetName("g2");
+    g2->SetLineColor(kRed);
+    g2->SetMarkerStyle(4);
+    g2->SetMarkerColor(kRed);
 
-    TF1 f1("f1", "[0]*x*x+[1]*x+[2]"); // a1 = p0, b1 = p1, c1 = p2;
-    f1.SetParameters(0.4, 0.1, 1.4);
-    f1.SetLineColor(kBlack);
-    TF1 f2("f2", "[0]*x*x+[1]*x+[2]"); // a2 = p0, b2 = p1, c2 = p2;
-    // f2.SetParameters(0.8, -1.1, 2);
-    f2.SetLineColor(kRed);
+    TF1* f1 = new TF1("f1", "([0]*x*x)+([1]*x)+[2]"); // a1 = p0, b1 = p1, c1 = p2;
+    f1->SetLineColor(kBlack);
+    // f1->SetParameters(0.0001, 0.001, 1.4);
+    TF1* f2 = new TF1("f2", "([0]*x*x)+([1]*x)+[2]"); // a2 = p0, b2 = p1, c2 = p2;
+    f2->SetParameters(2, -1, 0.8);
+    f2->SetLineColor(kRed);
 
-    g1.SetTitle("");
-    g1.GetXaxis()->SetTitle("Posizione x_{b} della massa M_{b} (m)");
-    g1.GetYaxis()->SetTitle("Periodo T (s)");
-    g1.GetXaxis()->SetTitleOffset(0.85);
-    g1.GetXaxis()->SetTitleSize(0.06);
-    g1.GetYaxis()->SetTitleSize(0.06);
-    g1.GetXaxis()->CenterTitle();
-    g1.GetYaxis()->CenterTitle();
+    g1->SetTitle("");
+    g1->GetXaxis()->SetTitle("Posizione x_{b} della massa M_{b} (m)");
+    g1->GetYaxis()->SetTitle("Periodo T (s)");
+    g1->GetXaxis()->SetTitleOffset(0.85);
+    g1->GetXaxis()->SetTitleSize(0.06);
+    g1->GetYaxis()->SetTitleSize(0.06);
+    g1->GetXaxis()->CenterTitle();
+    g1->GetYaxis()->CenterTitle();
 
+    print_mmsg("PROCESSING G1...");
 
-    g1.Draw("ap");
-    g1.Fit("f1");
+    g1->Draw("ap");
+    g1->Fit("f1");
 
-    g2.Draw("p");
-    g2.Fit("f2");
+    print_mmsg("FINISHED FITTING G1, PROCESSING G2...");
 
-    Double_t* par_1 = f1.GetParameters();
-    const Double_t* par_1_err = f1.GetParErrors();
-    Double_t* par_2 = f2.GetParameters();
-    const Double_t* par_2_err = f2.GetParErrors();
+    g2->Draw("p");
+    g2->Fit("f2");
+
+    print_mmsg("RESULTS ...");
+
+    Double_t* par_1 = f1->GetParameters();
+    const Double_t* par_1_err = f1->GetParErrors();
+    Double_t* par_2 = f2->GetParameters();
+    const Double_t* par_2_err = f2->GetParErrors();
 
     if(false){
         x_values x;
         x = isocrony_x(par_1, par_1_err, par_2, par_2_err);
 
         std::cout << "x+ = " << x.xpos[0] << " +/- " << x.xpos[1] << std::endl;
-        std::cout << "(T*)+ = " << f1.Eval(x.xpos[0]) << std::endl;
+        std::cout << "(T*)+ = " << f1->Eval(x.xpos[0]) << std::endl;
         std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
-        std::cout << "(T*)- = " << f1.Eval(x.xneg[0]) << std::endl;
-        std::cout << "--------------------------------------------" << std::endl
+        std::cout << "(T*)- = " << f1->Eval(x.xneg[0]) << std::endl;
+        std::cout << "*****************************************************" << std::endl
                   << "            AUTOMATIC METHOD" << std::endl
-                  << "--------------------------------------------" << std::endl;
+                  << "*****************************************************" << std::endl;
     }
 
     double* x_iso = get_isoX(isocrony_x(par_1, par_1_err, par_2, par_2_err), g1);
+    double T_iso = f1->Eval(x_iso[0]);
     double Terr_iso = get_err_T(x_iso[0], g1, g2);
 
     std::cout << "x* = " << x_iso[0] << " +/- " << x_iso[1] << std::endl;
-    std::cout << "T* = " << f1.Eval(x_iso[0]) << " +/- " << Terr_iso << std::endl;
+    std::cout << "T* = " << T_iso << " +/- " << Terr_iso << std::endl;
+    std::cout << "g = " << 4*M_PI*M_PI*(0.800010)/pow(T_iso, 2) << std::endl;
 
-    if(!fast){
+    if(false){
         std::string ss_1="#chi^{2}/ndf (prob.) = "
-            +std::to_string(f1.GetChisquare())+"/"
-            +std::to_string(f1.GetNDF())
-            +" ("+std::to_string(f1.GetProb())+")";
+            +std::to_string(f1->GetChisquare())+"/"
+            +std::to_string(f1->GetNDF())
+            +" ("+std::to_string(f1->GetProb())+")";
         TLatex sl_1;
         sl_1.SetTextSize(0.035);
         sl_1.SetTextColor(kBlack);
@@ -171,9 +178,9 @@ void kater_plot(bool fast = false){
         
         
         std::string ss_2="#chi^{2}/ndf (prob.) = "
-            +std::to_string(f2.GetChisquare())+"/"
-            +std::to_string(f2.GetNDF())
-            +" ("+std::to_string(f2.GetProb())+")";
+            +std::to_string(f2->GetChisquare())+"/"
+            +std::to_string(f2->GetNDF())
+            +" ("+std::to_string(f2->GetProb())+")";
         TLatex sl_2;
         sl_1.SetTextSize(0.035);
         sl_1.SetTextColor(kRed);
@@ -185,9 +192,16 @@ void kater_plot(bool fast = false){
 	header.SetTextSize(0.065);
     header.DrawLatexNDC(0.25, 0.85, "#bf{Pendolo di Kater}");
 
+    TLegend* leg = new TLegend(0.25, 0.65, 0.5, 0.8);
+    leg->AddEntry("g1", "Periodi T1");
+    leg->AddEntry("g2", "Periodi T2");
+    leg->SetBorderSize(0);
+    leg->Draw();
+
     // test(); // FOR TESTING PURPOSES
 
-    c1.SaveAs("../fig/kater.pdf");
+    c1->SaveAs("../fig/kater.pdf");
+    c1->Draw();
 
     delete[] x_iso;
     return;
@@ -195,5 +209,4 @@ void kater_plot(bool fast = false){
 
 int main(){
     kater_plot();
-    return 0;
 }
