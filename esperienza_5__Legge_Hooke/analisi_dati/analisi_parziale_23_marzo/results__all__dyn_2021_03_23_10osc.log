@@ -1,0 +1,31 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing analisi_dettaglio_preliminare.C...
+ FCN=21.6423 FROM MIGRAD    STATUS=CONVERGED      43 CALLS          44 TOTAL
+                     EDM=1.22279e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.84968e+01   4.30222e-01   4.44315e-04  -1.72815e-04
+   2  p1           5.53548e-02   3.55652e-03   3.67343e-06  -2.42518e-02
+prob0.0002361
+ FCN=21.7095 FROM MIGRAD    STATUS=CONVERGED      44 CALLS          45 TOTAL
+                     EDM=1.11884e-12    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           4.46105e-01   2.16544e-03   2.40463e-06  -1.36914e-03
+   2  p1           2.46620e-02   1.47720e-03   1.64037e-06  -2.09244e-03
+prob0.000228951
+ FCN=7.32838 FROM MIGRAD    STATUS=CONVERGED      44 CALLS          45 TOTAL
+                     EDM=3.61654e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.37962e-01   8.56477e-04   4.55234e-07   2.62189e+00
+   2  p1           1.27904e-03   6.24879e-04   3.32135e-07   3.45055e+00
+prob0.11952
