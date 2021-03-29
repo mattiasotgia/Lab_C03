@@ -16,7 +16,7 @@
 %                                                            
 %                                                            
 \documentclass[italian, a4paper, 10pt, twocolumn]{../../style/lab_unige}
-\usepackage[a4paper, margin=1.25cm, footskip=0.25in]{geometry}
+\usepackage[a4paper, margin=1.75cm, footskip=0.25in]{geometry}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -25,10 +25,7 @@
 
 % \usepackage{biblatex}
 
-\usepackage[bookmarksopen=true, 
-citebordercolor={0 1 0}, 
-linkbordercolor={1 0 0}, 
-urlbordercolor={0 1 1}]{hyperref}
+\usepackage[bookmarksopen=true, citebordercolor={0 1 0}, linkbordercolor={1 0 0}, urlbordercolor={0 1 1}]{hyperref}
 \usepackage[numbered]{bookmark}
 
 \usepackage{graphicx}
@@ -49,8 +46,8 @@ urlbordercolor={0 1 1}]{hyperref}
 \usepackage{lipsum}
 
 %% Define ref types
-\newcommand{\reftab}[1]{Tab. {\ref{#1}}}%
-\newcommand{\reffig}[1]{Fig. {\ref{#1}}}%
+\newcommand{\reftab}[1]{Tabella {\ref{#1}}}%
+\newcommand{\reffig}[1]{Figura {\ref{#1}}}%
 \newcommand{\refeqn}[1]{({\ref{#1}})}%
 %% PAPER ONLY custom Macros
 \newcommand{\Oi}{$O_1$}
@@ -64,13 +61,13 @@ urlbordercolor={0 1 1}]{hyperref}
 \newcommand{\ChiSqr}{$\chi^2$\space}
 \newcommand{\ChiNdf}{$\chi^2/\text{ndf}$\space}
 \newcommand{\cernroot}{\texttt{root} \space}
-\newcommand{\lr}{$l_{\text{R}}$}
+\newcommand{\lr}{$l_{\text{r}}$}
 \newcommand{\Ti}[1]{$T_{#1}$}
 \newcommand{\Ma}{$M_a$}
 \newcommand{\Mb}{$M_b$}
 \newcommand{\Tiso}{$T^*$}
 \newcommand{\xiso}{$x^*$}
-\newcommand{\LrVALUE}{$l_R=(0.800010\pm0.000010)$~mm}
+\newcommand{\LrVALUE}{$l_{\text{r}}=(0.800010\pm0.000010)$~m}
 
 
 %%
@@ -131,8 +128,8 @@ urlbordercolor={0 1 1}]{hyperref}
     Pendolo di Kater (si veda in seguto descrizione dettagliata dell'apparato);\\
     Cronometro elettronico collegato a una fotocellula in grado di misurare una singola oscillazione del pendolo, di portata potenzialmente infinita (molto maggiore comunque dei periodi misurati), e sensibilità 10$^{-7}$ s, che assumiamo anche come accuratezza;\\
 
-    Il pendolo di Kater è costituito da due masse \Ma~(massa rossa) e \Mb~(massa blu), poste su un'asta di acciaio inox., una fissa (\Ma) e una libera di muoversi, vincolata da una vite che la può bloccare all'asta in ben definite posizioni, che sono indicate da $N=25$ fori equidistanti 25~mm tra loro, eseguiti con strumentazione abbastanza precisa da poter trascurare l'incertezza associata a questa distanza. Il pendolo è poi poggiato su un sostegno tramite due perni che si incastrano perfettamente in una sede su una piastra posta orizzontalmente munita di livella a bolla, mantenuta in perfetto equilibrio.
-    Il pendolo di Kater viene anche definito pendolo reversibile, in quanto possiamo agganciare il pendolo sia tramite i perni posti sull'astremo vicino alla massa \Ma, che su due perni identici posti sull'estremo della massa \Mb, per consentire quindi di misurare due periodi diversi \Ti{1} e \Ti{2}. 
+    Il pendolo di Kater è costituito da un'asta graduata, dotata di due coltelli sospensione, con una massa fissa ad un'estremità (\Ma, massa rossa) ed una scorrevole (\Mb, massa blu), posizionata arbitrariamente, vincolata da una vite che la può bloccare all'asta in ben definite posizioni, che sono indicate da $N=25$ fori equidistanti 25~mm tra loro, eseguiti con strumentazione abbastanza precisa da poter trascurare l'incertezza associata a questa distanza. Il pendolo è poi poggiato su un sostegno tramite due perni che si incastrano perfettamente in una sede su una piastra posta orizzontalmente munita di livella a bolla, mantenuta in perfetto equilibrio. Il tutto viene montato su un dispositivo di sostegno in modo che l'asta risulti verticale. Lo strumento è realizzato in maniera tale che i centri di massa delle varie parti costituenti siano allineati su di una retta, intersecante gli assi definiti dai coltelli.\\
+    Il pendolo di Kater viene anche definito pendolo reversibile, in quanto possiamo agganciare il pendolo sia sul coltello di sospenzione posto sull'astremo vicino alla massa \Ma, che su uno identico posto sull'estremo della massa \Mb, consentendo quindi di misurare due periodi diversi \Ti{1} e \Ti{2}. 
 
     \section{Metodi}
     \label{section:methods}
@@ -141,7 +138,33 @@ urlbordercolor={0 1 1}]{hyperref}
     %% MAGARI AGGIUNGERE COMMENTO SU QUANTE CIFRE SI CONSIDERANO E COME APPROSSIMIAMO I VALORI %%
     I valori riportati sono stati approssimati tenendo conto di alcune convenzioni prese. Si approssima l'errore a una cifra significativa se tale cifra è $\geqslant3$, altrimenti se tale cifra è 1 o 2 allora si considerano due cifre significative. Considerando quindi le posizioni decimali significative dell'errore si approssima per eccesso il valore numerico della grandezza.\\
 
-    Abbiamo già accennato alla maggiore accuratezza nell'utilizzare il pendolo di Kater per misurare con maggiore precisione il valore di $g$. Infatti il pendolo di Kater può essere posto nella condizione di isocronia, dove il periodo misurato con il pendolo in un verso, viene uguale al periodo del caso in cui il pendolo sia fatto oscillare per l'altro estremo di oscillazione.
+    Dopo aver eseguito un prima misura del periodo del pendolo considerandolo come pendolo semplice, considerimo questa volta il pendolo fisico, ovvero come corpo più complesso e dotato di massa.\\
+    Il periodo dell’ oscillazione di un pendolo fisico dipende in genere dal momento di inerzia $I$ rispetto l’asse di sospensione, dal valore di g e dall’ampiezza massima delle oscillazioni. Tuttavia l’esperimento è effettuato nel limite delle piccole oscillazioni per cui la dipendenza dall’ampiezza è trascurabile (isocronia delle piccole oscillazioni).\\
+    È possibile quindi valutare $g$ a  partire dalla misura del periodo $T$ e di $I$.  Questo nella pratica non avviene data la difficoltà del calcolo di $I$ a cui sono associate incertezze significative.
+
+    Il pendolo reversibile, come quello di Kater, elimina questa difficoltà riducendo la misura di $g$ a quella di una serie di lunghezze e intervalli di tempo.\\
+    In tale modo l'oscillazione del pendolo può essere limitata (nei limiti sperimentali) ad un piano verticale, perpendicolare all'asse orizzontale di rotazione e passante per il centro di massa del sistema. Le misure del periodo di oscillazione viene effettuate utilizzando alternativamente i due coltelli si sospensione, al variare della posizione sull'asta della massa scorrevole.\\
+    L’equazione del periodo (nel limite delle piccole oscillazioni) di un pendolo reversibile è $T = 2\pi\sqrt{I/mgh}$, che nel caso del pendolo semplice si può verificare essere $T = 2\pi\sqrt{l/g}$.\\
+    Il confronto con il pendolo semplice permette di introdurre per il pendolo composto una grandezza caratteristica: la lunghezza ridotta \lr.
+    Definiamo lunghezza ridotta (\lr) del pendolo, la lunghezza del pendolo semplice isocrono ad esso \lr~$=~I/mh$. \\
+    Misuriamo con un calibro da banco di portata 1~m e sensibilità 10~$\mu$m il valore di \LrVALUE.\\ 
+    Attraverso considerazioni di meccanica si ottiene che \lr~$=~h_1+h_2$ con $h_1$ la distanza del coltello di sospensione(\Oi) al centro di massa e $h_2$ la distanza del coltello di sospensione \Oii~ dal centro di massa.\\
+    I risultati ottenuti danno un'indicazione di come deve essere progettata una misura di $g$ tramite un pendolo reversibile.
+    Il pendolo deve essere costruito in maniera tale che il suo momento d'inerzia e la posizione del suo centro di massa rispetto agli assi di rotazione, possa essere variata con continuità: ciò viene realizzato utilizzando la massa mobile tra i due coltelli che definiscono gli assi di sospensione.
+    In tale modo, con opportuni aggiustamenti della massa mobile, i due assi (fissi) di rotazione possono essere resi isocroni.\\
+    L'asimmetria viene realizzata introducendo una massa fissa ad un'estremità del pendolo.
+    Raggiunta una configurazione asimmetrica con assi isocroni, la distanza tra questi ultimi è pari alla lunghezza ridotta del pendolo e quindi è possibile risalire al valore di $g$ tramite una misura di periodo $g=4\pi^2\sqrt{l_{\text{r}}/T^2}$.
+
+    La massa mobile viene spostata partendo dal penultimo foro fino a quello adiacente, distante 25 mm, per un totale di 6 posizioni.
+
+    La posizione della massa $x_b$ si può ricavare dalla formula $x_b~=~L_0~+~N~\cdot~25$~mm , dove $L_0$ è la distanza dall’ estremo della sbarra al primo foro successivo alla massa fissa.\\
+    $L_0$ è stata misurata, in millimetri, attraverso 3 misure distinte mediante l’ uso del calibro. \\
+    Otteniamo che $L_0~=~L_{0,~1}~+~L_{0,~2}~+~\text{diametro}_{Mb}/2~= (0.10415)~+~(0.14930)~+~[(0.09040)/2]$~m $ = 0.29865$~m.
+
+    Le misure dei periodo \Ti{1} e \Ti{2} sono effettuate con un cronometro digitale azionato dalla fotocellula facendo attenzione a rimanere nel limite di piccole oscillazione e che il fascio di luce venga attraversato da entrambi i lati.
+    Le misure dei periodi sono effettuate in modo statistico svolgendo 10 misure per ciascun periodo (\Ti{1}, \Ti{2}) per una singola posizione della massa mobile.\\
+    I dati raccolti sono riportati in \reftab{table:raw_data}.
+
 
 
     \section{Risultati}
@@ -162,7 +185,7 @@ urlbordercolor={0 1 1}]{hyperref}
     \setcounter{table}{0}
     \renewcommand{\thetable}{A\arabic{table}}
 
-    \section{Dati completi}
+    \section{Dati estesi}
     \input{tables/TABLE_RAW.tex}
     
 \end{document}
