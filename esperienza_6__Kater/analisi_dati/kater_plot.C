@@ -12,7 +12,7 @@
 #include <TLatex.h>
 #include <TLegend.h>
 
-// defining some use constant values
+// definiamo valori costanti utili nel programma
 #define LR      0.800010
 #define ERR_LR  0.000010
 #define G_T     9.8056
@@ -38,7 +38,7 @@ void print_stat(TF1* _f){
         << std::endl << std::endl;
 }
 
-x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1, 
+x_values isocrono_x(Double_t* params_1, const Double_t* err_params_1, 
                     Double_t* params_2, const Double_t* err_params_2){
     x_values x;
     // a0+a1*x+a2*x^2
@@ -128,12 +128,12 @@ double get_g(double T_iso){
 double get_gerr(double T_iso, double Terr_iso){
     double g_err = 0;
     double ddT_sqr = pow( - (8 * LR * pow(M_PI, 2) / pow(T_iso, 3)), 2);
-    double ddg_sqr = pow(4*M_PI/pow(T_iso, 2), 2);
-    g_err = sqrt(ddT_sqr * pow(Terr_iso, 2) + ddg_sqr * pow(ERR_LR, 2));
+    double ddlr_sqr = pow(4*M_PI/pow(T_iso, 2), 2);
+    g_err = sqrt(ddT_sqr * pow(Terr_iso, 2) + ddlr_sqr * pow(ERR_LR, 2));
     return g_err;
 }
 
-void kater_plot(bool header = false, bool fast = true){
+void kater_plot(bool header = false, bool fast = false){
 
     gStyle->SetFrameLineWidth(0);
 
@@ -170,14 +170,14 @@ void kater_plot(bool header = false, bool fast = true){
     print_mmsg("PROCESSING G1...");
 
     g1->Draw("ap");
-    g1->Fit("f1");//, "V");
+    g1->Fit("f1", "E");
 
     print_stat(f1);
 
     print_mmsg("PROCESSING G2...");
 
     g2->Draw("p");
-    g2->Fit("f2");//, "V");
+    g2->Fit("f2", "E");
 
     print_stat(f2);
 
@@ -188,18 +188,7 @@ void kater_plot(bool header = false, bool fast = true){
     Double_t* par_2 = f2->GetParameters();
     const Double_t* par_2_err = f2->GetParErrors();
 
-    if(false){
-        x_values x;
-        x = isocrony_x(par_1, par_1_err, par_2, par_2_err);
-
-        std::cout << "x+ = " << x.xpos[0] << " +/- " << x.xpos[1] << std::endl;
-        std::cout << "(T*)+ = " << f1->Eval(x.xpos[0]) << std::endl;
-        std::cout << "x- = " << x.xneg[0] << " +/- " << x.xneg[1] << std::endl;
-        std::cout << "(T*)- = " << f1->Eval(x.xneg[0]) << std::endl;
-        print_mmsg("AUTOMATIC METHOD");
-    }
-
-    double* x_iso = get_isoX(isocrony_x(par_1, par_1_err, par_2, par_2_err), g1);
+    double* x_iso = get_isoX(isocrono_x(par_1, par_1_err, par_2, par_2_err), g1);
     double T_iso = f1->Eval(x_iso[0]);
     double Terr_iso = get_err_T(x_iso[0], g1, g2);
 
@@ -241,7 +230,7 @@ void kater_plot(bool header = false, bool fast = true){
     }
     
 
-    if(header){
+    if(!header){
         TLatex header;
         header.SetTextSize(0.055);
         header.DrawLatexNDC(0.25, 0.85, "#bf{Dati dalle tabelle 1 e 2}");
