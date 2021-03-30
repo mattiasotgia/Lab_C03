@@ -12,6 +12,12 @@
 #include <TLatex.h>
 #include <TLegend.h>
 
+// defining some use constant values
+#define LR      0.800010
+#define ERR_LR  0.000010
+#define G_T     9.8056
+#define ERR_G_T 0.0001
+
 struct x_values{
     double xpos[2];
     double xneg[2];        
