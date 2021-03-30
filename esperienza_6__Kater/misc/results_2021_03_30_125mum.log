@@ -1,0 +1,53 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing kater_plot.C...
+
+ **********
+    PROCESSING G1...
+ **********
+
+ FCN=65.7424 FROM MIGRAD    STATUS=CONVERGED     206 CALLS         207 TOTAL
+                     EDM=4.43527e-08    STRATEGY= 1  ERROR MATRIX UNCERTAINTY   6.5 per cent
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.43532e+00   3.17083e-02   6.83365e-05   1.43376e+00
+   2  p1           8.07331e-02   7.54481e-02  -1.61536e-04   1.09857e+00
+   3  p2           4.16199e-01   4.47701e-02   9.52345e-05   8.27506e-01
+
+** CHI2 / NDF ( PROB. ) 65.7424 / 3 ( 3.47975e-14 )
+
+
+ **********
+    PROCESSING G2...
+ **********
+
+ FCN=29.3688 FROM HESSE     STATUS=NOT POSDEF     16 CALLS         160 TOTAL
+                     EDM=2.28054e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           2.14662e+00   3.02509e-04   5.11794e-07   1.96054e+00
+   2  p1          -1.13957e+00   5.36205e-04   2.71694e-07   1.64138e+00
+   3  p2           8.59329e-01   4.61503e-04   2.04880e-07   1.38193e+00
+
+** CHI2 / NDF ( PROB. ) 29.3688 / 3 ( 1.87339e-06 )
+
+
+ **********
+    RESULTS ...
+ **********
+
+x* = 0.837748 +/- 0.163241
+T* = 1.79505 +/- 0.000355199
+
+ **********
+    COMPATIBLE VALUES
+ **********
+
+g = 9.80175 +/- 0.00387928

@@ -41,7 +41,7 @@ void print_stat(TF1* _f){
 x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1, 
                     Double_t* params_2, const Double_t* err_params_2){
     x_values x;
-
+    // a0+a1*x+a2*x^2
     // non usare valori assoluti per a0, a1 e a2 per evitare di ottenere valore di isocronia errato.
     double a2 = params_1[0]-params_2[0], err_a2 = abs(err_params_1[0])+abs(err_params_2[0]);
     double a1 = params_1[1]-params_2[1], err_a1 = abs(err_params_1[1])+abs(err_params_2[1]);
@@ -60,13 +60,15 @@ x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1,
     double dda_sqr_pos = pow(((-1)*a2/(a0*sqrt(delta))) - ((-a1 + sqrt(delta))/(2*a0*a0)), 2);
     double ddb_sqr_pos = pow((-1 + a1/sqrt(delta))/(2*a0), 2);
     double ddc_sqr_pos = pow(-1/sqrt(delta), 2);
-
+    
+    // errore su xpos
     x.xpos[1] = sqrt((dda_sqr_pos*err_a0*err_a0) + (ddb_sqr_pos*err_a1*err_a1) + (ddc_sqr_pos*err_a2*err_a2));
 
     double dda_sqr_neg = pow((a1*a1 - 2*a0*a2 + a1*sqrt(delta))/(2*a0*a0*sqrt(delta)), 2);
     double ddb_sqr_neg = pow((-1 - (a1/sqrt(delta)))/(2*a0), 2);
     double ddc_sqr_neg = pow(1/sqrt(delta), 2);
 
+    // err su xneg
     x.xneg[1] = sqrt((dda_sqr_neg*err_a0*err_a0) + (ddb_sqr_neg*err_a1*err_a1) + (ddc_sqr_neg*err_a2*err_a2));
 
     return x;
@@ -168,12 +170,16 @@ void kater_plot(bool header = false, bool fast = true){
     print_mmsg("PROCESSING G1...");
 
     g1->Draw("ap");
-    g1->Fit("f1");
+    g1->Fit("f1");//, "V");
 
-    print_mmsg("FINISHED FITTING G1, PROCESSING G2...");
+    print_stat(f1);
+
+    print_mmsg("PROCESSING G2...");
 
     g2->Draw("p");
-    g2->Fit("f2");
+    g2->Fit("f2");//, "V");
+
+    print_stat(f2);
 
     print_mmsg("RESULTS ...");
 
@@ -209,10 +215,11 @@ void kater_plot(bool header = false, bool fast = true){
     } else {
         print_mmsg("NON-COMPATIBLE VALUES...");
         std::cout << "g = " << g_s << " +/- " <<  gerr_s << std::endl;
-        std::cout << "Delta = abs( abs( gt - gs ) - 3*sqrt( err_gt^2 + err_gs^2 ) ) = " << abs(abs(g_s-G_T)-3*sqrt(pow(gerr_s, 2) + pow(ERR_G_T, 2))) << std::endl;
+        std::cout << "Delta = abs( abs( gt - gs ) - 3*sqrt( err_gt^2 + err_gs^2 ) ) = " 
+            << abs(abs(g_s-G_T)-3*sqrt(pow(gerr_s, 2) + pow(ERR_G_T, 2))) << std::endl;
     }
 
-    if(fast){
+    if(!fast){
         std::string ss_1="#chi^{2}/ndf (prob.) = "
             +std::to_string(f1->GetChisquare())+"/"
             +std::to_string(f1->GetNDF())
@@ -234,9 +241,11 @@ void kater_plot(bool header = false, bool fast = true){
     }
     
 
-    TLatex header;
-	header.SetTextSize(0.065);
-    header.DrawLatexNDC(0.25, 0.85, "#bf{Pendolo di Kater}");
+    if(header){
+        TLatex header;
+        header.SetTextSize(0.055);
+        header.DrawLatexNDC(0.25, 0.85, "#bf{Dati dalle tabelle 1 e 2}");
+    }
 
     TLegend* leg = new TLegend(0.25, 0.65, 0.5, 0.8);
     leg->AddEntry("g1", "Periodi T1");
@@ -246,7 +255,7 @@ void kater_plot(bool header = false, bool fast = true){
 
     // test(); // FOR TESTING PURPOSES
 
-    c1->SaveAs("../fig/kater.pdf");
+    c1->SaveAs("../fig/kater_plot.pdf");
     c1->Draw();
 
     delete[] x_iso;
