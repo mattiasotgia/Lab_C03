@@ -107,13 +107,37 @@ double get_err_T(double x_iso, TGraphErrors* g1, TGraphErrors* g2){
     return sqrt(pow(Terr_iso_1, 2)+pow(Terr_iso_2, 2));
 }
 
-void kater_plot(){
+bool compatible(double G1, double errG1,
+                double G2, double errG2){
+    double abs_values = abs(G2-G1);
+    double err_abs_val = 3*sqrt(pow(errG1, 2) + pow(errG2, 2));
+    if(abs_values<err_abs_val){
+        return true;
+    }
+    return false;
+}
+
+double get_g(double T_iso){
+    double g_value = 10;
+    g_value = 4 * pow(M_PI, 2) * LR / pow(T_iso, 2);
+    return g_value;
+}
+
+double get_gerr(double T_iso, double Terr_iso){
+    double g_err = 0;
+    double ddT_sqr = pow( - (8 * LR * pow(M_PI, 2) / pow(T_iso, 3)), 2);
+    double ddg_sqr = pow(4*M_PI/pow(T_iso, 2), 2);
+    g_err = sqrt(ddT_sqr * pow(Terr_iso, 2) + ddg_sqr * pow(ERR_LR, 2));
+    return g_err;
+}
+
+void kater_plot(bool header = false, bool fast = true){
 
     gStyle->SetFrameLineWidth(0);
 
     gStyle->SetTextFont(42);
 
-    TCanvas* c1 = new TCanvas("c", "", 600, 500);
+    TCanvas* c1 = new TCanvas("c1", "", 600, 500);
     c1->SetMargin(0.16, 0.06, 0.12, 0.06);
     // c1.SetGrid();
 
@@ -175,9 +199,20 @@ void kater_plot(){
 
     std::cout << "x* = " << x_iso[0] << " +/- " << x_iso[1] << std::endl;
     std::cout << "T* = " << T_iso << " +/- " << Terr_iso << std::endl;
-    std::cout << "g = " << 4*M_PI*M_PI*(0.800010)/pow(T_iso, 2) << std::endl;
 
-    if(false){
+    double g_s = get_g(T_iso);
+    double gerr_s = get_gerr(T_iso, Terr_iso);
+
+    if(compatible(g_s, gerr_s, G_T, ERR_G_T)){
+        print_mmsg("COMPATIBLE VALUES");
+        std::cout << "g = " << g_s << " +/- " <<  gerr_s << std::endl;
+    } else {
+        print_mmsg("NON-COMPATIBLE VALUES...");
+        std::cout << "g = " << g_s << " +/- " <<  gerr_s << std::endl;
+        std::cout << "Delta = abs( abs( gt - gs ) - 3*sqrt( err_gt^2 + err_gs^2 ) ) = " << abs(abs(g_s-G_T)-3*sqrt(pow(gerr_s, 2) + pow(ERR_G_T, 2))) << std::endl;
+    }
+
+    if(fast){
         std::string ss_1="#chi^{2}/ndf (prob.) = "
             +std::to_string(f1->GetChisquare())+"/"
             +std::to_string(f1->GetNDF())
