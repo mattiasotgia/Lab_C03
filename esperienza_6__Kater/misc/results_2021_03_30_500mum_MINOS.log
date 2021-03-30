@@ -13,13 +13,13 @@ Processing kater_plot.C...
     PROCESSING G1...
  **********
 
- FCN=18.4192 FROM HESSE     STATUS=NOT POSDEF     18 CALLS         295 TOTAL
-                     EDM=2.78081e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+ FCN=18.4192 FROM MINOS     STATUS=FAILURE       511 CALLS        1873 TOTAL
+                     EDM=4.33849e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
   EXT PARAMETER                APPROXIMATE        STEP         FIRST   
   NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-   1  p0           1.50052e+00   9.53956e-04   3.57751e-07  -1.12121e-01
-   2  p1          -7.46122e-02   1.96566e-03   5.65831e-08  -1.38731e-01
-   3  p2           5.08489e-01   1.52808e-03   1.21233e-07  -1.61835e-01
+   1  p0           1.50052e+00   1.11067e-03   4.78264e-06  -9.24021e-01
+   2  p1          -7.46122e-02   1.96336e-03  -6.60927e-06  -7.68752e-01
+   3  p2           5.08489e-01   1.61729e-03   1.61729e-03  -1.61835e-01
 
 ** CHI2 / NDF ( PROB. ) 18.4192 / 3 ( 0.000360406 )
 
@@ -28,13 +28,13 @@ Processing kater_plot.C...
     PROCESSING G2...
  **********
 
- FCN=20.0415 FROM HESSE     STATUS=NOT POSDEF     16 CALLS         188 TOTAL
-                     EDM=5.93214e-08    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+ FCN=20.0415 FROM MINOS     STATUS=FAILURE       511 CALLS        1759 TOTAL
+                     EDM=5.89274e-08    STRATEGY= 1      ERR MATRIX NOT POS-DEF
   EXT PARAMETER                APPROXIMATE        STEP         FIRST   
   NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-   1  p0           2.15156e+00   4.70557e-04   5.12972e-07  -3.39549e+00
-   2  p1          -1.15212e+00   8.22043e-04   2.74687e-07  -3.12642e+00
-   3  p2           8.67246e-01   7.10995e-04   2.06768e-07  -2.84828e+00
+   1  p0           2.15156e+00   4.69882e-04   1.72884e-06  -1.68645e+00
+   2  p1          -1.15212e+00   8.22046e-04  -2.44928e-06  -1.35845e+00
+   3  p2           8.67246e-01   7.09059e-04   7.09059e-04  -2.84828e+00
 
 ** CHI2 / NDF ( PROB. ) 20.0415 / 3 ( 0.000166411 )
 
