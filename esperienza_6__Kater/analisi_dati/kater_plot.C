@@ -25,42 +25,49 @@ struct x_values{
 
 void print_mmsg(std::string mmsg){
     std::cout << std::endl 
-        << "*****************************************************" << std::endl
-        << mmsg << std::endl
-        << "*****************************************************" << std::endl
+        << " **********" << std::endl
+        << "    " << mmsg << std::endl
+        << " **********" << std::endl
         << std::endl;
+}
+
+void print_stat(TF1* _f){
+    std::cout << std::endl
+        << "** " << "CHI2 / NDF ( PROB. ) " 
+        << _f->GetChisquare() << " / " << _f->GetNDF() << " ( " << _f->GetProb() << " )"
+        << std::endl << std::endl;
 }
 
 x_values isocrony_x(Double_t* params_1, const Double_t* err_params_1, 
                     Double_t* params_2, const Double_t* err_params_2){
     x_values x;
 
-    // non usare valori assoluti per a, b e c per evitare di ottenere valore di isocronia errato.
-    double a = params_1[0]-params_2[0], err_a = abs(err_params_1[0])+abs(err_params_2[0]);
-    double b = params_1[1]-params_2[1], err_b = abs(err_params_1[1])+abs(err_params_2[1]);
-    double c = params_1[2]-params_2[2], err_c = abs(err_params_1[2])+abs(err_params_2[2]);
+    // non usare valori assoluti per a0, a1 e a2 per evitare di ottenere valore di isocronia errato.
+    double a2 = params_1[0]-params_2[0], err_a2 = abs(err_params_1[0])+abs(err_params_2[0]);
+    double a1 = params_1[1]-params_2[1], err_a1 = abs(err_params_1[1])+abs(err_params_2[1]);
+    double a0 = params_1[2]-params_2[2], err_a0 = abs(err_params_1[2])+abs(err_params_2[2]);
 
-    double delta = pow(b, 2) - 4*a*c;
+    double delta = pow(a1, 2) - 4*a0*a2;
 
     if(delta<0){
         std::cout << "delta is negative!" << std::endl;
         return {{0,0}, {0,0}};
     }
 
-    x.xpos[0] = (-b+sqrt(delta))/(2*a);
-    x.xneg[0] = (-b-sqrt(delta))/(2*a);
+    x.xpos[0] = (-a1+sqrt(delta))/(2*a0);
+    x.xneg[0] = (-a1-sqrt(delta))/(2*a0);
 
-    double dda_sqr_pos = pow(((-1)*c/(a*sqrt(delta))) - ((-b + sqrt(delta))/(2*a*a)), 2);
-    double ddb_sqr_pos = pow((-1 + b/sqrt(delta))/(2*a), 2);
+    double dda_sqr_pos = pow(((-1)*a2/(a0*sqrt(delta))) - ((-a1 + sqrt(delta))/(2*a0*a0)), 2);
+    double ddb_sqr_pos = pow((-1 + a1/sqrt(delta))/(2*a0), 2);
     double ddc_sqr_pos = pow(-1/sqrt(delta), 2);
 
-    x.xpos[1] = sqrt((dda_sqr_pos*err_a*err_a) + (ddb_sqr_pos*err_b*err_b) + (ddc_sqr_pos*err_c*err_c));
+    x.xpos[1] = sqrt((dda_sqr_pos*err_a0*err_a0) + (ddb_sqr_pos*err_a1*err_a1) + (ddc_sqr_pos*err_a2*err_a2));
 
-    double dda_sqr_neg = pow((b*b - 2*a*c + b*sqrt(delta))/(2*a*a*sqrt(delta)), 2);
-    double ddb_sqr_neg = pow((-1 - (b/sqrt(delta)))/(2*a), 2);
+    double dda_sqr_neg = pow((a1*a1 - 2*a0*a2 + a1*sqrt(delta))/(2*a0*a0*sqrt(delta)), 2);
+    double ddb_sqr_neg = pow((-1 - (a1/sqrt(delta)))/(2*a0), 2);
     double ddc_sqr_neg = pow(1/sqrt(delta), 2);
 
-    x.xneg[1] = sqrt((dda_sqr_neg*err_a*err_a) + (ddb_sqr_neg*err_b*err_b) + (ddc_sqr_neg*err_c*err_c));
+    x.xneg[1] = sqrt((dda_sqr_neg*err_a0*err_a0) + (ddb_sqr_neg*err_a1*err_a1) + (ddc_sqr_neg*err_a2*err_a2));
 
     return x;
 }
@@ -118,11 +125,11 @@ void kater_plot(){
     g2->SetMarkerStyle(4);
     g2->SetMarkerColor(kRed);
 
-    TF1* f1 = new TF1("f1", "([0]*x*x)+([1]*x)+[2]"); // a1 = p0, b1 = p1, c1 = p2;
+    TF1* f1 = new TF1("f1", "pol2"); // a1 = p0, b1 = p1, c1 = p2;
     f1->SetLineColor(kBlack);
-    // f1->SetParameters(0.0001, 0.001, 1.4);
-    TF1* f2 = new TF1("f2", "([0]*x*x)+([1]*x)+[2]"); // a2 = p0, b2 = p1, c2 = p2;
-    f2->SetParameters(2, -1, 0.8);
+    f1->SetParameters(1, 0, 5);
+    TF1* f2 = new TF1("f2", "pol2"); // a2 = p0, b2 = p1, c2 = p2;
+    f2->SetParameters(2, -1, 1);
     f2->SetLineColor(kRed);
 
     g1->SetTitle("");
