@@ -43,5 +43,9 @@ lab_c03.code-workspace
 # ignore ai masters
 **/*.ai
 
+#ignore psd masters
+
+**/*.psd
+
 #not imported in github
 **/_misc_IMG
