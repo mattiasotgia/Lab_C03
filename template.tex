@@ -1,5 +1,5 @@
 \documentclass[italian, a4paper, 10pt, twocolumn]{../../style/lab_unige}
-\usepackage[a4paper, margin=1.25cm, footskip=0.25in]{geometry}
+\usepackage[a4paper, margin=1.75cm, footskip=0.25in]{geometry}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -8,10 +8,7 @@
 
 % \usepackage{biblatex}
 
-\usepackage[bookmarksopen=true, 
-citebordercolor={0 1 0}, 
-linkbordercolor={1 0 0}, 
-urlbordercolor={0 1 1}]{hyperref}
+\usepackage[bookmarksopen=true, citebordercolor={0 1 0}, linkbordercolor={1 0 0}, urlbordercolor={0 1 1}]{hyperref}
 \usepackage[numbered]{bookmark}
 
 \usepackage{graphicx}
@@ -32,8 +29,8 @@ urlbordercolor={0 1 1}]{hyperref}
 \usepackage{lipsum}
 
 %% Define ref types
-\newcommand{\reftab}[1]{Tab. {\ref{#1}}}%
-\newcommand{\reffig}[1]{Fig. {\ref{#1}}}%
+\newcommand{\reftab}[1]{Tabella {\ref{#1}}}%
+\newcommand{\reffig}[1]{Figura {\ref{#1}}}%
 \newcommand{\refeqn}[1]{({\ref{#1}})}%
 %% PAPER ONLY custom Macros
 
@@ -92,6 +89,9 @@ urlbordercolor={0 1 1}]{hyperref}
     \section{Metodi}
     \label{section:methods}
 
+    % \section{Analisi dati}
+    % \label{section:analysis}
+
     \section{Risultati}
     \label{section:results}
 
@@ -107,7 +107,7 @@ urlbordercolor={0 1 1}]{hyperref}
     \setcounter{table}{0}
     \renewcommand{\thetable}{A\arabic{table}}
 
-    \section{Dati completi}
+    \section{Dati estesi}
     
 
 \end{document}
