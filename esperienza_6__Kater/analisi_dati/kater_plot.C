@@ -242,8 +242,6 @@ void kater_plot(bool header = false, bool fast = false){
     leg->SetBorderSize(0);
     leg->Draw();
 
-    // test(); // FOR TESTING PURPOSES
-
     c1->SaveAs("../fig/kater_plot.pdf");
     c1->Draw();
 
