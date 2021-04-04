@@ -32,6 +32,7 @@
 import os, sys
 import logging
 import subprocess
+import yaml
 
 from datetime import date
 
@@ -90,17 +91,6 @@ SYS_EXIT = [
     '\x1b',
 ]
 TEMP_FILE = open('template.tex')
-# BUILD_LATEX_FILE = open('.github/workflows/build_latex.yml', 'a')
-# BUILD_SCRIPT = '''      - name: Compile e{n} Latex document
-#         uses: dante-ev/latex-action@master
-#         with:
-#           root_file: {filename}.tex
-#           working_directory: {dir}/relazione/
-#       - uses: actions/upload-artifact@v2
-#         with:
-#           name: PDF
-#           path: {dir}/relazione/{filename}.pdf
-# '''
 
 README_STRING = '''README file
 ===========
@@ -254,7 +244,23 @@ if __name__ == "__main__":
     print('\n📄 Created file {} with paper title: {}\n'.format(latex_file.name, capitalize(title_full)))
     logging.info('Done, created {} file in {}'.format(latex_file.name, title_underscore + PATHS[1]))
 
-    # print(BUILD_SCRIPT.format(filename=filename, n=exp_no, dir=title_underscore), file=BUILD_LATEX_FILE)
+    os.chdir(BASE_PATH)
+
+    with open('.github/workflows/build_latex.yml', 'r') as READ_YML:
+        yml_parser = yaml.load(READ_YML)
+        yml_parser['on']['push']['paths'] = 
+        # parse and change steps for paper compilation
+        yml_parser['jobs']['build_latex']['steps'][1]['name'] = 'Compile e{n} Latex document'.format(n=exp_no)
+        yml_parser['jobs']['build_latex']['steps'][1]['with']['root_file'] = latex_file.name
+        yml_parser['jobs']['build_latex']['steps'][1]['with']['working_directory'] = '{}/relazione/'.format(title_underscore)
+        # parse and change steps for relase
+        yml_parser['jobs']['build_latex']['steps'][2]['with']['files'] = '{}/relazione/'.format(title_underscore) + filename + '.pdf'
+        READ_YML.close()
+    
+    with open('.github/workflows/build_latex.yml', 'w') as WRITE_YML:
+        yaml.dump(yml_parser, WRITE_YML)
+        WRITE_YML.close()
+
 
     print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
     # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible
