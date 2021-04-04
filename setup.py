@@ -36,6 +36,8 @@ import yaml
 
 from datetime import date
 
+from yaml.loader import FullLoader
+
 # base support for logging information;
 logging.basicConfig(filename='setup.log', filemode='a', 
                     format='%(asctime)s %(levelname)s: %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
@@ -247,7 +249,7 @@ if __name__ == "__main__":
     os.chdir(BASE_PATH)
 
     with open('.github/workflows/build_latex.yml', 'r') as READ_YML:
-        yml_parser = yaml.load(READ_YML)
+        yml_parser = yaml.load(READ_YML, Loader=FullLoader)
         # parse and change steps for paper compilation
         yml_parser['jobs']['build_latex']['steps'][1]['name'] = 'Compile e{n} Latex document'.format(n=exp_no)
         yml_parser['jobs']['build_latex']['steps'][1]['with']['root_file'] = latex_file.name
