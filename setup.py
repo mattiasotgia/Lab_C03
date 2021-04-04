@@ -248,7 +248,6 @@ if __name__ == "__main__":
 
     with open('.github/workflows/build_latex.yml', 'r') as READ_YML:
         yml_parser = yaml.load(READ_YML)
-        yml_parser['on']['push']['paths'] = 
         # parse and change steps for paper compilation
         yml_parser['jobs']['build_latex']['steps'][1]['name'] = 'Compile e{n} Latex document'.format(n=exp_no)
         yml_parser['jobs']['build_latex']['steps'][1]['with']['root_file'] = latex_file.name
