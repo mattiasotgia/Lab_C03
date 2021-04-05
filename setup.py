@@ -261,7 +261,14 @@ if __name__ == "__main__":
     with open('.github/workflows/build_latex.yml', 'w') as WRITE_YML:
         yaml.dump(yml_parser, WRITE_YML)
         WRITE_YML.close()
-
+    
+    with open('.github/workflows/build_latex.yml', 'r') as read_yml:
+        ymllines = read_yml.readlines()
+        write_yml = open('.github/workflows/build_latex.yml', 'w')
+        for line in ymllines:
+            if 'true' in line:
+                line = line.replace('true', 'on')
+            write_yml.write(line)
 
     print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
     # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible
