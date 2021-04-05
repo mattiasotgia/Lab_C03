@@ -3,7 +3,7 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{lab_unige} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODIFICATO MODIFICATO MODIFICATO MODIFICATO
 
-\usepackage{caption}
+% \usepackage{caption}
 
 
 \newcommand\@ptsize{}
@@ -445,9 +445,9 @@
 
 
 
-% \newlength\abovecaptionskip
-% \newlength\belowcaptionskip
-\setlength\abovecaptionskip{5\p@}% it was 10
+\newlength\abovecaptionskip
+\newlength\belowcaptionskip
+\setlength\abovecaptionskip{10\p@}% it was 10
 \setlength\belowcaptionskip{5\p@}% it was 0
 \long\def\@caption#1[#2]#3{\par\begingroup
     \@parboxrestore
@@ -462,7 +462,7 @@
   {\small \bf #1.} \small#2\par%#1: #2\par%{\bf #1.} #2\par% it was #1: #2\par
   \else
     \global \@minipagefalse
-    \hb@xt@\hsize{\box\@tempboxa\hfil}% removed initial \hfil to align left
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
   \fi
   \vskip\belowcaptionskip}
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
