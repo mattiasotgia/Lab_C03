@@ -272,3 +272,5 @@ if __name__ == "__main__":
 
     print('\033[1;32mDone, see log file for errors!\n\033[1;33mMove to ./{}\033[0m'.format(title_underscore))
     # TODO: add command to make python cd to ./esperienza_#_<<>> <-- might not be possible
+
+    subprocess.run(['code', 'lab_c03.code-workspace'])
