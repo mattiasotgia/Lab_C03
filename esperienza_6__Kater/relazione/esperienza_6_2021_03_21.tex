@@ -61,13 +61,13 @@
 \newcommand{\ChiSqr}{$\chi^2$\space}
 \newcommand{\ChiNdf}{$\chi^2/\text{ndf}$}
 \newcommand{\cernroot}{\texttt{root}}
-\newcommand{\lr}{$l_{\text{r}}$}
+\newcommand{\lr}{$\ell_{\text{r}}$}
 \newcommand{\Ti}[1]{$T_{#1}$}
 \newcommand{\Ma}{$M_a$}
 \newcommand{\Mb}{$M_b$}
 \newcommand{\Tiso}{$T^*$}
 \newcommand{\xiso}{$x^*$}
-\newcommand{\LrVALUE}{$l_{\text{r}}=(0.800010\pm0.000010)$~m}
+\newcommand{\LrVALUE}{$\ell_{\text{r}}=(0.800010\pm0.000010)$~m}
 
 
 %%
@@ -132,6 +132,7 @@
     Il pendolo di Kater viene anche definito pendolo reversibile, in quanto possiamo agganciare il pendolo sia sul coltello di sospensione posto sull'estremo vicino alla massa \Ma, che su uno identico posto sull'estremo della massa \Mb, consentendo quindi di misurare due periodi diversi \Ti{1} e \Ti{2}. 
 
     \begin{figure}[h!]
+        \centering
         \includegraphics[width=\linewidth]{pendolo.pdf}
         \caption{Fotografia del pendolo di Kater utilizzato. Si mettono in evidenza i punti \Oi~ e \Oii~ dove sono i due coltelli su cui si può fa oscillare il pendolo; le masse \Ma~(massa rossa) e \Mb~(massa blu). Sono indicate le lunghezze \lr~ e $L_0$.}
         \label{figure:pendolo}
@@ -160,7 +161,7 @@
     I risultati ottenuti danno un'indicazione di come deve essere progettata una misura di $g$ tramite un pendolo reversibile.
     Il pendolo deve essere costruito in maniera tale che il suo momento d'inerzia e la posizione del suo centro di massa rispetto agli assi di rotazione, possano essere variate con continuità: ciò viene realizzato utilizzando la massa mobile tra i due coltelli che definiscono gli assi di sospensione.
     In tale modo, con opportuni aggiustamenti della massa mobile, i due assi (fissi) di rotazione possono essere resi isocroni.\\
-    Raggiunta una configurazione con assi isocroni, la distanza tra questi ultimi è pari alla lunghezza ridotta del pendolo e quindi è possibile risalire al valore di $g$ tramite una misura di periodo $g=4\pi^2\sqrt{l_{\text{r}}/{T*}^2}$.
+    Raggiunta una configurazione con assi isocroni, la distanza tra questi ultimi è pari alla lunghezza ridotta del pendolo e quindi è possibile risalire al valore di $g$ tramite una misura di periodo $g=4\pi^2\sqrt{\ell_{\text{r}}/{T*}^2}$.
 
     La massa mobile viene spostata partendo dal penultimo foro fino a quello adiacente, distante 25 mm, per un totale di sei posizioni.
 
@@ -198,17 +199,17 @@
 
     Per ricavare il valore di $g\pm\mstdErr{g}$ consideriamo la formula
     \[
-        g=4\pi^2\frac{l_{\text{r}}}{{T^*}^2}=9.802\text{ m/s}^2
+        g=4\pi^2\frac{\ell_{\text{r}}}{{T^*}^2}=9.802\text{ m/s}^2
     \]
     con relativo errore
     \[
         \mstdErr{g}=\sqrt{
             \left(
-                -\frac{8\cdot l_{\text{r}}\cdot\pi^2}{{T^*}^3}
+                -\frac{8\cdot \ell_{\text{r}}\cdot\pi^2}{{T^*}^3}
             \right)^2\cdot\mstdErr{T*}^2+
             \left(
                 \frac{4\cdot\pi^2}{{T^*}^2}
-            \right)^2\cdot\mstdErr{l_{\text{r}}}^2
+            \right)^2\cdot\mstdErr{\ell_{\text{r}}}^2
         }=0.004\text{ m/s}^2
     \]
 
@@ -224,6 +225,7 @@
     Infine le funzioni \verb|get_g()| e \verb|get_gerr()| ricavano il valore di $g\pm\mstdErr{g}$.
 
     \begin{figure}
+        \centering
         \includegraphics[width=\linewidth]{kater_plot.pdf}
         \caption{Grafico generato con \cernroot. Sono rappresentati i valori di $T_1$ e $T_2$ rispetto a $x_b$, dai dati raccolti in \autoref{table:t1_values} e \autoref{table:t2_values}. Possiamo osservare che il rapporto \ChiNdf~ è per entrambi i fit piuttosto alto. Questo potrebbe essere legato agli errori che sono molto piccoli sia per i periodi che per le lunghezze. }
         \label{figure:plot}
