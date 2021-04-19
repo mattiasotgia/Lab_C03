@@ -92,7 +92,7 @@
         
         \begin{abstract}
             \textit{Obiettivo-- }
-            Vogliamo costruire e tarare una bilancia elettronica che sfrutti il funzionanmento della cella di carico, e ricavare quindi una legge che permetta dei misurare la massa di un oggetto misurando la tensione in uscita dal sistema. Vogliamo poi verificare con lo strumento costruito le conseguenze macroscopiche della natura entropica delle forze elastomeriche, ovvero verificare come una variazione di temperatura causi una variazione dell'entropia di un sistema.
+            Vogliamo costruire e tarare una bilancia elettronica che sfrutti il funzionanmento della cella di carico, e ricavare quindi una legge che permetta dei misurare la massa di un oggetto misurando la tensione in uscita dal sistema. Vogliamo poi verificare con lo strumento costruito le conseguenze macroscopiche della natura entropica delle forze elastomeriche, ovvero verificare l'effetto Gough-Joule.
             \textit{Metodi-- }
             
             \textit{Risultati-- }
@@ -115,24 +115,76 @@
     \section{Strumentazione}
     \label{section:strument}
 
-    \begin{figure}
+    Abbiamo a disposizione la seguente strumentazione:\\
+    Multimetro da Banco Tektronix DMM 5-1/2 Digit Multimeter:
+    Portata 1000V;
+    Accuratezza dopo 1 anno a temperatura 23±5 °C : 0.0015 ± 0.004 mV;
+    Risoluzione con fondo scala 200 mV in modalità slow: $1~\mu$V;
+    Sensibilità che assumiamo coincidere con la risoluzione: $1~\mu$V;\\
+    Generatore di tensione Agilent U8031A Triple Output DC Power Supply 0-30V, 6A/5V, 3A;\\
+    Bilancia Elettronica Kern PCB-350/4, di portata 350~g, considerando come sensibilità la linearità dello strumento $40~\mu$g (non rischiamo così di sottostimare l'errore);\\
+    Lab-Jack;\\
+    Cella di Carico TEDEA;\\
+    Termometro a bulbo di portata 150 °C, sensibilità 1°C;\\
+    Calibro ventesimale, di portata 0.150~m, sensibilità uguale all'accuratezza $50~\mu$m;\\
+    Elastico di gomma generico;\\
+    Becker graduato;\\
+    Masse tarate con rispettivi valori in grammi riportati sulla scatola e in \reftab{table:masses_c};\\
+
+    \begin{table}[h!]
+        \centering
+        \footnotesize
+        \caption{Valori delle masse della scatola C, da 1 a 8.}
+        \label{table:masses_c}
+        \begin{tabular}{lr}
+            \hline\hline\\[-1.5ex]
+            $c_i$ &  Massa tarata [g] \\[+0.5ex] \hline \\[-1.5ex]     
+            $c_1$ &  48,140           \\[+0.5ex]
+            $c_2$ &  51,545           \\[+0.5ex]
+            $c_3$ &  53,193           \\[+0.5ex]
+            $c_4$ &  73,949           \\[+0.5ex]
+            $c_5$ &  80,134           \\[+0.5ex]
+            $c_6$ & 101,298           \\[+0.5ex]
+            $c_7$ & 101,117           \\[+0.5ex]
+            $c_8$ & 116,217           \\[+0.5ex] \hline \\[-1.5ex]
+        \end{tabular}
+    \end{table}
+
+    \begin{figure}[b!]
         \centering
         \includegraphics[width=0.9\linewidth]{load_cell_full.pdf}
         \caption{\textit{In alto: } schema di costruzione di un estensimetro (strain gauge). \textit{In basso: } vista laterale della cella di carico in condizioni di riposo e in condizione di carico. Nella condizione di carico l'effetto è volutamente esagerato per illustrare la compressione di $R_1$ e $R_3$ e la estensione di $R_2$ e $R_4$.}
         \label{figure:load_cell}
     \end{figure}
 
+    Per la prima parte dell’ esperienza, che consiste nella costruzione e  taratura di un dinamometro elettronico a cella di carico (\reffig{figure:load_cell}), si colleghi l’ alimentatore di tensione Agilent alla cella di carico facendo attenzione ad alimentarlo con tensione continua pari a 10 V. Per verificare che il valore si quello richiesto, collegare i terminali dell’ alimentatore nell’ ordine corretto al multimetro da banco. \\
+    Quest’ultimo deve essere impostato sulla modalità lettura a tensione continua VDC, scegliendo il fondo scala più basso (modalità automatica). Inoltre è importante evitare che la tensione dell’ alimentatore non venga variata nel corso delle misure; a tale scopo è consigliato utilizzare il pulsante “lock”. Per selezionare il fondo scala più basso del multimetro Tecktronix e si operi in modalità slow per ottenere una maggiore risoluzione necessaria alla nostra esperienza. Come incertezza sulla lettura in tensione del multimetro, considerando il criterio della mezza divisione sull’ ultima cifra significativa, assumendo quindi incertezza pari a  $0,5~\mu$V. 
+
+    L’ apparato sperimentale consiste infine nella cella di carico dotata di piano di appoggio, il tutto fissato con un morsetto al  rispettivo montante. Sia l’alimentatore sia il multimetro sono collegati alla scatola di connessione della cella posta sulla base del montante.
+
+    La superficie di appoggio, che  consiste in una lastra di metallo sottile, è collocata a un estremo della cella di carico.  Le masse di cui si dispone dovranno essere posizionate sopra il piano attraverso combinazioni intelligenti fino a raggiungere una massa massima di circa 600~g (si veda anche la sezione \ref{section:methods}).
+
+    La base del montante è fissata al tavolo da lavoro per mezzo di un secondo morsetto per impedire spostamenti indesiderati della struttura.
+
+    La seconda parte dell’esperienza consiste nella verifica empirica dell’effetto Gough-Joule.\\
+    La struttura è costituita da un piano di appoggio posto sopra la cella di carico la quale è tenuta fissa a un montante attraverso l’uso un morsetto.\\
+    Un secondo morsetto fissa al banco da lavoro la base del montante che sostiene la scatola di connessione della cella di carico.
+    
+    Al di sotto della lastra di appoggio, perpendicolare a essa, è fissato un gancio il cui estremo inferiore giace al di sopra del becker. Quest’ultimo contiene un termometro a bulbo e un contrappeso, anche esso munito di gancio; il tutto è inserito all’ interno di un contenitore di vetro (becker) centrato sopra il Lab-Jack.\\
+    Si sospende un estremo dell’ anello di elastomero al gancio della cella di carico e l’altro estremo al contrappeso che deve essere appoggiato delicatamente al fondo del becker.\\
+    Si abbassi il piano del Lab-Jack in modo da allungare l’elastico di una lunghezza circa pari a due volte la lunghezza di riposo portando il gancio all’orlo del becker. 
+    
     \section{Metodi}
     \label{section:methods}
 
-    Tutte le misure sono riportate nelle unità del Sistema Internazionale (SI), nal caso della tensione, si è utilizzato un sottomultiplo per evitare di rendere i calcoli difficili.\\
+    Tutte le misure sono riportate nelle unità del Sistema Internazionale (SI), nel caso della tensione, si è utilizzato un sottomultiplo per evitare di rendere i calcoli difficili.\\
     I valori riportati sono stati approssimati tenendo conto di alcune convenzioni prese. Si approssima l'errore a una cifra significativa se tale cifra è $\geqslant3$, altrimenti se tale cifra è 1 o 2 allora si considerano due cifre significative. Considerando quindi le posizioni decimali significative dell'errore si approssima per eccesso il valore numerico della grandezza.\\
     Si fa spesso riferimento anche alla regola del \treSigma, con la quale si vuole intendere la volontà di trasformare un errore di tipo massimo in errore statistico, ovvero calcolando $\mstdErr{x}~=~\Delta x/\sqrt{3}$.\\
 
     \subsection{Taratura dinamometro sperimentale}
 
-    La cella di carico utilizzata, mostrata in \reffig{figure:load_cell}, presenta quattro estensimetri (straing gauge) che rappresentano le resistenze $R_1$, $R_2$, $R_3$, e $R_4$, i quali subiscono estensione o compressione quando il carico viene applicato sulla cella. Quando subiscono compressione o estensione la loro resistenza diminuisce (compressione) o aumenta (estensione). Posta la cella di carico come in \reffig{figure:load_cell} in basso, $R_1$ e $R_3$ risultano avere resistenza maggiore, mentre $R_2$ e $R_4$ risultano avere resistenza minore. se consideriamo $\varepsilon=\Delta L/L$ la variazione di lunghezza dell'estensimetro, otteniamo che $\Delta R/R = k\varepsilon$ dove $k$ è un fattore di porporzionalità (gauge factor). Se consideriamo un’approssimazione di piccoli carichi $F$, allora $\varepsilon$ è proporzionale al carico applicato, $\varepsilon=cF$.\\
-    La variazione di resistenza può essere misurata in vari modi, ma è una variazione che corrisponde circa allo $0.1\%/0.01\%$. Sfruttiamo perciò lo schema di misua a ponte di Wheatstone, come rappresentato in \reffig{figure:multimeter_ps}, che trasforma variazioni di misura di resistenze in variazioni ben più evidenti di tensioni, lette poi dal multimetro come $V_0$.
+    La cella di carico utilizzata, mostrata in \reffig{figure:load_cell}, presenta quattro estensimetri (straing gauge) che rappresentano le resistenze $R_1$, $R_2$, $R_3$, e $R_4$, i quali subiscono estensione o compressione quando il carico viene applicato sulla cella. Quando subiscono compressione o estensione la loro resistenza diminuisce (compressione) o aumenta (estensione). Posta la cella di carico come in \reffig{figure:load_cell} in basso, $R_1$ e $R_3$ risultano avere resistenza maggiore, mentre $R_2$ e $R_4$ risultano avere resistenza minore. se consideriamo $\varepsilon=\Delta L/L$ la variazione di lunghezza dell'estensimetro, otteniamo che $\Delta R/R = k\varepsilon$ dove $k$ è un fattore di proporzionalità (gauge factor). Se consideriamo un’approssimazione di piccoli carichi $F$, allora $\varepsilon$ è proporzionale al carico applicato, $\varepsilon=cF$.\\
+    La variazione di resistenza può essere misurata in vari modi, ma è una variazione che corrisponde circa allo $0.1\%/0.01\%$. Sfruttiamo perciò lo schema di misura a ponte di Wheatstone, come rappresentato in \reffig{figure:multimeter_ps}, che trasforma variazioni di misura di resistenze in variazioni ben più evidenti di tensioni, lette poi dal multimetro come $V_0$.
 
     In assenza di carico le resistenze sono nulle, e la tensione in uscita è $V_0=0V$, in presenza di carico invece la tensione è legata alla forza esercitata come
     \begin{equation}
@@ -145,11 +197,11 @@
     \begin{figure}
         \centering
         \includegraphics[width=0.9\linewidth]{multimeter_ps_full.pdf}
-        \caption{\textit{In alto:} multimetro da banco Tektronix DMM 5-1/2 Digit Multimeter impostato su scala automatica, modalità \texttt{Slow} che consente una lettura più precisa della tensione; generatore di corrente DC Agilent U8031A Triple Output DC Power Supply, con una tensione in uscita sull'output 1 di 10.00 V. \textit{In basso:} Schema elettrico del ponte di Wheatstone utilizzato per amplificare la variazione delle resistenze. $V_0$ indica la tensione misurata con il multimetro, mentre $V_S$ indica la tensione erogata dal generatore che alimenta tale ponte.}
+        \caption{\textit{In alto:} multimetro da banco Tektronix DMM 5-1/2 Digit Multimeter impostato su scala automatica, modalità \texttt{Slow} che consente una lettura più precisa della tensione; generatore di corrente DC Agilent U8031A Triple Output DC Power Supply, con una tensione in uscita sull'output-1 di 10.00 V. \textit{In basso:} Schema elettrico del ponte di Wheatstone utilizzato per amplificare la variazione delle resistenze. $V_0$ indica la tensione misurata con il multimetro, mentre $V_S$ indica la tensione erogata dal generatore che alimenta tale ponte.}
         \label{figure:multimeter_ps}
     \end{figure}
 
-    Per tarare il dinamometro sperimentale creato prendiamo in considerazione otto corpi di massa nota senza errore, e li combiniamo in modo da ottenere 15 valori (da circa $5.0\times10^{-2}$~kg fino a $5.50\times10^{-1}$~kg) di masse. Queste masse vengono poi posate sul piatto della cella di carico e ne viene misurata la tensione $V_0$ dal ponte di Wheatstone. 
+    Per tarare il dinamometro sperimentale creato prendiamo in considerazione otto corpi di massa nota senza errore \reftab{table:masses_c}, e li combiniamo in modo da ottenere 15 valori (da circa $5.0\times10^{-2}$~kg fino a $5.50\times10^{-1}$~kg) di masse. Queste masse vengono poi posate sul piatto della cella di carico e ne viene misurata la tensione $V_0$ dal ponte di Wheatstone. 
     Se ora partendo dalla equazione \ref{equation:v0_f} consideriamo la forza come forza peso ricaviamo ($F=Mg$)
     \begin{equation}
         V_0=V_sk\varepsilon=V_skcgM\text{ ($V_s=10.00$~V).}\label{eqation:v0_mg}
@@ -164,8 +216,8 @@
 
     \subsection{Misura di $\Delta V$ in relazione alla temperatura}
 
-    Per verificare sperimentalemnte l'effetto Gough Joule si utilizza una sua conseguenza macroscopica. È noto che in un solido sottoposto ad un aumento di temperatura i legami interni si indebolicano, come si può osservare in un metallo. Il comportamento degli elasomeri è invece contro-intuitivo e in particolare si osserva una contrazione del solido all'aumentare della temperatura. Questo comportamento è legato alla natura entropica dell'elastomero; la gomma in particolar modo quando viene scaldata aumenta la sua entropia interna, e quindi i singoli filamenti interni si dispongono in modo caotico, facendo contrarre il solido. \\
-    In un elastomero, il maggior effetto che si può osservare quando un carico viene applicato è l'allineamento delle catene polimeriche e quindi un allineamento dei monomeri. In questo modo si ha una riduzione dell'entropia. Se il corpo viene invece rialsciato, il sistema tornerebbe ad uno stato ad entropia maggiore, per cui il corpo complessivamente si accorcerebbe. In modo analogo, se forniamo calore ad un elastomero allungato, aumentiamo l'entropia del sistema, che corrisponde ad una tendenza delle catene polimeriche a ritornare in uno stato caotico, quindi accorciamo macroscopicamente il solido; togliendo calore invece allunghiamo il corpo, che ritorna ad uno stato ad entropia minore.\\
+    Per verificare sperimentalmente l'effetto Gough-Joule si utilizza una sua conseguenza macroscopica. È noto che in un solido sottoposto ad un aumento di temperatura i legami interni si indeboliscano, come si può osservare in un metallo. Il comportamento degli elastomeri è invece contro-intuitivo e in particolare si osserva una contrazione del solido all'aumentare della temperatura. Questo comportamento è legato alla natura entropica dell'elastomero; la gomma in particolar modo quando viene scaldata aumenta la sua entropia interna, e quindi i singoli filamenti interni si dispongono in modo caotico, facendo contrarre il solido. \\
+    In un elastomero, il maggior effetto che si può osservare quando un carico viene applicato è l'allineamento delle catene polimeriche e quindi un allineamento dei monomeri. In questo modo si ha una riduzione dell'entropia. Se il corpo viene invece rilasciato, il sistema tornerebbe a uno stato a entropia maggiore, per cui il corpo complessivamente si accorcerebbe. In modo analogo, se forniamo calore a un elastomero allungato, aumentiamo l'entropia del sistema, che corrisponde a una tendenza delle catene polimeriche a ritornare in uno stato caotico, quindi accorciamo macroscopicamente il solido; togliendo calore invece allunghiamo il corpo, che ritorna a uno stato a entropia minore.\\
     Vogliamo sfruttare il dinamometro creato e tarato per verificare sperimentalmente questo comportamento.\\
     Si può dimostrare che la tensione $f$ esercitata da un elastomero allungato fino a $l$ da $l_0$ è con buona approssimazione
     \begin{equation}
@@ -174,17 +226,18 @@
     con $N$ il numero di catene monomeriche dell'elastico, $K_B=1.3806\times10^{-23}$~J/K è la costante di Boltzmann, $T$ la temperatura in kelvin, $l_0$ la lunghezza a riposo dell'elastico e $\alpha$ l'elongazione relativa, definita come $\alpha=\frac{l}{l_{0}}$. Con $\alpha$ costante possiamo osservare una relazione lineare tra $f$ e $T$.
     
     
-    Innanzitutto con un calibro misuriamo la lunghezza interna dell'elastico, $l_{0}\approx29$~mm. Su il gancio fissato sulla cella di carico colleghiamo un capo dell'elastico, l'altro lo attacchiamo al gancio sul contrappeso posto in fondo al becker posto sul lab-jack, che regoliamo in modo da avere una lunghezza tra i due ganci $l\approx2\cdot l_{0}\approx58$~mm. Ricaviamo l'elongazione relativa $\alpha=\frac{l}{l_{0}}=\frac{2\cdot l_0}{l_0}=2$.\\
+    Innanzitutto con un calibro misuriamo la lunghezza interna dell'elastico, $l_{0}\approx29$~mm. Su il gancio fissato sulla cella di carico colleghiamo un capo dell'elastico, l'altro lo attacchiamo al gancio sul contrappeso posto in fondo al becker posto sul Lab-Jack, che regoliamo in modo da avere una lunghezza tra i due ganci $l\approx2\cdot l_{0}\approx58$~mm. Ricaviamo l'elongazione relativa $\alpha=\frac{l}{l_{0}}=\frac{2\cdot l_0}{l_0}=2$.\\
     Riempito il becker con acqua calda ($T_K=58$~K), quando il termometro segna una temperatura stabile e non in discesa o in salita, facciamo partire un cronometro e misuriamo dopo 30~s, 1~min, 2~min e 3~min il valore di $V_0$ letto dal multimetro, riportiamo tutti i valori in \reftab{table:p2}.
     
     \input{tables/table_p2.tex}
     
     Abbassiamo la temperatura aggiungendo acqua fredda, scalando $T$ a intervalli di circa 5°C, fino a raggiungere circa 20°C, oltre quale troviamo difficile scendere, pur continuando ad aggiungere acqua fredda. Per ogni $T$ attendiamo che sia stabile e poi azioniamo il cronometro, ripetendo la misura dopo 30~s/1~min/2~min/3~min.\\
-    Infine proviamo ad aumentare da 20°C la temperatura a intervalli di circa 10~K, raggiungendo il valore di circa 49°C. Tuttavia le tensioni misurate a queste temperature sono molto incerte, perchè le temperature non sono stabili, e tendono a scendere, probabilmente a causa del contrappeso di metallo posto sul fondo del becker che rallenta il processo di riscaldamento dell'acqua, disperdendo molto del calore immerso. Infatti per le tre misure effettuate osserviamo che la temperatura nell'arco dei tre minuti della misurazione tende a scendere di circa 4/6~K.
+    Infine proviamo ad aumentare da 20°C la temperatura a intervalli di circa 10~K, raggiungendo il valore di circa 49°C. Tuttavia le tensioni misurate a queste temperature sono molto incerte, perché le temperature non sono stabili, e tendono a scendere, probabilmente a causa del contrappeso di metallo posto sul fondo del becker che rallenta il processo di riscaldamento dell'acqua, disperdendo molto del calore immerso. Infatti per le tre misure effettuate osserviamo che la temperatura nell'arco dei tre minuti della misurazione tende a scendere di circa 4-6~K.
 
+    Durante lo svolgimento dell’esperienza si faccia attenzione ad non urtare il sistema per non introdurre errori sistematici.
 
-    % \section{Analisi dati}
-    % \label{section:analysis}
+    \section{Analisi dati}
+    \label{section:analysis}
 
     \section{Risultati}
     \label{section:results}
