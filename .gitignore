@@ -40,6 +40,9 @@ lab_c03.code-workspace
 # excel files and swp
 **/*.xlsx
 
+# word files and swp
+**/*.docx
+
 # ignore ai masters
 **/*.ai
 
