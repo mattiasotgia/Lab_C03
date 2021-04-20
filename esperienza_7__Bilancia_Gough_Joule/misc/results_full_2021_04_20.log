@@ -107,63 +107,63 @@ N (da V_0 a 3 min) = 7.4141e+21 +/- 2.65633e+20
     PROCESSING G30_UP...
  **********
 
- FCN=1.85026 FROM MINOS     STATUS=SUCCESSFUL     67 CALLS         289 TOTAL
-                     EDM=1.04287e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
-  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+ FCN=3.55303 FROM MINOS     STATUS=SUCCESSFUL     31 CALLS         180 TOTAL
+                     EDM=1.43539e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
   NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-   1  p0           9.54309e+02   2.65238e+01  -5.34615e-02  -4.58570e-08
-   2  p1           5.01687e+00   8.47162e-02   8.47162e-02  -4.42370e-03
+   1  p0           1.01907e+03   3.51558e+01  -2.05445e-02  -7.54730e-11
+   2  p1           4.81181e+00   1.14179e-01   1.14179e-01   7.21340e-02
 
-** CHI2 / NDF ( PROB. ) 1.85026 / 1 ( 0.173754 )
+** CHI2 / NDF ( PROB. ) 3.55303 / 2 ( 0.169227 )
 
 
  **********
     PROCESSING G1_UP...
  **********
 
- FCN=1.73906 FROM MINOS     STATUS=SUCCESSFUL     61 CALLS         247 TOTAL
-                     EDM=1.69866e-09    STRATEGY= 1      ERROR MATRIX ACCURATE 
+ FCN=3.69522 FROM MINOS     STATUS=SUCCESSFUL     43 CALLS         204 TOTAL
+                     EDM=2.45639e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
   EXT PARAMETER                                   STEP         FIRST   
   NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-   1  p0           9.59665e+02   3.44815e+01   4.32344e-01   1.98619e-04
-   2  p1           4.99712e+00   1.10325e-01   1.10325e-01   2.60379e-02
+   1  p0           1.02845e+03   2.77033e+01  -3.49229e-01   1.87638e-04
+   2  p1           4.77933e+00   8.99433e-02   8.99433e-02   6.13475e-02
 
-** CHI2 / NDF ( PROB. ) 1.73906 / 1 ( 0.187258 )
+** CHI2 / NDF ( PROB. ) 3.69522 / 2 ( 0.157613 )
 
 
  **********
     PROCESSING G2_UP...
  **********
 
- FCN=1.12949 FROM MINOS     STATUS=SUCCESSFUL     67 CALLS         283 TOTAL
-                     EDM=2.37203e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
-  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+ FCN=3.07644 FROM MINOS     STATUS=SUCCESSFUL     43 CALLS         209 TOTAL
+                     EDM=1.61308e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
   NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-   1  p0           9.94378e+02   2.57764e+01  -5.13522e-02  -1.48168e-12
-   2  p1           4.87934e+00   8.24237e-02   8.24237e-02  -8.16232e-03
+   1  p0           1.06134e+03   2.16221e+01  -5.76551e-01   5.49548e-04
+   2  p1           4.66733e+00   7.02764e-02   7.02764e-02   9.09699e-02
 
-** CHI2 / NDF ( PROB. ) 1.12949 / 1 ( 0.287884 )
+** CHI2 / NDF ( PROB. ) 3.07644 / 2 ( 0.214763 )
 
 
  **********
     PROCESSING G3_UP...
  **********
 
- FCN=0.865242 FROM MINOS     STATUS=SUCCESSFUL     38 CALLS         195 TOTAL
-                     EDM=1.29983e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+ FCN=3.48698 FROM MINOS     STATUS=SUCCESSFUL     43 CALLS         228 TOTAL
+                     EDM=2.98628e-10    STRATEGY= 1      ERROR MATRIX ACCURATE 
   EXT PARAMETER                                   STEP         FIRST   
   NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
-   1  p0           1.01089e+03   7.02799e+01   3.22983e-01   1.20934e-04
-   2  p1           4.82091e+00   2.24823e-01   2.24823e-01  -3.66225e-03
+   1  p0           1.08677e+03   1.95233e+01  -6.25628e-01   6.84558e-04
+   2  p1           4.58072e+00   6.34233e-02   6.34233e-02   1.16158e-01
 
-** CHI2 / NDF ( PROB. ) 0.865242 / 1 ( 0.352276 )
+** CHI2 / NDF ( PROB. ) 3.48698 / 2 ( 0.174909 )
 
 
  **********
     RISULTATI PER TEMPERATURE A SALIRE PER N
  **********
 
-N (da V_0 a 30 s)  = 6.02177e+21 +/- 2.31208e+20
-N (da V_0 a 1 min) = 5.99808e+21 +/- 2.45591e+20
-N (da V_0 a 2 min) = 5.8567e+21 +/- 2.24886e+20
-N (da V_0 a 3 min) = 5.78657e+21 +/- 3.35615e+20
+N (da V_0 a 30 s)  = 5.77565e+21 +/- 2.41759e+20
+N (da V_0 a 1 min) = 5.73666e+21 +/- 2.25358e+20
+N (da V_0 a 2 min) = 5.60223e+21 +/- 2.10794e+20
+N (da V_0 a 3 min) = 5.49826e+21 +/- 2.04308e+20
