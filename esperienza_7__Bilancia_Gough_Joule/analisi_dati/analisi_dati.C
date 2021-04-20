@@ -16,10 +16,13 @@
 #define G_T     9.8056      // {m/s2}
 #define ERR_G_T 0.0001      // {m/s2}
 #define K_B     1.3806e-23  // {J/K}
+#define ALPHA   2           // {a. u.}
 #define L_0     0.029       // {m}
-#define ALPHA   2;          // {a. u.}
-#define L_0     0.029;      // {m}
-#define ERR_L_0 0.001;      // {m}
+#define ERR_L_0 0.001       // {m}
+#define V_0_0   0.857e-3    // {V}
+#define V_0_T   0.845e-3    // {V}
+
+// pol1 = a0 + a1*x           ****
 
 void print_mmsg(std::string mmsg){
     std::cout << std::endl 
@@ -36,35 +39,38 @@ void print_stat(TF1* _f){
         << std::endl << std::endl;
 }
 
-double get_F(Double_t* params, double V_0){
-    return G_T * (V_0 - params[1]) / params[0];
+double get_F(Double_t* params, double V_0, bool idrostatic = false){
+    if(idrostatic){
+        return G_T * (V_0 - V_0_0) / params[1];
+    }
+    return G_T * (V_0 - params[0]) / params[1];
 }
 
 double get_Ferr(Double_t* params, const Double_t* params_err, double V_0, double V_0err){
-    double ddV_sqr = pow(G_T / params[0], 2);
-    double dda_sqr = pow(G_T * (params[1] - V_0) / pow(params[0], 2), 2);
-    double ddb_sqr = pow(-G_T / params[0], 2);
-    double ddg_sqr = pow((V_0 - params[1]) / params[0], 2);
+    double ddV_sqr = pow(G_T / params[1], 2);
+    double dda_sqr = pow(G_T * (params[0] - V_0) / pow(params[1], 2), 2);
+    double ddb_sqr = pow(-G_T / params[1], 2);
+    double ddg_sqr = pow((V_0 - params[0]) / params[1], 2);
 
     return sqrt(
         (ddV_sqr * V_0err * V_0err) + 
-        (dda_sqr * params_err[0] * params_err[0]) + 
-        (ddb_sqr * params_err[1] * params_err[1]) + 
+        (dda_sqr * params_err[1] * params_err[1]) + 
+        (ddb_sqr * params_err[0] * params_err[0]) + 
         (ddg_sqr * ERR_G_T * ERR_G_T)
     );
 }
 
 double det_N(Double_t* params){
-    return params[0] * L_0 / (K_B * (ALPHA - pow(ALPHA, -2)));
+    return params[1] * L_0 / (K_B * (ALPHA - pow(ALPHA, -2)));
 }
 
 double get_Nerr(Double_t* params, const Double_t* params_err){
-    double ddl_sqr = pow(params[0] / (K_B * (ALPHA - pow(ALPHA, -2))), 2);
+    double ddl_sqr = pow(params[1] / (K_B * (ALPHA - pow(ALPHA, -2))), 2);
     double dda_sqr = pow(L_0 / (K_B * (ALPHA - pow(ALPHA, -2))), 2);
 
     return sqrt(
         (ddl_sqr * ERR_L_0 * ERR_L_0) + 
-        (dda_sqr * params_err[0] * params_err[0])
+        (dda_sqr * params_err[1] * params_err[1])
     );
 }
 
@@ -93,7 +99,7 @@ void analisi_dati(bool header = true){
 
     print_mmsg("RUN 0, PROCESSING 15 POINTS...");
     
-    std::string f_Opt = "E";
+    std::string f_Opt = "F";
 
     t1->Fit("f1", f_Opt.c_str());
     t1->Draw("ap");
@@ -104,8 +110,8 @@ void analisi_dati(bool header = true){
 
     c1->SaveAs("../fig/kater_plot_all.pdf");
     c1->Draw("ap");
-
-    for (int i = t1->GetN() - 1; chi2>(1.5 * (f1->GetNDF())) || (i=0); i--){
+//                               \/ chi2>(1.5 * (f1->GetNDF())) || (i=0)
+    for (int i = t1->GetN() - 1; i>0; i--){
         print_mmsg("RUN "+ std::to_string(15-i) + ", PROCESSING " + std::to_string(i) + " POINTS...");
         t1->RemovePoint(i);
         t1->Fit("f1", f_Opt.c_str());
@@ -114,9 +120,9 @@ void analisi_dati(bool header = true){
         print_stat(f1);
         c1->SaveAs(("../fig/kater_plot_" + std::to_string(i) + "_points.pdf").c_str());
         c1->Draw("ap");
-        if(prob_chi2<0.05){
-            break;
-        }
+        // if(prob_chi2<0.05){
+        //     break;
+        // }
     }
 
 
