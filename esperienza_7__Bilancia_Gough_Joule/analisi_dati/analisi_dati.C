@@ -87,7 +87,7 @@ double max_to_stat(double value){
     return value/(std::sqrt(3));
 }
 
-void analisi_dati(bool header = true){
+void analisi_dati(){
 
     gStyle->SetFrameLineWidth(0);
 
@@ -101,7 +101,7 @@ void analisi_dati(bool header = true){
 
     t1->SetTitle("");
     t1->GetXaxis()->SetTitle("Massa [kg]");
-    t1->GetYaxis()->SetTitle("Tensione [V]");
+    t1->GetYaxis()->SetTitle("Tensione elettrica [V]");
     t1->GetXaxis()->SetTitleOffset(0.85);
     t1->GetXaxis()->SetTitleSize(0.06);
     t1->GetYaxis()->SetTitleSize(0.06);
@@ -118,6 +118,19 @@ void analisi_dati(bool header = true){
     t1->Draw("ap");
     auto chi2 = F1->GetChisquare();
     auto prob_chi2 = F1->GetProb();
+
+    std::string ss_1="#chi^{2}/ndf (prob.) = "
+        +std::to_string(F1->GetChisquare())+"/"
+        +std::to_string(F1->GetNDF())
+        +" ("+std::to_string(F1->GetProb())+")";
+    TLatex sl_1;
+    sl_1.SetTextSize(0.035);
+    sl_1.SetTextColor(kBlack);
+    sl_1.DrawLatexNDC(0.50, 0.28, ss_1.c_str());
+    
+    TLatex header;
+    header.SetTextSize(0.055);
+    header.DrawLatexNDC(0.25, 0.85, "#bf{Dati dalla tabella 2}");
 
     print_stat(F1);
     print_mmsg(compatible(F1->GetParameter(0), F1->GetParError(0), V_0_T, 0.001e-3/(2*std::sqrt(3))));
@@ -153,19 +166,19 @@ void analisi_dati(bool header = true){
     TCanvas* c2 = new TCanvas("c2", "", 600, 500);
     c2->SetMargin(0.16, 0.06, 0.12, 0.06);
 
-    TGraphErrors* g30 = new TGraphErrors(); g30->SetMarkerColor(kBlack); g30->SetLineColor(kBlack); g30->SetMarkerStyle(1);
-    TGraphErrors* g1 = new TGraphErrors(); g1->SetMarkerColor(kRed); g1->SetLineColor(kRed); g1->SetMarkerStyle(2);
-    TGraphErrors* g2 = new TGraphErrors(); g2->SetMarkerColor(kGreen); g2->SetLineColor(kGreen); g2->SetMarkerStyle(3);
-    TGraphErrors* g3 = new TGraphErrors(); g3->SetMarkerColor(kAzure); g3->SetLineColor(kAzure); g3->SetMarkerStyle(4);
+    TGraphErrors* g30 = new TGraphErrors(); g30->SetMarkerColor(kOrange); g30->SetLineColor(kOrange); g30->SetMarkerStyle(1); g30->SetName("g30");
+    TGraphErrors* g1 = new TGraphErrors(); g1->SetMarkerColor(kRed); g1->SetLineColor(kRed); g1->SetMarkerStyle(2); g1->SetName("g1");
+    TGraphErrors* g2 = new TGraphErrors(); g2->SetMarkerColor(kGreen); g2->SetLineColor(kGreen); g2->SetMarkerStyle(3); g2->SetName("g2");
+    TGraphErrors* g3 = new TGraphErrors(); g3->SetMarkerColor(kAzure); g3->SetLineColor(kAzure); g3->SetMarkerStyle(4); g3->SetName("g3");
 
-    TGraphErrors* g30_up = new TGraphErrors(); g30_up->SetMarkerColor(kBlack+1); g30_up->SetLineColor(kBlack+1); g30_up->SetMarkerStyle(1);
-    TGraphErrors* g1_up = new TGraphErrors(); g1_up->SetMarkerColor(kRed+1); g1_up->SetLineColor(kRed+1); g1_up->SetMarkerStyle(2);
-    TGraphErrors* g2_up = new TGraphErrors(); g2_up->SetMarkerColor(kGreen+1); g2_up->SetLineColor(kGreen+1); g2_up->SetMarkerStyle(3);
-    TGraphErrors* g3_up = new TGraphErrors(); g3_up->SetMarkerColor(kAzure+1); g3_up->SetLineColor(kAzure+1); g3_up->SetMarkerStyle(4);
+    TGraphErrors* g30_up = new TGraphErrors(); g30_up->SetMarkerColor(kOrange+1); g30_up->SetLineColor(kOrange+1); g30_up->SetMarkerStyle(1); g30_up->SetName("g30_up");
+    TGraphErrors* g1_up = new TGraphErrors(); g1_up->SetMarkerColor(kRed+1); g1_up->SetLineColor(kRed+1); g1_up->SetMarkerStyle(2); g1_up->SetName("g1_up");
+    TGraphErrors* g2_up = new TGraphErrors(); g2_up->SetMarkerColor(kGreen+1); g2_up->SetLineColor(kGreen+1); g2_up->SetMarkerStyle(3); g2_up->SetName("g2_up");
+    TGraphErrors* g3_up = new TGraphErrors(); g3_up->SetMarkerColor(kAzure+1); g3_up->SetLineColor(kAzure+1); g3_up->SetMarkerStyle(4); g3_up->SetName("g3_up");
 
     g30->SetTitle("");
     g30->GetXaxis()->SetTitle("Temperatura [K]");
-    g30->GetYaxis()->SetTitle("Tensione [V]");
+    g30->GetYaxis()->SetTitle("Tensione [N]");
     g30->GetXaxis()->SetTitleOffset(0.85);
     g30->GetXaxis()->SetTitleSize(0.06);
     g30->GetYaxis()->SetTitleSize(0.06);
@@ -194,12 +207,12 @@ void analisi_dati(bool header = true){
         g3_up->SetPointError(i, max_to_stat(Terr), get_Ferr(p_taratura, p_taratura_err, v3, max_to_stat(v3err/2)));
     }
 
-    TF1* f30 = new TF1("f30", "pol1"); f30->SetLineColor(kBlack);
+    TF1* f30 = new TF1("f30", "pol1"); f30->SetLineColor(kOrange);
     TF1*  f1 = new TF1("f1", "pol1"); f1->SetLineColor(kRed);
     TF1*  f2 = new TF1("f2", "pol1"); f2->SetLineColor(kGreen);
     TF1*  f3 = new TF1("f3", "pol1"); f3->SetLineColor(kAzure);
 
-    TF1* f30_up = new TF1("f30_up", "pol1"); f30_up->SetLineColor(kBlack+1);
+    TF1* f30_up = new TF1("f30_up", "pol1"); f30_up->SetLineColor(kOrange+1);
     TF1*  f1_up = new TF1("f1_up", "pol1"); f1_up->SetLineColor(kRed+1);
     TF1*  f2_up = new TF1("f2_up", "pol1"); f2_up->SetLineColor(kGreen+1);
     TF1*  f3_up = new TF1("f3_up", "pol1"); f3_up->SetLineColor(kAzure+1);
@@ -265,8 +278,42 @@ void analisi_dati(bool header = true){
     std::cout << "N (da V_0 a 2 min) = " << get_N(f2_up->GetParameters()) << " +/- " << get_Nerr(f2_up->GetParameters(), f2_up->GetParErrors()) << std::endl;
     std::cout << "N (da V_0 a 3 min) = " << get_N(f3_up->GetParameters()) << " +/- " << get_Nerr(f3_up->GetParameters(), f3_up->GetParErrors()) << std::endl;
 
+    
+    TLatex header2;
+    header2.SetTextSize(0.055);
+    header2.DrawLatexNDC(0.2, 0.85, "#bf{Dati dalle tabelle 3 e 4}");
+
+    TLegend* leg_down = new TLegend(0.2, 0.6, 0.6, 0.835);
+    leg_down->SetHeader("Temperature da 58 #circ C a 20 #circ C (a scendere)");
+    leg_down->AddEntry("g30", "Tensione dopo 30s");
+    leg_down->AddEntry("g1", "Tensione dopo 1 min");
+    leg_down->AddEntry("g2", "Tensione dopo 2 min");
+    leg_down->AddEntry("g3", "Tensione dopo 3 min");
+    leg_down->SetBorderSize(0);
+    leg_down->SetFillColorAlpha(kWhite, 0);
+    leg_down->Draw();
+
+    TLegend* leg_up = new TLegend(0.2, 0.375, 0.6, 0.6);
+    leg_up->SetHeader("Temperature da 20 #circ C a 49 #circ C (a salire)");
+    leg_up->AddEntry("g30_up", "Tensione dopo 30s");
+    leg_up->AddEntry("g1_up", "Tensione dopo 1 min");
+    leg_up->AddEntry("g2_up", "Tensione dopo 2 min");
+    leg_up->AddEntry("g3_up", "Tensione dopo 3 min");
+    leg_up->SetBorderSize(0);
+    leg_up->SetFillColorAlpha(kWhite, 0);
+    leg_up->Draw();
+
     c2->SaveAs("../fig/plot_istresi.pdf");
     c2->Draw();
+
+    std::ofstream o_file("../misc/tabella_f_T.log");
+    for(int i = 0; i<g30->GetN(); i++){
+        o_file << "$" << g30->GetY()[i] << "\\pm" << g30->GetEY()[i] << "$ & $" << g1->GetY()[i] << "\\pm" << g1->GetEY()[i] << "$ & $" << g2->GetY()[i] << "\\pm" << g2->GetEY()[i] << "$ & $" << g3->GetY()[i] << "\\pm" << g3->GetEY()[i] << "$ & $" << g30->GetX()[i] << "\\pm" << g30->GetEX()[i] << " \\[+0.5ex]" << std::endl;
+    }
+    o_file << "\\hline \\[-1.5ex]" << std::endl;
+    for(int i = 1; i<g30_up->GetN(); i++){
+        o_file << "$" << g30_up->GetY()[i] << "\\pm" << g30_up->GetEY()[i] << "$ & $" << g1_up->GetY()[i] << "\\pm" << g1_up->GetEY()[i] << "$ & $" << g2_up->GetY()[i] << "\\pm" << g2_up->GetEY()[i] << "$ & $" << g3_up->GetY()[i] << "\\pm" << g3_up->GetEY()[i] << "$ & $" << g30_up->GetX()[i] << "\\pm" << g30_up->GetEX()[i] << " \\[+0.5ex]" << std::endl;
+    }
 
     return;
 }
