@@ -1,0 +1,295 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing analisi_dati.C...
+
+ **********
+    RUN 0, PROCESSING 15 POINTS...
+ **********
+
+ FCN=88.59 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          82 TOTAL
+                     EDM=1.74139e-15    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45297e-04   1.44611e-07   3.44978e-13   6.16196e-02
+   2  p1           2.81266e-02   4.57968e-07   4.57968e-07   3.30372e-03
+
+** CHI2 / NDF ( PROB. ) 88.59 / 13 ( 2.59857e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 1, PROCESSING 14 POINTS...
+ **********
+
+ FCN=88.495 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          68 TOTAL
+                     EDM=1.00822e-15    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45281e-04   1.52739e-07   9.50851e-12   9.02269e-02
+   2  p1           2.81267e-02   5.30141e-07   5.30141e-07  -2.92167e+01
+
+** CHI2 / NDF ( PROB. ) 88.495 / 12 ( 9.65056e-14 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 2, PROCESSING 13 POINTS...
+ **********
+
+ FCN=86.6839 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          68 TOTAL
+                     EDM=5.79508e-18    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45205e-04   1.62997e-07   7.23811e-13  -7.62732e-02
+   2  p1           2.81271e-02   6.24498e-07   6.24498e-07  -2.54077e-03
+
+** CHI2 / NDF ( PROB. ) 86.6839 / 11 ( 7.4207e-14 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 3, PROCESSING 12 POINTS...
+ **********
+
+ FCN=84.8888 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          62 TOTAL
+                     EDM=2.18635e-17    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45116e-04   1.75999e-07  -7.30505e-13  -1.62185e-02
+   2  p1           2.81277e-02   7.49242e-07   7.49242e-07  -7.00011e-01
+
+** CHI2 / NDF ( PROB. ) 84.8888 / 10 ( 5.48997e-14 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 4, PROCESSING 11 POINTS...
+ **********
+
+ FCN=80.9145 FROM MINOS     STATUS=SUCCESSFUL     10 CALLS          68 TOTAL
+                     EDM=2.83605e-17    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.44986e-04   1.87612e-07  -0.00000e+00   6.23012e+01
+   2  p1           2.81286e-02   8.77237e-07   8.77237e-07   3.51216e-04
+
+** CHI2 / NDF ( PROB. ) 80.9145 / 9 ( 1.06347e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 5, PROCESSING 10 POINTS...
+ **********
+
+ FCN=69.763 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          66 TOTAL
+                     EDM=2.36356e-16    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.44718e-04   2.04143e-07   5.44472e-13   6.35270e-02
+   2  p1           2.81306e-02   1.06329e-06   1.06329e-06   3.90228e-01
+
+** CHI2 / NDF ( PROB. ) 69.763 / 8 ( 5.47841e-12 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 6, PROCESSING 9 POINTS...
+ **********
+
+ FCN=69.7554 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          72 TOTAL
+                     EDM=9.24993e-16    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.44710e-04   2.23104e-07  -2.95194e-11  -2.88707e-02
+   2  p1           2.81306e-02   1.29503e-06   1.29503e-06  -1.97575e-04
+
+** CHI2 / NDF ( PROB. ) 69.7554 / 7 ( 1.6555e-12 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 7, PROCESSING 8 POINTS...
+ **********
+
+ FCN=69.7546 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          68 TOTAL
+                     EDM=1.05929e-15    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.44707e-04   2.44290e-07   2.22391e-11  -1.58893e-02
+   2  p1           2.81307e-02   1.58231e-06   1.58231e-06  -7.95058e-04
+
+** CHI2 / NDF ( PROB. ) 69.7546 / 6 ( 4.59117e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 8, PROCESSING 7 POINTS...
+ **********
+
+ FCN=68.4623 FROM MINOS     STATUS=SUCCESSFUL     10 CALLS          64 TOTAL
+                     EDM=3.44339e-17    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.44874e-04   2.84983e-07  -2.11846e-17  -3.67976e-02
+   2  p1           2.81291e-02   2.12237e-06   2.12237e-06   5.50894e-05
+
+** CHI2 / NDF ( PROB. ) 68.4623 / 5 ( 2.14036e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 9, PROCESSING 6 POINTS...
+ **********
+
+ FCN=65.1139 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          70 TOTAL
+                     EDM=1.28414e-16    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45153e-04   3.23179e-07   5.20479e-13   2.83360e-02
+   2  p1           2.81260e-02   2.71144e-06   2.71144e-06  -3.42221e-04
+
+** CHI2 / NDF ( PROB. ) 65.1139 / 4 ( 2.43485e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 10, PROCESSING 5 POINTS...
+ **********
+
+ FCN=65.0399 FROM MINOS     STATUS=SUCCESSFUL      8 CALLS          65 TOTAL
+                     EDM=1.10754e-16    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45100e-04   3.76844e-07   0.00000e+00  -4.11211e-02
+   2  p1           2.81266e-02   3.60652e-06   3.60652e-06   1.13732e-03
+
+** CHI2 / NDF ( PROB. ) 65.0399 / 3 ( 4.91833e-14 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 11, PROCESSING 4 POINTS...
+ **********
+
+ FCN=33.0041 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          73 TOTAL
+                     EDM=7.35182e-16    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.46905e-04   4.93522e-07   1.02522e-11  -2.30985e-02
+   2  p1           2.81025e-02   5.58540e-06   5.58540e-06  -1.20077e-04
+
+** CHI2 / NDF ( PROB. ) 33.0041 / 2 ( 6.81155e-08 )
+
+
+ **********
+    NON-COMPATIBLE
+ **********
+
+
+ **********
+    RUN 12, PROCESSING 3 POINTS...
+ **********
+
+ FCN=7.57737 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          69 TOTAL
+                     EDM=9.88579e-17    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45108e-04   6.08745e-07   1.22430e-12   3.08351e-05
+   2  p1           2.81308e-02   7.92004e-06   7.92004e-06  -2.75772e-04
+
+** CHI2 / NDF ( PROB. ) 7.57737 / 1 ( 0.00591058 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 13, PROCESSING 2 POINTS...
+ **********
+
+ FCN=8.67797e-21 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          74 TOTAL
+                     EDM=1.64651e-20    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.42970e-04   9.86945e-07   1.36513e-15   1.04009e-04
+   2  p1           2.81685e-02   1.58181e-05   1.58181e-05   1.75001e-03
+
+** CHI2 / NDF ( PROB. ) 8.67797e-21 / 0 ( 0 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 14, PROCESSING 1 POINTS...
+ **********
+
+ FCN=0 FROM MINOS     STATUS=FAILURE       160 CALLS         383 TOTAL
+                     EDM=2.824e-22    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.42970e-04   4.56663e-06   9.13327e-06   1.56125e-05
+   2  p1           2.81685e-02   9.48615e-05   9.48615e-05   0.00000e+00
+
+** CHI2 / NDF ( PROB. ) 0 / 0 ( 0 )
+
+
+ **********
+    COMPATIBLE
+ **********
+

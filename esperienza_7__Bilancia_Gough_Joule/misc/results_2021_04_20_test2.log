@@ -1,0 +1,98 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing analisi_dati.C...
+
+ **********
+    RUN 0, PROCESSING 15 POINTS...
+ **********
+
+ FCN=88.59 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          82 TOTAL
+                     EDM=1.74139e-15    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45297e-04   1.44611e-07   3.44978e-13   6.16196e-02
+   2  p1           2.81266e-02   4.57968e-07   4.57968e-07   3.30372e-03
+
+** CHI2 / NDF ( PROB. ) 88.59 / 13 ( 2.59857e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 1, PROCESSING 14 POINTS...
+ **********
+
+Unknown function: f
+
+** CHI2 / NDF ( PROB. ) 88.59 / 13 ( 2.59857e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 2, PROCESSING 13 POINTS...
+ **********
+
+Unknown function: f
+
+** CHI2 / NDF ( PROB. ) 88.59 / 13 ( 2.59857e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    RUN 3, PROCESSING 12 POINTS...
+ **********
+
+Unknown function: f
+
+** CHI2 / NDF ( PROB. ) 88.59 / 13 ( 2.59857e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] TUnixSystem::DispatchSignals(ESignals) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] SigHandler(ESignals) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] sighandler(int) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] textinput::TerminalConfigUnix::HandleSignal(int) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] (anonymous namespace)::TerminalConfigUnix__handleSignal(int) (no debug info)
+[/usr/lib/system/libsystem_platform.dylib] _sigtramp (no debug info)
+[<unknown binary>] (no debug info)
+[<unknown binary>] (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::IncrementalExecutor::executeWrapper(llvm::StringRef, cling::Value*) const (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::Interpreter::RunFunction(clang::FunctionDecl const*, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::Interpreter::EvaluateInternal(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, cling::CompilationOptions, cling::Value*, cling::Transaction**, unsigned long) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::Interpreter::echo(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::MetaSema::actOnxCommand(llvm::StringRef, llvm::StringRef, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::MetaParser::isXCommand(cling::MetaSema::ActionResult&, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::MetaParser::isCommand(cling::MetaSema::ActionResult&, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::MetaParser::isMetaCommand(cling::MetaSema::ActionResult&, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] cling::MetaProcessor::process(llvm::StringRef, cling::Interpreter::CompilationResult&, cling::Value*, bool) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] HandleInterpreterException(cling::MetaProcessor*, char const*, cling::Interpreter::CompilationResult&, cling::Value*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] TCling::ProcessLine(char const*, TInterpreter::EErrorCode*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCling.so] TCling::ProcessLineSynch(char const*, TInterpreter::EErrorCode*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] TApplication::ExecuteFile(char const*, int*, bool) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] TApplication::ProcessFile(char const*, int*, bool) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libCore.so] TApplication::ProcessLine(char const*, bool, int*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libRint.so] TRint::ProcessLineNr(char const*, char const*, int*) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/lib/root/libRint.so] TRint::Run(bool) (no debug info)
+[/usr/local/Cellar/root/6.22.06_1/bin/root.exe] main (no debug info)
+[/usr/lib/system/libdyld.dylib] start (no debug info)

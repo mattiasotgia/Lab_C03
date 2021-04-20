@@ -1,0 +1,169 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing analisi_dati.C...
+
+ **********
+    RUN 0, PROCESSING 15 POINTS...
+ **********
+
+ FCN=88.59 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          78 TOTAL
+                     EDM=2.88123e-17    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45297e-04   1.44609e-07   6.42644e-13  -2.67559e-02
+   2  p1           2.81266e-02   4.57961e-07   4.57961e-07  -7.30571e-01
+
+** CHI2 / NDF ( PROB. ) 88.59 / 13 ( 2.59857e-13 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
+
+ **********
+    READING FROM INPUT ../dati/effetto_G_J_Tdown.txt
+ **********
+
+
+ **********
+    PROCESSING G30...
+ **********
+
+ FCN=72.3069 FROM MINOS     STATUS=SUCCESSFUL     62 CALLS         254 TOTAL
+                     EDM=2.18658e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           3.95020e+02   1.57411e+01  -9.07982e-01   8.66647e-04
+   2  p1           6.89614e+00   5.03366e-02   5.03366e-02   2.42091e-01
+
+** CHI2 / NDF ( PROB. ) 72.3069 / 7 ( 5.04393e-13 )
+
+
+ **********
+    PROCESSING G1...
+ **********
+
+ FCN=55.7073 FROM MINOS     STATUS=SUCCESSFUL     45 CALLS         216 TOTAL
+                     EDM=2.9432e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           4.55748e+02   4.52419e+01   1.60774e-01   2.98080e-05
+   2  p1           6.69415e+00   1.44687e-01   1.44687e-01  -4.21615e-04
+
+** CHI2 / NDF ( PROB. ) 55.7073 / 7 ( 1.07953e-09 )
+
+
+ **********
+    PROCESSING G2...
+ **********
+
+ FCN=54.1923 FROM MINOS     STATUS=SUCCESSFUL     68 CALLS         261 TOTAL
+                     EDM=3.72206e-11    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           5.24201e+02   1.36875e+01  -3.65367e-03  -4.84735e-08
+   2  p1           6.46572e+00   4.37562e-02   4.37562e-02   9.42328e-01
+
+** CHI2 / NDF ( PROB. ) 54.1923 / 7 ( 2.1546e-09 )
+
+
+ **********
+    PROCESSING G3...
+ **********
+
+ FCN=38.4733 FROM MINOS     STATUS=SUCCESSFUL     44 CALLS         212 TOTAL
+                     EDM=2.67048e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           6.10696e+02   1.87998e+01  -2.06160e-01   6.42299e-05
+   2  p1           6.17684e+00   6.00758e-02   6.00758e-02   2.09922e-02
+
+** CHI2 / NDF ( PROB. ) 38.4733 / 7 ( 2.46268e-06 )
+
+
+ **********
+    RISULTATI PER TEMPERATURE A SCENDERE PER N
+ **********
+
+N (da V_0 a 30 s)  = 8.27749e+21 +/- 2.91755e+20
+N (da V_0 a 1 min) = 8.03503e+21 +/- 3.27e+20
+N (da V_0 a 2 min) = 7.76085e+21 +/- 2.7272e+20
+N (da V_0 a 3 min) = 7.4141e+21 +/- 2.65633e+20
+
+ **********
+    READING FROM INPUT ../dati/effetto_G_J_Tup.txt
+ **********
+
+
+ **********
+    PROCESSING G30_UP...
+ **********
+
+ FCN=1.85026 FROM MINOS     STATUS=SUCCESSFUL     67 CALLS         289 TOTAL
+                     EDM=1.04287e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.54309e+02   2.65238e+01  -5.34615e-02  -4.58570e-08
+   2  p1           5.01687e+00   8.47162e-02   8.47162e-02  -4.42370e-03
+
+** CHI2 / NDF ( PROB. ) 1.85026 / 1 ( 0.173754 )
+
+
+ **********
+    PROCESSING G1_UP...
+ **********
+
+ FCN=1.73906 FROM MINOS     STATUS=SUCCESSFUL     61 CALLS         247 TOTAL
+                     EDM=1.69866e-09    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.59665e+02   3.44815e+01   4.32344e-01   1.98619e-04
+   2  p1           4.99712e+00   1.10325e-01   1.10325e-01   2.60379e-02
+
+** CHI2 / NDF ( PROB. ) 1.73906 / 1 ( 0.187258 )
+
+
+ **********
+    PROCESSING G2_UP...
+ **********
+
+ FCN=1.12949 FROM MINOS     STATUS=SUCCESSFUL     67 CALLS         283 TOTAL
+                     EDM=2.37203e-09    STRATEGY= 1      ERR MATRIX NOT POS-DEF
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           9.94378e+02   2.57764e+01  -5.13522e-02  -1.48168e-12
+   2  p1           4.87934e+00   8.24237e-02   8.24237e-02  -8.16232e-03
+
+** CHI2 / NDF ( PROB. ) 1.12949 / 1 ( 0.287884 )
+
+
+ **********
+    PROCESSING G3_UP...
+ **********
+
+ FCN=0.865242 FROM MINOS     STATUS=SUCCESSFUL     38 CALLS         195 TOTAL
+                     EDM=1.29983e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           1.01089e+03   7.02799e+01   3.22983e-01   1.20934e-04
+   2  p1           4.82091e+00   2.24823e-01   2.24823e-01  -3.66225e-03
+
+** CHI2 / NDF ( PROB. ) 0.865242 / 1 ( 0.352276 )
+
+
+ **********
+    RISULTATI PER TEMPERATURE A SALIRE PER N
+ **********
+
+N (da V_0 a 30 s)  = 6.02177e+21 +/- 2.31208e+20
+N (da V_0 a 1 min) = 5.99808e+21 +/- 2.45591e+20
+N (da V_0 a 2 min) = 5.8567e+21 +/- 2.24886e+20
+N (da V_0 a 3 min) = 5.78657e+21 +/- 3.35615e+20

@@ -1,0 +1,29 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.22/06                        https://root.cern |
+  | (c) 1995-2020, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for macosx64 on Nov 27 2020, 15:14:08                      |
+  | From tags/v6-22-06@v6-22-06                                      |
+  | Try '.help', '.demo', '.license', '.credits', '.quit'/'.q'       |
+   ------------------------------------------------------------------
+
+
+Processing analisi_dati.C...
+
+ **********
+    RUN 0, PROCESSING 14 POINTS...
+ **********
+
+ FCN=88.495 FROM MINOS     STATUS=SUCCESSFUL     12 CALLS          80 TOTAL
+                     EDM=9.23342e-17    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  p0           8.45281e-04   1.52789e-07  -1.21409e-11  -7.06269e-02
+   2  p1           2.81267e-02   5.30272e-07   5.30272e-07  -7.72948e-04
+
+** CHI2 / NDF ( PROB. ) 88.495 / 12 ( 9.65056e-14 )
+
+
+ **********
+    COMPATIBLE
+ **********
+
