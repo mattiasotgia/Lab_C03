@@ -32,6 +32,13 @@
 \newcommand{\reftab}[1]{Tabella {\ref{#1}}}%
 \newcommand{\reffig}[1]{Figura {\ref{#1}}}%
 \newcommand{\refeqn}[1]{({\ref{#1}})}%
+\newcommand{\ChiSqr}{$\chi^2$\space}
+\newcommand{\ChiNdf}{$\chi^2/\text{ndf}$}
+\newcommand{\cernroot}{\texttt{root}}
+\newcommand{\treSigma}{$3\sigma$}
+\newcommand{\stdErr}[1]{$\varepsilon_{#1}$}
+\newcommand{\mstdErr}[1]{\varepsilon_{#1}}
+\newcommand{\gLab}{$g_t~=~(~9.8056~\pm~0.0001~\text{ stat}~)~\text{ m/s}^2$}
 %% PAPER ONLY custom Macros
 
 
@@ -53,12 +60,15 @@
         }
 
         \date{
-        \textsuperscript{1}Gruppo C03, Esperienza di laboratorio n. %%NN%% \\
-        %\textsuperscript{2}In presenza in laboratorio per la presa dati\\
+            \textit{
+            \textsuperscript{1}Gruppo C03, Esperienza di laboratorio n. %%NN%% \\
+            %\textsuperscript{2}In presenza in laboratorio per la presa dati\\
             % Università degli Studi di Genova, Dipartimento di Fisica.\\
-            Presa dati-- 
-            %%DATE_HERE%%, 15:00– 18:00; Analisi dati-- 
-            <end-date here>
+            \vspace{2ex}
+            (Presa dati
+            %%DATE_HERE%%, 15:00– 18:00; Analisi dati 
+            <end-date here>)
+            }
         }
         \maketitle
         

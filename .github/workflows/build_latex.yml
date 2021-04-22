@@ -1,24 +1,23 @@
 name: Build and Relase papers
-on: 
+on:
   push:
-    paths: 
-      - '**/relazione/*.tex'
+    paths:
+    - '**/relazione/*.tex'
 jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v1
-      - name: Compile e6 Latex document
-        uses: dante-ev/latex-action@master
-        with:
-          root_file: esperienza_6_2021_03_21.tex
-          working_directory: esperienza_6__Kater/relazione/
-      - name: Relase latests papers
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: esperienza_6__Kater/relazione/esperienza_6_2021_03_21.pdf
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+    - name: Checkout repository
+      uses: actions/checkout@v1
+    - name: Compile e7 Latex document
+      uses: dante-ev/latex-action@master
+      with:
+        root_file: esperienza_7_2021_04_12.tex
+        working_directory: esperienza_7__Bilancia_Gough_Joule/relazione/
+    - env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: startsWith(github.ref, 'refs/tags/')
+      name: Relase latests papers
+      uses: softprops/action-gh-release@v1
+      with:
+        files: esperienza_7__Bilancia_Gough_Joule/relazione/esperienza_7_2021_04_12.pdf
