@@ -89,23 +89,25 @@ double max_to_stat(double value){
 
 void analisi_dati(){
 
-    gStyle->SetFrameLineWidth(0);
+    // gStyle->SetFrameLineWidth(0);
 
-    gStyle->SetTextFont(42);   
+    gStyle->SetTextFont(43);
+
 
     TCanvas* c1 = new TCanvas("c1", "", 600, 500);
     c1->SetMargin(0.16, 0.06, 0.12, 0.06);
     // c1.SetGrid();
+    gStyle->SetTextFont(63);   
 
     TGraphErrors* t1 = new TGraphErrors("../dati/taratura.txt");
 
     t1->SetTitle("");
-    t1->GetXaxis()->SetTitle("Massa [kg]");
     t1->GetYaxis()->SetTitle("Tensione elettrica [V]");
-    t1->GetXaxis()->SetTitleOffset(0.85);
-    t1->GetXaxis()->SetTitleSize(0.06);
-    t1->GetYaxis()->SetTitleSize(0.06);
-    t1->GetXaxis()->CenterTitle();
+    t1->GetYaxis()->SetTitleOffset(1);
+    t1->GetYaxis()->SetTitleFont(43);
+    t1->GetYaxis()->SetTitleSize(28);
+    t1->GetYaxis()->SetLabelFont(43);
+    t1->GetYaxis()->SetLabelSize(12);
     t1->GetYaxis()->CenterTitle();
 
     TF1* F1 = new TF1("F1", "pol1");
@@ -114,6 +116,14 @@ void analisi_dati(){
     
     std::string f_Opt = "E";
 
+    TPad* p1 = new TPad("", "", 0.0, 0.3, 1.0, 1.0);
+    TPad* p2 = new TPad("", "", 0.0, 0.0, 1.0, 0.3); 
+    p1->SetMargin(0.14, 0.06, 0.0, 0.06);
+    p1->Draw();
+    p2->SetMargin(0.14, 0.06, 0.4, 0.0);
+    p2->Draw();
+
+    p1->cd();
     t1->Fit("F1", f_Opt.c_str());
     t1->Draw("ap");
     auto chi2 = F1->GetChisquare();
@@ -134,6 +144,28 @@ void analisi_dati(){
 
     print_stat(F1);
     print_mmsg(compatible(F1->GetParameter(0), F1->GetParError(0), V_0_T, 0.001e-3/(2*std::sqrt(3))));
+
+    p2->cd();
+    TGraphErrors* rg = new TGraphErrors();
+    for(int i=0; i<t1->GetN(); i++){
+        rg->SetPoint(i, t1->GetX()[i], (t1->GetY()[i] - F1->Eval(t1->GetX()[i])));
+        rg->SetPointError(i, t1->GetEX()[i], t1->GetEY()[i]);
+    }
+
+    rg->GetXaxis()->SetTitle("Massa [kg]");
+    rg->GetXaxis()->SetTitleOffset(2);
+    rg->GetXaxis()->SetTitleFont(43);
+    rg->GetXaxis()->SetTitleSize(28);
+
+    rg->GetYaxis()->SetLabelFont(43);
+    rg->GetYaxis()->SetLabelSize(12);
+    rg->GetXaxis()->SetLabelFont(43);
+    rg->GetXaxis()->SetLabelSize(12);
+    rg->GetXaxis()->CenterTitle();
+
+    rg->Draw("ap");
+
+    TF1* rf0 = new TF1("rf0", "0"); rf0->Draw("same");
 
     c1->SaveAs("../fig/tar_plot.pdf");
     c1->Draw();
