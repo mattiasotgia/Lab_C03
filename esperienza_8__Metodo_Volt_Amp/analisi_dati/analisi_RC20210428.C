@@ -87,10 +87,15 @@ void analisi_RC20210428(){
         m_VI_g2->SetPointError(i, tektronix_Verr_stat(I_i, range_I), amprobe_Aerr_stat(V_i));
     }
 
+    TF1* f1 = new TF1("f1", "pol1");
+    TF1* f2 = new TF1("f2", "pol1");
+
     c1->cd(1);
+    m_VI_g1->Fit("f1");
     m_VI_g1->Draw("ap");
 
     c1->cd(2);
+    m_VI_g2->Fit("f2");
     m_VI_g2->Draw("ap");
 
     return;
