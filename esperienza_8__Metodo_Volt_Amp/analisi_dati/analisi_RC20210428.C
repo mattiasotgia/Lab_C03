@@ -34,9 +34,9 @@ std::string compatible(double G1, double errG1,
     double abs_values = abs(G2-G1);
     double err_abs_val = 3*sqrt(pow(errG1, 2) + pow(errG2, 2));
     if(abs_values<err_abs_val){
-        return "COMPATIBLE";
+        return "COMPATIBILE";
     }
-    return "NON-COMPATIBLE";
+    return "NON-COMPATIBILE";
 }
 
 double max_to_stat(double value){
@@ -51,12 +51,21 @@ double amprobe_Aerr_stat(double reading){
     return max_to_stat((0.015 * reading));
 }
 
+// double get_Verr(){}
+
 // ** MAIN PROGRAM
 
-const double R1_M = 9.9371e+03;                 // {ohm}
-const double R1_Merr = amprobe_Aerr_stat(R1_M); // {ohm} // !! HANNO MISURATO CON IL MULT. DA BANCO?? **
-const double R2_M = 32.770e+03;                 // {ohm}
-const double R2_Merr = amprobe_Aerr_stat(R2_M); // {ohm} // !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R1_M = 9.9371e-3;                  // {mohm}
+const double R1_Merr = amprobe_Aerr_stat(R1_M); // {mohm} // !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R2_M = 32.770e-3;                  // {mohm}
+const double R2_Merr = amprobe_Aerr_stat(R2_M); // {mohm} // !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+
+struct resist
+{
+    double value[2];
+    double err[2];
+};
+
 
 void analisi_RC20210428(){
 
@@ -65,38 +74,133 @@ void analisi_RC20210428(){
 
     // ** METODO VOLT-AMPEROMETRICO PER RICAVARE R1 E R2
 
-    std::ifstream m_VI_R1("../dati/metodo_VI/metodo_VI_R1.dat");
-    std::ifstream m_VI_R2("../dati/metodo_VI/metodo_VI_R2.dat");
+    print_mmsg("METODO VOLT-AMPEROMETRICO PER RICAVARE R1 E R2");
 
     double V_i, I_i, range_V, range_I;
+    std::string paths[2] = {"../dati/metodo_VI/metodo_VI_R1.dat", "../dati/metodo_VI/metodo_VI_R2.dat"};
 
-    TCanvas* c1 = new TCanvas("c1", "", 600, 700);
+    TCanvas* c1 = new TCanvas("c1", "", 600, 1000);
     c1->SetMargin(0.16, 0.06, 0.12, 0.06);
+    c1->SetFillStyle(4000);
     c1->Divide(1, 2);
 
-    TGraphErrors* m_VI_g1 = new TGraphErrors();
-    TGraphErrors* m_VI_g2 = new TGraphErrors();
+    resist R;
 
-    for(int i = 0; m_VI_R1 >> V_i >> range_V >> I_i >> range_I; i++){
-        m_VI_g1->SetPoint(i, I_i, V_i);
-        m_VI_g1->SetPointError(i, tektronix_Verr_stat(I_i, range_I), amprobe_Aerr_stat(V_i));
+    for(int i=0; i<2; i++){
+
+        c1->cd(i+1);
+
+        TGraphErrors* m_VI_g = new TGraphErrors();
+
+        m_VI_g->SetTitle("");
+        m_VI_g->GetYaxis()->SetTitle("Tensione elettrica [V]");
+        m_VI_g->GetYaxis()->SetTitleOffset(2);
+        m_VI_g->GetYaxis()->SetTitleFont(43);
+        m_VI_g->GetYaxis()->SetTitleSize(24);
+        m_VI_g->GetYaxis()->SetLabelFont(43);
+        m_VI_g->GetYaxis()->SetLabelSize(12);
+        m_VI_g->GetYaxis()->CenterTitle();
+
+        TF1* f = new TF1("f", "[0]*x");
+
+        TPad* p1 = new TPad("", "", 0.0, 0.3, 1.0, 1.0);
+        TPad* p2 = new TPad("", "", 0.0, 0.0, 1.0, 0.3); 
+        p1->SetMargin(0.14, 0.06, 0.0, 0.06);
+        p1->SetFillStyle(4000);
+        p1->Draw();
+        p2->SetMargin(0.14, 0.06, 0.4, 0.0);
+        p2->SetFillStyle(4000);
+        p2->Draw();
+
+        TLatex* sl_1 = new TLatex();
+        sl_1->SetTextFont(43);
+        sl_1->SetTextSize(15);
+        sl_1->SetTextColor(kBlack);
+
+        TLatex* header = new TLatex();
+        header->SetTextFont(43);
+        header->SetTextSize(15);
+
+        TGraphErrors* rg = new TGraphErrors();
+        TF1* rf = new TF1("rf", "0", 0, 1100); 
+
+        rg->GetXaxis()->SetTitle("Corrente [#mu A]");
+        rg->GetXaxis()->SetTitleOffset(5);
+        rg->GetXaxis()->SetTitleFont(43);
+        rg->GetXaxis()->SetTitleSize(24);
+
+        rg->GetYaxis()->SetTitle("Residui");
+        rg->GetYaxis()->SetTitleOffset(2);
+        rg->GetYaxis()->SetTitleFont(43);
+        rg->GetYaxis()->SetTitleSize(24);
+
+        rg->GetYaxis()->SetLabelFont(43);
+        rg->GetYaxis()->SetLabelSize(12);
+        rg->GetYaxis()->SetNdivisions(5, 5, 0);
+        rg->GetXaxis()->SetLabelFont(43);
+        rg->GetXaxis()->SetLabelSize(12);
+        rg->GetXaxis()->CenterTitle();
+
+        rf->SetLineStyle(2);
+
+        std::ifstream m_VI_READ(paths[i]);
+
+        for(int j = 0; m_VI_READ >> V_i >> range_V >> I_i >> range_I; j++){
+            m_VI_g->SetPoint(j, I_i, V_i);
+            m_VI_g->SetPointError(j, tektronix_Verr_stat(I_i, range_I), amprobe_Aerr_stat(V_i));
+        }
+
+        p1->cd();
+        m_VI_g->Draw("ap");
+        m_VI_g->Fit("f");
+
+        std::string ss_1="#chi^{2}/ndf (prob.) = "
+            +std::to_string(f->GetChisquare())+"/"
+            +std::to_string(f->GetNDF())
+            +" ("+std::to_string(f->GetProb())+")";
+
+        header->DrawLatexNDC(0.20, 0.85, ("#splitline{" + paths[i] + "}{#bf{Misura R" + std::to_string(i+1) + "}}").c_str());
+
+        sl_1->DrawLatexNDC(0.50, 0.10, ss_1.c_str());
+        
+        print_stat(f);
+        R.value[i] = f->GetParameter(0);
+        R.err[i] = f->GetParError(0);
+
+        // ** RESIDUALS
+
+        p2->cd();
+
+        for(int i=0; i<m_VI_g->GetN(); i++){
+            rg->SetPoint(i, m_VI_g->GetX()[i], (m_VI_g->GetY()[i] - f->Eval(m_VI_g->GetX()[i])));
+            rg->SetPointError(i, m_VI_g->GetEX()[i], m_VI_g->GetEY()[i]);
+        }
+
+        rg->Draw("ap");
+        rf->Draw("same");
+
     }
 
-    for(int i = 0; m_VI_R2 >> V_i >> range_V >> I_i >> range_I; i++){
-        m_VI_g2->SetPoint(i, I_i, V_i);
-        m_VI_g2->SetPointError(i, tektronix_Verr_stat(I_i, range_I), amprobe_Aerr_stat(V_i));
-    }
+    print_mmsg("CONTROLLO COMPATIBILITA' R1 E R2");
 
-    TF1* f1 = new TF1("f1", "pol1");
-    TF1* f2 = new TF1("f2", "pol1");
+    std::cout << " ** R1 => " << compatible(R1_M, R1_Merr, R.value[0], R.err[0]) << std::endl; 
+    std::cout << "R1 (misurata) " << R1_M << " +/- " << R1_Merr << " milli ohm" << std::endl;
+    std::cout << "R1 (ricavata) " << R.value[0] << " +/- " << R.err[0] << " milli ohm" << std::endl << std::endl;
 
-    c1->cd(1);
-    m_VI_g1->Fit("f1");
-    m_VI_g1->Draw("ap");
+    std::cout << " ** R2 => " << compatible(R2_M, R2_Merr, R.value[1], R.err[1]) << std::endl; 
+    std::cout << "R2 (misurata) " << R2_M << " +/- " << R2_Merr << " milli ohm" << std::endl;
+    std::cout << "R2 (ricavata) " << R.value[1] << " +/- " << R.err[1] << " milli ohm" << std::endl << std::endl;
 
-    c1->cd(2);
-    m_VI_g2->Fit("f2");
-    m_VI_g2->Draw("ap");
+    c1->SaveAs("../fig/test.pdf");
+
+    // ** STUDIO CIRCUITO RC
+
 
     return;
 }
+
+#ifndef __CINT__
+int main(){
+    analisi_RC20210428();
+}
+#endif
