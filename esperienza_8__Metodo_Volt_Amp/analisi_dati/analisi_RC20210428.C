@@ -43,12 +43,25 @@ double max_to_stat(double value){
     return value/(std::sqrt(3));
 }
 
-double tektronix_Verr_stat(double reading, double range){
-    return max_to_stat((0.00015 * reading) + (0.00004 * range));
+double tektronix_Aerr_stat(double reading, double range){
+    if(range==200){
+        return max_to_stat((0.0003 * reading) + (0.00005 * range));
+    }
+    return max_to_stat((0.0002 * reading) + (0.00005 * range));
 }
 
-double amprobe_Aerr_stat(double reading){
-    return max_to_stat((0.015 * reading));
+double amprobe_Verr_stat(double reading, double range){
+    if(range==2){
+        return max_to_stat((0.01 * reading) + 0.001);
+    }
+    return max_to_stat((0.01 * reading) + 0.01);
+}
+
+double amprobe_Rerr_stat(double reading, double range){
+    if(range==20){
+        return max_to_stat((0.01 * reading) + (4 * 0.0001));
+    }
+    return max_to_stat((0.01 * reading) + (4 * 0.001));
 }
 
 // double get_Verr(){}
@@ -56,9 +69,9 @@ double amprobe_Aerr_stat(double reading){
 // ** MAIN PROGRAM
 
 const double R1_M = 9.9371e-3;                  // {mohm}
-const double R1_Merr = amprobe_Aerr_stat(R1_M); // {mohm} // !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R1_Merr = amprobe_Rerr_stat(R1_M, 20); // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
 const double R2_M = 32.770e-3;                  // {mohm}
-const double R2_Merr = amprobe_Aerr_stat(R2_M); // {mohm} // !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R2_Merr = amprobe_Rerr_stat(R2_M, 200); // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
 
 struct resist
 {
@@ -147,7 +160,7 @@ void analisi_RC20210428(){
 
         for(int j = 0; m_VI_READ >> V_i >> range_V >> I_i >> range_I; j++){
             m_VI_g->SetPoint(j, I_i, V_i);
-            m_VI_g->SetPointError(j, tektronix_Verr_stat(I_i, range_I), amprobe_Aerr_stat(V_i));
+            m_VI_g->SetPointError(j, tektronix_Aerr_stat(I_i, range_I), amprobe_Verr_stat(V_i ,range_V));
         }
 
         p1->cd();
@@ -173,7 +186,7 @@ void analisi_RC20210428(){
 
         for(int i=0; i<m_VI_g->GetN(); i++){
             rg->SetPoint(i, m_VI_g->GetX()[i], (m_VI_g->GetY()[i] - f->Eval(m_VI_g->GetX()[i])));
-            rg->SetPointError(i, m_VI_g->GetEX()[i], m_VI_g->GetEY()[i]);
+            rg->SetPointError(i, 0, m_VI_g->GetEY()[i]);
         }
 
         rg->Draw("ap");
@@ -191,7 +204,7 @@ void analisi_RC20210428(){
     std::cout << "R2 (misurata) " << R2_M << " +/- " << R2_Merr << " milli ohm" << std::endl;
     std::cout << "R2 (ricavata) " << R.value[1] << " +/- " << R.err[1] << " milli ohm" << std::endl << std::endl;
 
-    c1->SaveAs("../fig/test.pdf");
+    c1->SaveAs("../fig/misura_R1_R2.pdf");
 
     // ** STUDIO CIRCUITO RC
 
