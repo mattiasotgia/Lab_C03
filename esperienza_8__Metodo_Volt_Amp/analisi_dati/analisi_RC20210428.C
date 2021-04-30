@@ -221,8 +221,166 @@ void analisi_RC20210428(){
 
     c1->SaveAs("../fig/misura_R1_R2.pdf");
 
+
     // ** STUDIO CIRCUITO RC
 
+    TCanvas* c2 = new TCanvas("c2", "", 1200, 1000);
+    c2->SetMargin(0.16, 0.06, 0.12, 0.06);
+    c2->Divide(2, 2);
+
+    std::string paths_RC[4] = {
+        "../dati/circuito_RC/polished_data/caricaR1_2.dat", 
+        "../dati/circuito_RC/polished_data/scaricaR1_2.dat",
+        "../dati/circuito_RC/polished_data/caricaR2_2.dat",
+        "../dati/circuito_RC/polished_data/scaricaR2_2.dat"
+    };
+
+    for(int i=0; i<4; i++){
+
+        c2->cd(i+1);
+
+        std::ifstream dati_RC(paths_RC[i]);
+        double time, V;
+
+        TGraphErrors* RC_g = new TGraphErrors();
+
+        RC_g->SetTitle("");
+        RC_g->GetYaxis()->SetTitle("Tensione elettrica [V]");
+        RC_g->GetYaxis()->SetTitleOffset(2);
+        RC_g->GetYaxis()->SetTitleFont(43);
+        RC_g->GetYaxis()->SetTitleSize(24);
+        RC_g->GetYaxis()->SetLabelFont(43);
+        RC_g->GetYaxis()->SetLabelSize(12);
+        RC_g->GetYaxis()->CenterTitle();
+
+        // ** CARICA, ALTRIMENTI CAMBIA
+        std::string formula = "[0]*(1-exp(-(x-[2])/[1]))";
+
+        // V_0/V_I = [0], tau = [1], t_0 = [2] for both formulas
+
+        // ** SCARICA
+        if(i==1 || i==3) formula = "[0]*exp(-(x)/[1])";
+
+        TF1* f_RC = new TF1("f_RC", formula.c_str());
+
+        TPad* p1 = new TPad("", "", 0.0, 0.3, 1.0, 1.0);
+        TPad* p2 = new TPad("", "", 0.0, 0.0, 1.0, 0.295); 
+        p1->SetMargin(0.14, 0.06, 0.0, 0.06);
+        p1->SetFillStyle(4000);
+        p1->Draw();
+        p2->SetMargin(0.14, 0.06, 0.4, 1.0);
+        p2->SetFillStyle(4000);
+        p2->Draw();
+
+        TLatex* sl_1 = new TLatex();
+        sl_1->SetTextFont(43);
+        sl_1->SetTextSize(15);
+        sl_1->SetTextColor(kBlack);
+
+        TLatex* header = new TLatex();
+        header->SetTextFont(43);
+        header->SetTextSize(15);
+
+        TGraphErrors* rg = new TGraphErrors();
+        TF1* rf = new TF1("rf", "0", -10, 100); 
+
+        rg->GetXaxis()->SetTitle("Tempo [s]");
+        rg->GetXaxis()->SetTitleOffset(5);
+        rg->GetXaxis()->SetTitleFont(43);
+        rg->GetXaxis()->SetTitleSize(24);
+
+        rg->GetYaxis()->SetTitle("Residui");
+        rg->GetYaxis()->SetTitleOffset(2);
+        rg->GetYaxis()->SetTitleFont(43);
+        rg->GetYaxis()->SetTitleSize(24);
+        rg->GetYaxis()->CenterTitle();
+
+        rg->GetYaxis()->SetLabelFont(43);
+        rg->GetYaxis()->SetLabelSize(12);
+        rg->GetYaxis()->SetNdivisions(5, 5, 0);
+        rg->GetXaxis()->SetLabelFont(43);
+        rg->GetXaxis()->SetLabelSize(12);
+        rg->GetXaxis()->CenterTitle();
+
+        rf->SetLineStyle(2);
+
+        // ** CARICO I DATI
+
+        dati_RC >> time >> V;
+        RC_g->SetPoint(0, 0, V);
+
+        double t0 = time;
+
+        for (int j=1; dati_RC >> time >> V; j++){
+            RC_g->SetPointError(j-1, 0.005 * ((time-t0) - RC_g->GetX()[j-1]), get_Verr(V, RC_g->GetY()[j-1], (time - RC_g->GetX()[j-1])));
+            // ** PUNTO SUCCESSIVO
+            RC_g->SetPoint(j, time-t0, V);
+        }
+        RC_g->SetPointError(RC_g->GetN()-1, 0.005 * ((time-t0) - RC_g->GetX()[RC_g->GetN()-1]), get_Verr(V, RC_g->GetY()[RC_g->GetN()-1], (time - RC_g->GetX()[RC_g->GetN()-1])));
+        
+        if(i==1){
+            f_RC->SetParameters(1, 10, 0);
+        }else if(i==3){
+            f_RC->SetParameters(1, 30, 0);
+        }else{
+            f_RC->SetParameters(1, 20, 0);
+        }
+
+        p1->cd();
+        RC_g->Draw("ap");
+        RC_g->Fit("f_RC");
+
+        std::string ss_1="#chi^{2}/ndf (prob.) = "
+            +std::to_string(f_RC->GetChisquare())+"/"
+            +std::to_string(f_RC->GetNDF())
+            +" ("+std::to_string(f_RC->GetProb())+")";
+
+        std::string head[4] = {
+            "Carica consensatore (resistenza R1)",
+            "Scarica condensatore (resistenza R1)",
+            "Carica consensatore (resistenza R2)",
+            "Scarica condensatore (resistenza R2)"
+        };
+
+        double xpos=0.4, ypos = 0.2;
+
+        if(i==1 || i==3){
+            xpos = 0.4;
+            ypos = 0.9;
+        }
+
+        header->DrawLatexNDC(xpos, ypos, ("#splitline{" + paths_RC[i] + "}{#bf{" + head[i] + "}}").c_str());
+        sl_1->DrawLatexNDC(xpos, ypos-0.1, ss_1.c_str());
+        
+        print_stat(f_RC);
+
+        // ** RESIDUI
+
+        p2->cd();
+
+        for(int i=0; i<RC_g->GetN(); i++){
+            rg->SetPoint(i, RC_g->GetX()[i], (RC_g->GetY()[i] - f_RC->Eval(RC_g->GetX()[i])));
+            rg->SetPointError(i, 0, RC_g->GetEY()[i]);
+        }
+
+        rg->Draw("ap");
+        rf->Draw("same");
+
+        if(i==2 || i==3){
+            RC_g->GetXaxis()->SetLimits(-5, 95);
+            rg->GetXaxis()->SetLimits(-5, 95);
+        }else if(i==0){
+            RC_g->GetXaxis()->SetLimits(-5, 65);
+            rg->GetXaxis()->SetLimits(-5, 65);
+        }else{
+            RC_g->GetXaxis()->SetLimits(-5, 55);
+            rg->GetXaxis()->SetLimits(-5, 55);
+        }
+
+    }
+
+
+    c2->SaveAs("../fig/plot_RC.pdf");
 
     return;
 }
@@ -230,5 +388,6 @@ void analisi_RC20210428(){
 #ifndef __CINT__
 int main(){
     analisi_RC20210428();
+    return 0;
 }
 #endif
