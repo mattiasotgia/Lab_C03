@@ -131,11 +131,11 @@ void analisi_RC20210428(){
         TF1* f = new TF1("f", "[0]*x");
 
         TPad* p1 = new TPad("", "", 0.0, 0.3, 1.0, 1.0);
-        TPad* p2 = new TPad("", "", 0.0, 0.0, 1.0, 0.3); 
+        TPad* p2 = new TPad("", "", 0.0, 0.0, 1.0, 0.295); 
         p1->SetMargin(0.14, 0.06, 0.0, 0.06);
         p1->SetFillStyle(4000);
         p1->Draw();
-        p2->SetMargin(0.14, 0.06, 0.4, 0.0);
+        p2->SetMargin(0.14, 0.06, 0.4, 1.0);
         p2->SetFillStyle(4000);
         p2->Draw();
 
@@ -151,7 +151,7 @@ void analisi_RC20210428(){
         TGraphErrors* rg = new TGraphErrors();
         TF1* rf = new TF1("rf", "0", 0, 1100); 
 
-        rg->GetXaxis()->SetTitle("Corrente [#mu A]");
+        rg->GetXaxis()->SetTitle("Corrente [#muA]");
         rg->GetXaxis()->SetTitleOffset(5);
         rg->GetXaxis()->SetTitleFont(43);
         rg->GetXaxis()->SetTitleSize(24);
@@ -160,6 +160,7 @@ void analisi_RC20210428(){
         rg->GetYaxis()->SetTitleOffset(2);
         rg->GetYaxis()->SetTitleFont(43);
         rg->GetYaxis()->SetTitleSize(24);
+        rg->GetYaxis()->CenterTitle();
 
         rg->GetYaxis()->SetLabelFont(43);
         rg->GetYaxis()->SetLabelSize(12);
@@ -170,9 +171,9 @@ void analisi_RC20210428(){
 
         rf->SetLineStyle(2);
 
-        std::ifstream m_VI_READ(paths[i]);
+        std::ifstream m_VI_READ(paths_mVI[i]);
 
-        for(int j = 0; m_VI_READ >> V_i >> range_V >> I_i >> range_I; j++){
+        for(int j=0; m_VI_READ >> V_i >> range_V >> I_i >> range_I; j++){
             m_VI_g->SetPoint(j, I_i, V_i);
             m_VI_g->SetPointError(j, tektronix_Aerr_stat(I_i, range_I), amprobe_Verr_stat(V_i ,range_V));
         }
@@ -186,7 +187,7 @@ void analisi_RC20210428(){
             +std::to_string(f->GetNDF())
             +" ("+std::to_string(f->GetProb())+")";
 
-        header->DrawLatexNDC(0.20, 0.85, ("#splitline{" + paths[i] + "}{#bf{Misura R" + std::to_string(i+1) + "}}").c_str());
+        header->DrawLatexNDC(0.20, 0.85, ("#splitline{" + paths_mVI[i] + "}{#bf{Misura R" + std::to_string(i+1) + "}}").c_str());
 
         sl_1->DrawLatexNDC(0.50, 0.10, ss_1.c_str());
         
@@ -194,7 +195,7 @@ void analisi_RC20210428(){
         R.value[i] = f->GetParameter(0);
         R.err[i] = f->GetParError(0);
 
-        // ** RESIDUALS
+        // ** RESIDUI
 
         p2->cd();
 
