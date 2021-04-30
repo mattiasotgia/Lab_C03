@@ -81,15 +81,15 @@ double get_Verr(double current_reading, double last_reading, double time){
 
 // ** MAIN PROGRAM
 
-const double R1_M = 9.9371e-3;                  // {mohm}
-const double R1_Merr = amprobe_Rerr_stat(R1_M, 20); // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
-const double R2_M = 32.770e-3;                  // {mohm}
+const double R1_M = 9.9371e-3;                       // {mohm}
+const double R1_Merr = amprobe_Rerr_stat(R1_M, 20);  // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R2_M = 32.770e-3;                       // {mohm}
 const double R2_Merr = amprobe_Rerr_stat(R2_M, 200); // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
 
-struct resist
+struct result
 {
-    double value[2];
-    double err[2];
+    double value[4];
+    double err[4];
 };
 
 
@@ -111,7 +111,7 @@ void analisi_RC20210428(){
     c1->SetFillStyle(4000);
     c1->Divide(1, 2);
 
-    resist R;
+    result R;
 
     for(int i=0; i<2; i++){
 
@@ -224,6 +224,10 @@ void analisi_RC20210428(){
 
     // ** STUDIO CIRCUITO RC
 
+    print_mmsg("STUDIO CIRCUITO RC");
+
+    result V_I0, tau, t_0;
+
     TCanvas* c2 = new TCanvas("c2", "", 1200, 1000);
     c2->SetMargin(0.16, 0.06, 0.12, 0.06);
     c2->Divide(2, 2);
@@ -312,11 +316,19 @@ void analisi_RC20210428(){
         double t0 = time;
 
         for (int j=1; dati_RC >> time >> V; j++){
-            RC_g->SetPointError(j-1, 0.005 * ((time-t0) - RC_g->GetX()[j-1]), get_Verr(V, RC_g->GetY()[j-1], (time - RC_g->GetX()[j-1])));
+            RC_g->SetPointError(
+                j-1, 
+                0.005 * ((time-t0) - RC_g->GetX()[j-1]), 
+                get_Verr(V, RC_g->GetY()[j-1], (time - RC_g->GetX()[j-1]))
+            );
             // ** PUNTO SUCCESSIVO
             RC_g->SetPoint(j, time-t0, V);
         }
-        RC_g->SetPointError(RC_g->GetN()-1, 0.005 * ((time-t0) - RC_g->GetX()[RC_g->GetN()-1]), get_Verr(V, RC_g->GetY()[RC_g->GetN()-1], (time - RC_g->GetX()[RC_g->GetN()-1])));
+        RC_g->SetPointError(
+            RC_g->GetN()-1, 
+            0.005 * ((time-t0) - RC_g->GetX()[RC_g->GetN()-1]), 
+            get_Verr(V, RC_g->GetY()[RC_g->GetN()-1], (time - RC_g->GetX()[RC_g->GetN()-1]))
+        );
         
         if(i==1){
             f_RC->SetParameters(1, 10, 0);
@@ -353,6 +365,15 @@ void analisi_RC20210428(){
         sl_1->DrawLatexNDC(xpos, ypos-0.1, ss_1.c_str());
         
         print_stat(f_RC);
+
+        // V_0/V_I = [0], tau = [1], t_0 = [2] for both formulas
+        // ** READING OUPUT VALUES FROM FIT
+
+        V_I0.value[i] = f_RC->GetParameter(0); V_I0.err[i] = f_RC->GetParError(0);
+        tau.value[i] = f_RC->GetParameter(1); tau.err[i] = f_RC->GetParError(1);
+        if(i==0 || i==2){
+            t_0.value[i] = f_RC->GetParameter(2); t_0.err[i] = f_RC->GetParError(2);
+        }
 
         // ** RESIDUI
 
