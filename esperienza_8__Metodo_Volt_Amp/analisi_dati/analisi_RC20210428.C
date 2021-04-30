@@ -64,7 +64,20 @@ double amprobe_Rerr_stat(double reading, double range){
     return max_to_stat((0.01 * reading) + (4 * 0.001));
 }
 
-// double get_Verr(){}
+double tektronix_Verr_stat(double reading){
+    return max_to_stat((0.00015 * reading) + (0.00003 * 2));
+}
+
+double get_Verr(double current_reading, double last_reading, double time){
+
+    double err1 = (std::abs(current_reading-last_reading) * 0.3)/(std::sqrt(12) * time);
+    double err2 = tektronix_Verr_stat(current_reading);
+
+    if(err1>err2){
+        return err1;
+    }
+    return err2;
+}
 
 // ** MAIN PROGRAM
 
@@ -84,13 +97,14 @@ void analisi_RC20210428(){
 
     gStyle->SetFrameLineWidth(0);
     gStyle->SetTextFont(43);
+    gStyle->SetLineScalePS(1);
 
     // ** METODO VOLT-AMPEROMETRICO PER RICAVARE R1 E R2
 
     print_mmsg("METODO VOLT-AMPEROMETRICO PER RICAVARE R1 E R2");
 
     double V_i, I_i, range_V, range_I;
-    std::string paths[2] = {"../dati/metodo_VI/metodo_VI_R1.dat", "../dati/metodo_VI/metodo_VI_R2.dat"};
+    std::string paths_mVI[2] = {"../dati/metodo_VI/metodo_VI_R1.dat", "../dati/metodo_VI/metodo_VI_R2.dat"};
 
     TCanvas* c1 = new TCanvas("c1", "", 600, 1000);
     c1->SetMargin(0.16, 0.06, 0.12, 0.06);
