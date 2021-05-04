@@ -13,6 +13,8 @@
 #include<TLatex.h>
 #include<TLegend.h>
 
+const double title_size = 22;
+
 
 void print_mmsg(std::string mmsg){
     std::cout << std::endl 
@@ -95,6 +97,15 @@ struct result
 
 void analisi_RC20210428(){
 
+    // Programma di analisi dati per l'esperienza 8.
+    // Il programma prende come file di input per la prima parte
+    // due file con i valori di I e V relativi alla misura fatta 
+    // delle resistenze R1 e R2. 
+    // (../dati/metodo_VI/metodo_VI_R1.dat e metodo_VI_R2.dat)
+    //
+    // Nella seconda parte prende come file di input i 4 file in
+    // ..dati/circuito_RC/ . 
+
     gStyle->SetFrameLineWidth(0);
     gStyle->SetTextFont(43);
     gStyle->SetLineScalePS(1);
@@ -123,12 +134,12 @@ void analisi_RC20210428(){
         m_VI_g->GetYaxis()->SetTitle("Tensione elettrica [V]");
         m_VI_g->GetYaxis()->SetTitleOffset(2);
         m_VI_g->GetYaxis()->SetTitleFont(43);
-        m_VI_g->GetYaxis()->SetTitleSize(24);
+        m_VI_g->GetYaxis()->SetTitleSize(title_size);
         m_VI_g->GetYaxis()->SetLabelFont(43);
         m_VI_g->GetYaxis()->SetLabelSize(12);
         m_VI_g->GetYaxis()->CenterTitle();
 
-        TF1* f = new TF1("f", "[0]*x");
+        TF1* f = new TF1("f", "pol1");
 
         TPad* p1 = new TPad("", "", 0.0, 0.3, 1.0, 1.0);
         TPad* p2 = new TPad("", "", 0.0, 0.0, 1.0, 0.295); 
@@ -154,12 +165,12 @@ void analisi_RC20210428(){
         rg->GetXaxis()->SetTitle("Corrente [#muA]");
         rg->GetXaxis()->SetTitleOffset(5);
         rg->GetXaxis()->SetTitleFont(43);
-        rg->GetXaxis()->SetTitleSize(24);
+        rg->GetXaxis()->SetTitleSize(title_size);
 
         rg->GetYaxis()->SetTitle("Residui");
         rg->GetYaxis()->SetTitleOffset(2);
         rg->GetYaxis()->SetTitleFont(43);
-        rg->GetYaxis()->SetTitleSize(24);
+        rg->GetYaxis()->SetTitleSize(title_size);
         rg->GetYaxis()->CenterTitle();
 
         rg->GetYaxis()->SetLabelFont(43);
@@ -192,16 +203,18 @@ void analisi_RC20210428(){
         sl_1->DrawLatexNDC(0.50, 0.10, ss_1.c_str());
         
         print_stat(f);
-        R.value[i] = f->GetParameter(0);
-        R.err[i] = f->GetParError(0);
+        R.value[i] = f->GetParameter(1);
+        R.err[i] = f->GetParError(1);
+
+        std::cout << "** COMPATIBILITA' DI ZERO PER R" << i << " => " << compatible(f->GetParameter(0), f->GetParError(0), 0, 0) << std::endl << std::endl;
 
         // ** RESIDUI
 
         p2->cd();
 
         for(int i=0; i<m_VI_g->GetN(); i++){
-            rg->SetPoint(i, m_VI_g->GetX()[i], (m_VI_g->GetY()[i] - f->Eval(m_VI_g->GetX()[i])));
-            rg->SetPointError(i, 0, m_VI_g->GetEY()[i]);
+            rg->SetPoint(i, m_VI_g->GetX()[i], (m_VI_g->GetY()[i] - f->Eval(m_VI_g->GetX()[i]))/m_VI_g->GetEY()[i]);
+            rg->SetPointError(i, 0, 1);
         }
 
         rg->Draw("ap");
@@ -252,7 +265,7 @@ void analisi_RC20210428(){
         RC_g->GetYaxis()->SetTitle("Tensione elettrica [V]");
         RC_g->GetYaxis()->SetTitleOffset(2);
         RC_g->GetYaxis()->SetTitleFont(43);
-        RC_g->GetYaxis()->SetTitleSize(24);
+        RC_g->GetYaxis()->SetTitleSize(title_size);
         RC_g->GetYaxis()->SetLabelFont(43);
         RC_g->GetYaxis()->SetLabelSize(12);
         RC_g->GetYaxis()->CenterTitle();
@@ -291,12 +304,12 @@ void analisi_RC20210428(){
         rg->GetXaxis()->SetTitle("Tempo [s]");
         rg->GetXaxis()->SetTitleOffset(5);
         rg->GetXaxis()->SetTitleFont(43);
-        rg->GetXaxis()->SetTitleSize(24);
+        rg->GetXaxis()->SetTitleSize(title_size);
 
-        rg->GetYaxis()->SetTitle("Residui");
+        rg->GetYaxis()->SetTitle("Residui [#sigma]");
         rg->GetYaxis()->SetTitleOffset(2);
         rg->GetYaxis()->SetTitleFont(43);
-        rg->GetYaxis()->SetTitleSize(24);
+        rg->GetYaxis()->SetTitleSize(title_size);
         rg->GetYaxis()->CenterTitle();
 
         rg->GetYaxis()->SetLabelFont(43);
@@ -340,28 +353,21 @@ void analisi_RC20210428(){
 
         p1->cd();
         RC_g->Draw("ap");
-        RC_g->Fit("f_RC");
+        RC_g->Fit("f_RC", "E");
 
         std::string ss_1="#chi^{2}/ndf (prob.) = "
             +std::to_string(f_RC->GetChisquare())+"/"
             +std::to_string(f_RC->GetNDF())
             +" ("+std::to_string(f_RC->GetProb())+")";
 
-        std::string head[4] = {
-            "Carica consensatore (resistenza R1)",
-            "Scarica condensatore (resistenza R1)",
-            "Carica consensatore (resistenza R2)",
-            "Scarica condensatore (resistenza R2)"
-        };
-
         double xpos=0.4, ypos = 0.2;
 
         if(i==1 || i==3){
             xpos = 0.4;
-            ypos = 0.9;
+            ypos = 0.85;
         }
 
-        header->DrawLatexNDC(xpos, ypos, ("#splitline{" + paths_RC[i] + "}{#bf{" + head[i] + "}}").c_str());
+        header->DrawLatexNDC(xpos, ypos, ("#splitline{" + paths_RC_zero[i] + "}{#bf{" + head[i] + "}}").c_str());
         sl_1->DrawLatexNDC(xpos, ypos-0.1, ss_1.c_str());
         
         print_stat(f_RC);
@@ -380,8 +386,8 @@ void analisi_RC20210428(){
         p2->cd();
 
         for(int i=0; i<RC_g->GetN(); i++){
-            rg->SetPoint(i, RC_g->GetX()[i], (RC_g->GetY()[i] - f_RC->Eval(RC_g->GetX()[i])));
-            rg->SetPointError(i, 0, RC_g->GetEY()[i]);
+            rg->SetPoint(i, RC_g->GetX()[i], (RC_g->GetY()[i] - f_RC->Eval(RC_g->GetX()[i]))/RC_g->GetEY()[i]);
+            rg->SetPointError(i, 0, 1);
         }
 
         rg->Draw("ap");
@@ -400,8 +406,9 @@ void analisi_RC20210428(){
 
     }
 
-
     c2->SaveAs("../fig/plot_RC.pdf");
+
+    // ** IMPLEMENTARE FINALE ANALISI DATI
 
     return;
 }
