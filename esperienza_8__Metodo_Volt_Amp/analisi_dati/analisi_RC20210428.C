@@ -245,18 +245,26 @@ void analisi_RC20210428(){
     c2->SetMargin(0.16, 0.06, 0.12, 0.06);
     c2->Divide(2, 2);
 
-    std::string paths_RC[4] = {
-        "../dati/circuito_RC/polished_data/caricaR1_2.dat", 
-        "../dati/circuito_RC/polished_data/scaricaR1_2.dat",
-        "../dati/circuito_RC/polished_data/caricaR2_2.dat",
-        "../dati/circuito_RC/polished_data/scaricaR2_2.dat"
+    std::string paths_RC_zero[4] = {
+        "../dati/circuito_RC/dati_azzerati/caricaR1_2.dat", 
+        "../dati/circuito_RC/dati_azzerati/scaricaR1_2.dat",
+        "../dati/circuito_RC/dati_azzerati/caricaR2_2.dat",
+        "../dati/circuito_RC/dati_azzerati/scaricaR2_2.dat"
     };
+
+
+    std::string head[4] = {
+            "Carica consensatore (resistenza R1)",
+            "Scarica condensatore (resistenza R1)",
+            "Carica consensatore (resistenza R2)",
+            "Scarica condensatore (resistenza R2)"
+        };
 
     for(int i=0; i<4; i++){
 
         c2->cd(i+1);
 
-        std::ifstream dati_RC(paths_RC[i]);
+        std::ifstream dati_RC(paths_RC_zero[i]);
         double time, V;
 
         TGraphErrors* RC_g = new TGraphErrors();
