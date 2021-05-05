@@ -113,6 +113,9 @@ void analisi_RC20210428(){
     // Nella seconda parte prende come file di input i 4 file in
     // ..dati/circuito_RC/ . 
 
+
+    std::ofstream out_table("result_table.txt");
+
     gStyle->SetFrameLineWidth(0);
     gStyle->SetTextFont(43);
     gStyle->SetLineScalePS(1);
@@ -194,7 +197,11 @@ void analisi_RC20210428(){
         for(int j=0; m_VI_READ >> V_i >> range_V >> I_i >> range_I; j++){
             m_VI_g->SetPoint(j, I_i, V_i);
             m_VI_g->SetPointError(j, tektronix_Aerr_stat(I_i, range_I), amprobe_Verr_stat(V_i ,range_V));
+
+            out_table << I_i << " " << tektronix_Aerr_stat(I_i, range_I) << " " << V_i << " " <<  amprobe_Verr_stat(V_i ,range_V) << std::endl;
+
         }
+        out_table << "EOL" << std::endl;
 
         p1->cd();
         m_VI_g->Draw("ap");
