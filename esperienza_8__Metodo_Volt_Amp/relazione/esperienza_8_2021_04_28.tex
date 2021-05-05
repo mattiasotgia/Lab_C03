@@ -45,7 +45,7 @@
 
 \usepackage{lipsum}
 
-\usepackage[american]{circuitikz}
+\usepackage[american resistors]{circuitikz}
 
 %% Define ref types
 \newcommand{\reftab}[1]{Tabella {\ref{#1}}}%
@@ -118,7 +118,8 @@
 
     Il metodo volt-amperometrico è un processo sperimentale, che consente di risalire al valore di una resistenza, tramite le misure della tensione ai suoi capi, e dell’intensità di corrente fluente al suo interno. Chiamando $I_R$ la corrente che scorre all’interno della resistenza, e $V_R$ la tensione ai suoi estremi, possiamo calcolare il valore della resistenza $R$, con la formula \[R=\frac{V_R}{I_R}.\]
 
-    Nella prima parte dell’esperienza, misuriamo i valori di due resistenze $R_1$ e $R_2$, mediante il metodo volt-amperometrico. \\
+    Nella prima parte dell’esperienza, misuriamo i valori di due resistenze $R_1$ e $R_2$, mediante il metodo volt-amperometrico.
+
     Il circuito realizzato è composto da un generatore, collegato ad una resistenza nel circuito primario. Sullo stesso circuito è collegato l'amperometro, e in parallelo alla resistenza (posta dopo l'amperometro) è posizionato il voltmetro.
     Il  circuito sul quale sono effettuate le misure è mostrato in \reffig{figure:VI_circ}. 
 
@@ -126,15 +127,15 @@
         \centering
         \begin{circuitikz} \draw
             (0,4) -- (1,4)
-            (1,4) to [ammeter, *-](4,4)
+            (1,4) to [ammeter, l=$I_A$, *-](4,4)
             (4,4) -- (6,4)
-            (0,4) to [battery2, l=$V_0$](0,0)
+            (0,4) to [V<=$V_0$](0,0)
             (0,0) -- (6,0)
-            (6,0) to [voltmeter](6,4)
+            (6,0) to [voltmeter, l=$V_V$, rotate=0](6,4)
             (4,0) to [R, l=$R$, *-*](4,4)
             ;
         \end{circuitikz}
-        \caption{}
+        \caption{Schema elettrico del circuito utilizzato per la misura delle resistenze $R_1$ e $R_2$ con il metodo volt-amperometrico.}
         \label{figure:VI_circ}
     \end{figure}
     
@@ -158,6 +159,27 @@
     \end{equation}
 
     Dove $\tau$ è la stessa costante di tempo del processo di carica e $V_I$ è la tensione ai capi del condensatore  nell’istante in cui viene commutato l’interruttore che quindi sarà inferiore alla tensione di regime.
+
+    \begin{figure}[h!]
+        \centering
+        \begin{circuitikz} \draw
+            (0,4) to [short, -*] (1.2,4) node[above] {A}
+            (1.5, 0) to[short, -*](1.5, 3.5) node[right] {B}
+            (5.2,4) to [R, l_=$R$, *-*](2,4) node[above] {T}
+            (2,4) -- (1.35, 3.75) 
+            (0,4) to [V<=1V](0,0)
+            (0,0) to[short, -*] (5.2,0)
+            (5.35,0) to[short, *-] (6,0)
+            (5.35,4) to[short, *-] (6,4)
+            (6,0) to [voltmeter, l_=$V_C(t)$](6,4)
+            (4.5,0) to [C, l=$C$](4.5,4)
+            ;
+            \draw (-0.5, 2) node[left] {$V_0$}
+            ;
+        \end{circuitikz}
+        \caption{Schema elettrico del circuito utilizzato nella seconda parte dell'esperienza. Troviamo indicato con T il commutatore che può chiudere il circuito con A o con B, escludendo o meno il generatore.}
+        \label{figure:RC_circ}
+    \end{figure}
 
 
     % \section{Strumentazione}
@@ -226,33 +248,25 @@
 
     \subsection{Stima delle resistenze}
 
-    \begin{figure}
-        \centering
-        \includegraphics[width=\linewidth]{misura_R1_R2.pdf}
-        \caption{}
-        \label{figure:plot_R1_R2}
-    \end{figure}
 
     Rappresentiamo le coppie ($I_A$, $V_V$) trascritte in TABELLA nella \reffig{figure:plot_R1_R2}, dove possiamo osservare un andamento lineare. Per le coppie ($I_A$, $V_V$) consideriamo come incertezza il valore deducibile dal data-sheet.\\
     Per la corrente $I_A$ l'errore 
     \[
-        \mstdErr{I_A} = \left \{
-            \begin{aligned}
-                0.03\%\cdot\text{valore}+0.05\%\cdot\text{range  (se range}=200~\mu\text{A)}\\
-                0.02\%\cdot\text{valore}+0.05\%\cdot\text{range  (se range}=2~\text{mA)}
-            \end{aligned}
-            \right .
+        \mstdErr{I_A} =
+            \begin{cases}
+                0.03\%\cdot val + 0.05\%\cdot range & \text{(se range}=200~\mu\text{A)}\\
+                0.02\%\cdot val + 0.05\%\cdot range & \text{(se range}=2~\text{mA)}
+            \end{cases}
     \]
     mentre per la tensione il valore è
     \[
-        \mstdErr{V_V} = \left \{
-            \begin{aligned}
-                0.015\%\cdot\text{valore}+0.001 \text{  (se range}=2~V)\\
-                0.015\%\cdot\text{valore}+0.01 \text{  (se range}=20~V)
-            \end{aligned}
-            \right .
+        \mstdErr{V_V} =
+            \begin{cases}
+                0.015\%\cdot val+0.001 & (\text{se range}=2~V)\\
+                0.015\%\cdot val+0.01 & (\text{se range}=20~V)
+            \end{cases}
     \]
-    dove \textit{range} indica il fondoscala scelto.
+    dove \textit{range} indica il fondoscala scelto, \textit{val} indica il valore letto dallo strumento.
 
     Dalla \refeqn{equation:VI} possiamo ricavare una relazione lineare rappresentabile da una polinomiale di primo grado (\verb|pol1| in \cernroot) come $a_0 + a_1x = y$, dove $a_0$ deve essere compatibile con 0.\\
     Dal Fit possiamo ricavare una stima di $R_1$ e $R_2$. In \reffig{equation:VI} rappresentiamo anche i grafici dei residui, dove il valore sulle $x$ è lo stesso, mentre sulle $y$ poniamo
@@ -261,21 +275,36 @@
     \]
     che rappresenta lo spostamento del valore misurato dal Fit, normalizzato, a cui è associato un errore pari a $1\sigma$. In questa considerazione stiamo assumendo che la distribuzione di probabilità dei singoli punti sia Gaussiana.
 
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{misura_R1_R2.pdf}
+        \caption{Grafico delle coppie di punti ($I_A$, $V_V$) misurati nella prima parte dell'esperienza, con i relativi residui. Sopra sono rappresentati i punti delle misure relativi a $R_1$, sotto troviamo i valori relativi alla misura di $R_2$. Il valore del \ChiSqr, e il valore del rapporto \ChiNdf, indicano in entrambi i casi un Fit quasi troppo perfetto, potremmo quindi ipotizzare di aver sovrastimato gli errori, osservando comunque che tutti i punti sono vicini al valor vero a meno di $1\sigma$.}
+        \label{figure:plot_R1_R2}
+    \end{figure}
+
     \subsection{Stima delle costanti di tempo}
 
-    Dai file raccolti dal software DMMDaq riportati nell'appendice \ref{section:appendix_EXT_DATA} rappresentiamo in \reffig{figure:plot_RC} le coppie ($t$, $V_C(t)$) per i processi di carica e scarica relativi alle due resistenze. \\
-    L'errore relativo a $t$ si assume essere $\mstdErr{t}=0.005\cdot T$ dove $T=\Delta t$ è l'intervallo che intercorre tra due misurazioni. Per l'errore relativo a $V_C$ consideriamo la maggiore tra le seguenti quantità: 
-    \[
-        \mstdErr{V_C} = \frac{1}{\sqrt{12}}\left|V_{(i)}-V_{(i-1)}\right|\frac{0.3~\text{s}}{T}  
-    \]oppure l'incertezza deducibile dal data-sheet dello strumento.
-
-
-    \begin{figure*}
+    \begin{figure*}[t!]
         \centering
         \includegraphics[width=\linewidth]{plot_RC.pdf}
         \caption{}
         \label{figure:plot_RC}
     \end{figure*}
+
+    Dai file raccolti dal software DMMDaq riportati nell'appendice \ref{section:appendix_EXT_DATA} rappresentiamo in \reffig{figure:plot_RC} le coppie ($t$, $V_C(t)$) per i processi di carica e scarica relativi alle due resistenze. \\
+    L'errore relativo a $t$ si assume essere $\mstdErr{t}=0.005\cdot T$ dove $T=\Delta t$ è l'intervallo che intercorre tra due misurazioni. Per l'errore relativo a $V_C$ consideriamo la maggiore tra le seguenti quantità: 
+    \[
+        \mstdErr{V_C} = \frac{1}{\sqrt{12}}\left|V_{(i)}-V_{(i-1)}\right|\frac{0.3~\text{s}}{T}  
+    \]oppure l'incertezza deducibile dal data-sheet dello strumento
+    \[
+        \mstdErr{V_C}=0.015\% \cdot val + 0.003\% * range~~~(\text{range}=2~\text{V}).
+    \]
+
+    Sui punti rappresentati in \reffig{figure:plot_RC} eseguiamo poi fit utilizzando la \refeqn{equation:carica} per i processi di carica (\reffig{figure:plot_RC} a sinistra, sopra con la resistenza $R_1$ sotto $R_2$), e la \refeqn{equation:scarica} per i processi di scarica (\reffig{figure:plot_RC} a destra, sopra con la resistenza $R_1$ sotto $R_2$).
+
+    Dai modelli di Fit ricaviamo i valori di $V_\infty\pm\mstdErr{V_\infty}$, $\tau\pm\mstdErr{\tau}$ e $t_0\pm\mstdErr{t_0}$ per il processo di carica, $V_0\pm\mstdErr{V_0}$ e $\tau\pm\mstdErr{\tau}$ per il processo di scarica.
+
+    Da questi valori, in particolar modo dal valore di $\tau$, possiamo ricavare la capacità C del condensatore. Infatti se $\tau=RC$, otteniamo che \[C=\frac{\tau}{R},\] da cui otteniamo che \[\mstdErr{C}=C\sqrt{\left(\frac{\mstdErr{\tau}}{\tau}\right)^2+\left(\frac{\mstdErr{R}}{R}\right)^2}.\]
 
     \section{Risultati}
     \label{section:results}
@@ -292,7 +321,7 @@
     \setcounter{table}{0}
     \renewcommand{\thetable}{A\arabic{table}}
 
-    \section{Dati estesi}
+    \section{Dati aggiuntivi}
     \label{section:appendix_EXT_DATA}
     
 
