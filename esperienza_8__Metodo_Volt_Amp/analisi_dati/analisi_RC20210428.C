@@ -59,11 +59,8 @@ double amprobe_Verr_stat(double reading, double range){
     return max_to_stat((0.01 * reading) + 0.01);
 }
 
-double amprobe_Rerr_stat(double reading, double range){
-    if(range==20){
-        return max_to_stat((0.01 * reading) + (4 * 0.0001));
-    }
-    return max_to_stat((0.01 * reading) + (4 * 0.001));
+double tektronix_Rerr_stat(double reading, double range){
+    return max_to_stat((0.0002 * reading) + (0.00003 * range));
 }
 
 double tektronix_Verr_stat(double reading){
@@ -83,10 +80,10 @@ double get_Verr(double current_reading, double last_reading, double time){
 
 // ** MAIN PROGRAM
 
-const double R1_M = 9.9371e-3;                       // {mohm}
-const double R1_Merr = amprobe_Rerr_stat(R1_M, 20);  // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
-const double R2_M = 32.770e-3;                       // {mohm}
-const double R2_Merr = amprobe_Rerr_stat(R2_M, 200); // {mohm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R1_M = 9.9371;                            // {kOhm}
+const double R1_Merr = tektronix_Rerr_stat(R1_M, 20);  // {kOhm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
+const double R2_M = 32.770;                            // {kOhm}
+const double R2_Merr = tektronix_Rerr_stat(R2_M, 200); // {kOhm} // TODO: !! HANNO MISURATO CON IL MULT. DA BANCO?? **
 
 struct result
 {
@@ -203,8 +200,8 @@ void analisi_RC20210428(){
         sl_1->DrawLatexNDC(0.50, 0.10, ss_1.c_str());
         
         print_stat(f);
-        R.value[i] = f->GetParameter(1);
-        R.err[i] = f->GetParError(1);
+        R.value[i] = f->GetParameter(1) * std::pow(10, 3);
+        R.err[i] = f->GetParError(1) * std::pow(10, 3);
 
         std::cout << "** COMPATIBILITA' DI ZERO PER R" << i << " => " << compatible(f->GetParameter(0), f->GetParError(0), 0, 0) << std::endl << std::endl;
 
@@ -225,12 +222,12 @@ void analisi_RC20210428(){
     print_mmsg("CONTROLLO COMPATIBILITA' R1 E R2");
 
     std::cout << " ** R1 => " << compatible(R1_M, R1_Merr, R.value[0], R.err[0]) << std::endl; 
-    std::cout << "R1 (misurata) " << R1_M << " +/- " << R1_Merr << " milli ohm" << std::endl;
-    std::cout << "R1 (ricavata) " << R.value[0] << " +/- " << R.err[0] << " milli ohm" << std::endl << std::endl;
+    std::cout << "R1 (misurata) " << R1_M << " +/- " << R1_Merr << " kOhm" << std::endl;
+    std::cout << "R1 (ricavata) " << R.value[0] << " +/- " << R.err[0] << " kOhm" << std::endl << std::endl;
 
     std::cout << " ** R2 => " << compatible(R2_M, R2_Merr, R.value[1], R.err[1]) << std::endl; 
-    std::cout << "R2 (misurata) " << R2_M << " +/- " << R2_Merr << " milli ohm" << std::endl;
-    std::cout << "R2 (ricavata) " << R.value[1] << " +/- " << R.err[1] << " milli ohm" << std::endl << std::endl;
+    std::cout << "R2 (misurata) " << R2_M << " +/- " << R2_Merr << " kOhm" << std::endl;
+    std::cout << "R2 (ricavata) " << R.value[1] << " +/- " << R.err[1] << " kOhm" << std::endl << std::endl;
 
     c1->SaveAs("../fig/misura_R1_R2.pdf");
 
@@ -252,6 +249,12 @@ void analisi_RC20210428(){
         "../dati/circuito_RC/dati_azzerati/scaricaR2_2.dat"
     };
 
+    // std::string paths_RC_zero[4] = {
+    //     "../dati/circuito_RC/dati_normalizzati/norm_caricaR1_2.dat", 
+    //     "../dati/circuito_RC/dati_normalizzati/norm_scaricaR1_2.dat",
+    //     "../dati/circuito_RC/dati_normalizzati/norm_caricaR2_2.dat",
+    //     "../dati/circuito_RC/dati_normalizzati/norm_scaricaR2_2.dat"
+    // };
 
     std::string head[4] = {
             "Carica consensatore (resistenza R1)",
