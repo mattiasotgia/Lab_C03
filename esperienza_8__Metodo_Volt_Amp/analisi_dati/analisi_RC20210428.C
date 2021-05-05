@@ -13,7 +13,7 @@
 #include<TLatex.h>
 #include<TLegend.h>
 
-const double title_size = 22;
+const double title_size = 21;
 
 
 void print_mmsg(std::string mmsg){
@@ -76,6 +76,16 @@ double get_Verr(double current_reading, double last_reading, double time){
         return err1;
     }
     return err2;
+}
+
+double getC(double tau, double R){
+    return tau/R;
+}
+
+double getCerr(double C, double tau, double R, double tauerr, double Rerr){
+    return C * sqrt(
+        pow(tauerr/tau, 2) + pow(Rerr/R, 2)
+    );
 }
 
 // ** MAIN PROGRAM
@@ -164,7 +174,7 @@ void analisi_RC20210428(){
         rg->GetXaxis()->SetTitleFont(43);
         rg->GetXaxis()->SetTitleSize(title_size);
 
-        rg->GetYaxis()->SetTitle("Residui");
+        rg->GetYaxis()->SetTitle("Residui [#sigma]");
         rg->GetYaxis()->SetTitleOffset(2);
         rg->GetYaxis()->SetTitleFont(43);
         rg->GetYaxis()->SetTitleSize(title_size);
@@ -267,6 +277,7 @@ void analisi_RC20210428(){
 
         c2->cd(i+1);
 
+        std::cout << "** READING FROM FILE "<< paths_RC_zero[i] << std::endl << std::endl;
         std::ifstream dati_RC(paths_RC_zero[i]);
         double time, V;
 
@@ -334,8 +345,8 @@ void analisi_RC20210428(){
 
         // ** CARICO I DATI
 
-        dati_RC >> time >> V;
-        RC_g->SetPoint(0, 0, V);
+        dati_RC >> time >> V; // leggo la prima riga
+        RC_g->SetPoint(0, 0, V); // imposto il primo punto
 
         double t0 = time;
 
@@ -350,8 +361,8 @@ void analisi_RC20210428(){
         }
         RC_g->SetPointError(
             RC_g->GetN()-1, 
-            0.005 * ((time-t0) - RC_g->GetX()[RC_g->GetN()-1]), 
-            get_Verr(V, RC_g->GetY()[RC_g->GetN()-1], (time - RC_g->GetX()[RC_g->GetN()-1]))
+            0.005 * (RC_g->GetX()[RC_g->GetN()] - RC_g->GetX()[RC_g->GetN()-1]), 
+            get_Verr(V, RC_g->GetY()[RC_g->GetN()-1], (RC_g->GetX()[RC_g->GetN()] - RC_g->GetX()[RC_g->GetN()-1]))
         );
         
         if(i==1){
@@ -371,10 +382,10 @@ void analisi_RC20210428(){
             +std::to_string(f_RC->GetNDF())
             +" ("+std::to_string(f_RC->GetProb())+")";
 
-        double xpos=0.4, ypos = 0.2;
+        double xpos=0.35, ypos = 0.2;
 
         if(i==1 || i==3){
-            xpos = 0.4;
+            xpos = 0.35;
             ypos = 0.85;
         }
 
@@ -387,9 +398,13 @@ void analisi_RC20210428(){
         // ** READING OUPUT VALUES FROM FIT
 
         V_I0.value[i] = f_RC->GetParameter(0); V_I0.err[i] = f_RC->GetParError(0);
+        std::cout << "V_0/V_I " << V_I0.value[i] << " +/- " << V_I0.err[i] << " V" << std::endl;
         tau.value[i] = f_RC->GetParameter(1); tau.err[i] = f_RC->GetParError(1);
+        std::cout << "tau     " << tau.value[i] << " +/- " << tau.err[i] << " s" << std::endl << std::endl;
         if(i==0 || i==2){
             t_0.value[i] = f_RC->GetParameter(2); t_0.err[i] = f_RC->GetParError(2);
+            std::cout << " ** COMPATIBILITA' DI ZERO =>" << compatible(t_0.value[i], t_0.err[i], 0, 0) << std::endl;
+            std::cout << "t_0     " << t_0.value[i] << " +/- " << t_0.err[i] << " s" << std::endl << std::endl;
         }
 
         // ** RESIDUI
@@ -420,6 +435,29 @@ void analisi_RC20210428(){
     c2->SaveAs("../fig/plot_RC.pdf");
 
     // ** IMPLEMENTARE FINALE ANALISI DATI
+
+    print_mmsg("STIMA DELLA CAPACITA' C ");
+
+    result C;
+
+    C.value[0] = getC(tau.value[0], R.value[0]); C.err[0] = getCerr(getC(tau.value[0], R.value[0]), tau.value[0], R.value[0], tau.err[0], R.err[0]);
+    C.value[1] = getC(tau.value[1], R.value[0]); C.err[1] = getCerr(getC(tau.value[1], R.value[0]), tau.value[1], R.value[1], tau.err[1], R.err[1]);
+    C.value[2] = getC(tau.value[2], R.value[1]); C.err[2] = getCerr(getC(tau.value[2], R.value[1]), tau.value[2], R.value[2], tau.err[2], R.err[2]);
+    C.value[3] = getC(tau.value[3], R.value[1]); C.err[3] = getCerr(getC(tau.value[3], R.value[1]), tau.value[3], R.value[3], tau.err[3], R.err[3]);
+
+    std::cout << "C (da carica R1)  " << C.value[0] << " +/- " << C.err[0] << " mF" << std::endl;
+    std::cout << "C (da scarica R1) " << C.value[1] << " +/- " << C.err[1] << " mF" << std::endl;
+    std::cout << "C (da carica R2)  " << C.value[2] << " +/- " << C.err[2] << " mF" << std::endl;
+    std::cout << "C (da scarica R2) " << C.value[3] << " +/- " << C.err[3] << " mF" << std::endl;
+    std::cout << std::endl;
+
+    for(int m=0; m<4; m++){
+        for(int n=0; n<4; n++){
+            if(n!=m){
+                std::cout << " ** COMPATIBILITA' TRA C[" << m << "] E C[" << n << "] => " << compatible(C.value[m], C.err[m], C.value[n], C.err[n]) << std::endl;
+            }
+        }
+    }
 
     return;
 }
