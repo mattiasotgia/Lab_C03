@@ -441,9 +441,9 @@ void analisi_RC20210428(){
     result C;
 
     C.value[0] = getC(tau.value[0], R.value[0]); C.err[0] = getCerr(getC(tau.value[0], R.value[0]), tau.value[0], R.value[0], tau.err[0], R.err[0]);
-    C.value[1] = getC(tau.value[1], R.value[0]); C.err[1] = getCerr(getC(tau.value[1], R.value[0]), tau.value[1], R.value[1], tau.err[1], R.err[1]);
-    C.value[2] = getC(tau.value[2], R.value[1]); C.err[2] = getCerr(getC(tau.value[2], R.value[1]), tau.value[2], R.value[2], tau.err[2], R.err[2]);
-    C.value[3] = getC(tau.value[3], R.value[1]); C.err[3] = getCerr(getC(tau.value[3], R.value[1]), tau.value[3], R.value[3], tau.err[3], R.err[3]);
+    C.value[1] = getC(tau.value[1], R.value[0]); C.err[1] = getCerr(getC(tau.value[1], R.value[0]), tau.value[1], R.value[0], tau.err[1], R.err[0]);
+    C.value[2] = getC(tau.value[2], R.value[1]); C.err[2] = getCerr(getC(tau.value[2], R.value[1]), tau.value[2], R.value[1], tau.err[2], R.err[1]);
+    C.value[3] = getC(tau.value[3], R.value[1]); C.err[3] = getCerr(getC(tau.value[3], R.value[1]), tau.value[3], R.value[1], tau.err[3], R.err[1]);
 
     std::cout << "C (da carica R1)  " << C.value[0] << " +/- " << C.err[0] << " mF" << std::endl;
     std::cout << "C (da scarica R1) " << C.value[1] << " +/- " << C.err[1] << " mF" << std::endl;
