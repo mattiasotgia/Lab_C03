@@ -283,14 +283,14 @@
                                        {-1em}%
                                       {\normalfont\normalsize\bfseries}}
 \if@twocolumn
-  \setlength\leftmargini  {6em} %{2em} %% modified 2021/01/07 mattia sotgia
+  \setlength\leftmargini  {2em} %% modified 2021/01/07 mattia sotgia
 \else
-  \setlength\leftmargini  {5em} %{2.5em}
+  \setlength\leftmargini  {2.5em}
 \fi
 \leftmargin  \leftmargini
-\setlength\leftmarginii  {4.4em} %{2.2em}
-\setlength\leftmarginiii {3.6em} %{1.87em}
-\setlength\leftmarginiv  {3.4em} %{1.7em}
+\setlength\leftmarginii  {2.2em}
+\setlength\leftmarginiii {1.87em}
+\setlength\leftmarginiv  {1.7em}
 \if@twocolumn
   \setlength\leftmarginv  {1em} %{.5em}
   \setlength\leftmarginvi {1em} %{.5em}
