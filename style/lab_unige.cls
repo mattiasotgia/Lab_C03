@@ -200,6 +200,7 @@
   \vskip 1em% it was 2em
   \begin{center}%
   % \let \footnote \thanks
+    {\raggedright \includegraphics[width=0.2\linewidth]{../../style/lab_mark.pdf}\\}
     {\fontsize{14}{16} \bf \@title \par}% %%removed \LARGE added \bf
     \vskip 1em% \it was 1.5 em
     {\normalsize
