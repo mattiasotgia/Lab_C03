@@ -46,7 +46,7 @@
 	Double_t ymin = ro.GetHistogram()->GetMinimum();
 	Double_t ymax = ro.GetHistogram()->GetMaximum();
 	Double_t dy = (ymax - ymin) / 0.8; // 10 percent margins top and bottom
-	p2->Range(xmin-0.1*dx, ymin-0.1*dy, xmax+0.1*dx, ymax+0.1*dy);
+	p2->Range(xmin, ymin-0.1*dy, xmax, ymax+0.1*dy);
 
 	p2->Draw();
 	p2->cd();

@@ -4,6 +4,7 @@
 \ProvidesClass{lab_unige} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODIFICATO MODIFICATO MODIFICATO MODIFICATO
 
 % \usepackage{caption}
+\usepackage{gillius}
 
 
 \newcommand\@ptsize{}
@@ -454,13 +455,13 @@
     \@parboxrestore
     % \normalsize
 
-    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces  \small#3\strut}\par %%added \strut to separate from table/ & \bf
+    \@makecaption{\csname fnum@#1\endcsname}{\ignorespaces  \small\fontfamily{cmss}\selectfont#3\strut}\fontfamily{cmss}\selectfont\par %%added \strut to separate from table/ & \bf
   \endgroup}
 \long\def\@makecaption#1#2{%
   %\vskip\abovecaptionskip
-  \sbox\@tempboxa{{\small \bf #1.} \small#2}%
+  \sbox\@tempboxa{{\small \bf \fontfamily{phv}\selectfont #1.} \fontfamily{phv}\selectfont \small#2}%
   \ifdim \wd\@tempboxa >\hsize
-  {\small \bf #1.} \small#2\par%#1: #2\par%{\bf #1.} #2\par% it was #1: #2\par
+  {\small \bf \fontfamily{phv}\selectfont #1.} \fontfamily{phv}\selectfont \small#2\par%#1: #2\par%{\bf #1.} #2\par% it was #1: #2\par
   \else
     \global \@minipagefalse
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
